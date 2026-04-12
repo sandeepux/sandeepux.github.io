@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oracle Unity Data Platform — Sandeep Virmani</title>
+<link rel="icon" type="image/png" href="Images/Favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1e2d42;
+    --slate: #2a3f5f;
+    --mid: #3a6a9a;
+    --light: #7a9ec4;
+    --pale: #e8f0f8;
+    --cream: #faf9f7;
+    --ink: #111111;
+    --muted: #444;
+    --rule: #e0e0e0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 400;
+    color: var(--ink);
+    background: #fff;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 0 48px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: -0.2px;
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-family: 'Source Serif 4', serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--navy); }
+
+/* ── HAMBURGER + MOBILE MENU ── */
+  .nav-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--navy);
+    transition: transform 0.25s, opacity 0.25s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    background: #fff;
+    border-bottom: 2px solid var(--navy);
+    z-index: 99;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  }
+  .mobile-menu.open { display: block; }
+  .mobile-menu a {
+    display: block;
+    padding: 16px 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--navy);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.15s, padding-left 0.15s;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { background: var(--pale); padding-left: 32px; }
+  @media (max-width: 768px) { .nav-hamburger { display: flex; } }
+
+  .back-link {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--navy); }
+
+  .project-header {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 48px 80px;
+    background: linear-gradient(135deg, var(--pale) 0%, rgba(232,240,248,0.5) 100%);
+    max-width: 100%;
+  }
+
+  .project-header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .project-co {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 16px;
+  }
+
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.1;
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
+  }
+
+  .project-summary {
+    font-size: 18px;
+    color: #222;
+    line-height: 1.8;
+    max-width: 800px;
+    margin-bottom: 0;
+  }
+
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 48px;
+  }
+
+  .section-header {
+    margin-bottom: 48px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+  }
+
+  .project-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+    margin-bottom: 48px;
+    padding: 48px;
+    background: var(--pale);
+    border-radius: 8px;
+  }
+
+  .metric-card {
+    text-align: left;
+  }
+
+  .metric-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .metric-label {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .project-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    margin-bottom: 48px;
+  }
+
+  .content-left, .content-right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .content-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+
+  .content-block p {
+    font-size: 16px;
+    color: #222;
+    line-height: 1.8;
+  }
+
+  .content-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .content-list li {
+    font-size: 15px;
+    color: #222;
+    line-height: 1.7;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .content-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--mid);
+  }
+
+  .project-cta {
+    background: var(--navy);
+    padding: 64px 48px;
+    text-align: center;
+  }
+
+  .project-cta-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .cta-text {
+    font-size: 16px;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 32px;
+    line-height: 1.7;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border: 1px solid rgba(255,255,255,0.4);
+    background: transparent;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  .cta-button:hover {
+    border-color: #fff;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .cta-button.primary {
+    background: #fff;
+    color: var(--navy);
+    border-color: #fff;
+  }
+
+  .cta-button.primary:hover {
+    background: rgba(255,255,255,0.9);
+  }
+
+  .project-footer-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer-nav-link {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-decoration: none;
+    color: var(--navy);
+    transition: color 0.2s;
+  }
+
+  .footer-nav-link:hover { color: var(--mid); }
+
+  .footer-nav-label {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .footer-nav-title {
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .project-header { padding: 100px 24px 60px; }
+    section { padding: 60px 24px; }
+    .project-content { grid-template-columns: 1fr; gap: 40px; }
+    .project-cta { padding: 48px 24px; }
+    .project-footer-nav { flex-direction: column; gap: 24px; text-align: center; padding: 32px 24px; }
+    .project-metrics { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 16px; }
+    nav .nav-links { display: none; }
+    .project-title { font-size: clamp(28px, 5vw, 36px); }
+    .project-header { padding: 80px 16px 48px; }
+    section { padding: 48px 16px; }
+    .section-title { font-size: 24px; }
+    .project-metrics { grid-template-columns: 1fr; padding: 32px 16px; }
+    .project-cta { padding: 32px 16px; }
+    .cta-buttons { flex-direction: column; }
+    .cta-button { width: 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name">Sandeep Virmani</a>
+  <a href="index.html#work" class="back-link">← Back to Work</a>
+</nav>
+
+<\!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html#work" onclick="closeMobileMenu()">Work</a>
+  <a href="index.html#about" onclick="closeMobileMenu()">About</a>
+  <a href="index.html#career" onclick="closeMobileMenu()">Career</a>
+  <a href="index.html#contact" onclick="closeMobileMenu()">Contact</a>
+</div>
+
+<div class="project-header">
+  <div class="project-header-inner">
+    <div class="project-co">Oracle · 2019–2021</div>
+    <h1 class="project-title">Oracle Unity Data Platform</h1>
+    <p class="project-summary">
+      [Project summary to be written - Describe your design work on the Unity Data Platform, the data integration challenges you addressed, and the platform's strategic role in Oracle's portfolio.]
+    </p>
+  </div>
+</div>
+
+<section>
+  <div class="section-header">
+    <div class="section-label">Key Outcomes</div>
+    <h2 class="section-title">Metrics & Impact</h2>
+  </div>
+  <div class="project-metrics">
+    <div class="metric-card">
+      <div class="metric-value">—</div>
+      <div class="metric-label">Metric to be defined</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">—</div>
+      <div class="metric-label">Metric to be defined</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">—</div>
+      <div class="metric-label">Metric to be defined</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header">
+    <div class="section-label">Design Process</div>
+    <h2 class="section-title">Research & Strategy</h2>
+  </div>
+  <div class="project-content">
+    <div class="content-left">
+      <div class="content-block">
+        <h3>Challenge</h3>
+        <p>[Describe the data integration challenge and complexity you were designing for]</p>
+      </div>
+      <div class="content-block">
+        <h3>Approach</h3>
+        <ul class="content-list">
+          <li>Data workflow research</li>
+          <li>Key insight from data ops teams</li>
+          <li>Design principle for clarity</li>
+        </ul>
+      </div>
+    </div>
+    <div class="content-right">
+      <div class="content-block">
+        <h3>Solution</h3>
+        <p>[Explain how you designed the platform to make data integration accessible and discoverable]</p>
+      </div>
+      <div class="content-block">
+        <h3>Outcome</h3>
+        <ul class="content-list">
+          <li>User adoption metric</li>
+          <li>Data integration success rate</li>
+          <li>Strategic platform positioning</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header">
+    <div class="section-label">Further Details</div>
+    <h2 class="section-title">Full Case Study</h2>
+  </div>
+  <div style="padding: 48px; background: var(--pale); border-radius: 8px; text-align: center;">
+    <p style="font-size: 15px; color: var(--muted); margin-bottom: 20px;">Download the full case study PDF for detailed design process, data architecture, and research findings.</p>
+    <a href="Usecases/oracle-unity-data-platform.pdf" class="cta-button primary">↓ Download PDF</a>
+  </div>
+</section>
+
+<div class="project-cta">
+  <div class="project-cta-inner">
+    <h2 class="cta-title">Interested in discussing this work?</h2>
+    <p class="cta-text">I'm always happy to discuss design process, data platform design, or how I approach making complex technical workflows approachable.</p>
+    <div class="cta-buttons">
+      <a href="index.html#contact" class="cta-button">Get in Touch</a>
+      <a href="index.html#work" class="cta-button">View Other Work</a>
+    </div>
+  </div>
+</div>
+
+<div class="project-footer-nav">
+  <a href="oracle-live-experience.html" class="footer-nav-link" style="text-align: left;">
+    <span class="footer-nav-label">← Previous Project</span>
+    <span class="footer-nav-title">Oracle Live Experience</span>
+  </a>
+  <a href="index.html" class="footer-nav-link" style="text-align: center;">
+    <span class="footer-nav-label">Back to Home</span>
+  </a>
+  <a href="index.html#work" class="footer-nav-link" style="text-align: right;">
+    <span class="footer-nav-label">Back to Work →</span>
+  </a>
+</div>
+
+<script>
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const btn = document.getElementById('hamburger');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+// Close mobile menu on outside click
+document.addEventListener('click', e => {
+  const menu = document.getElementById('mobile-menu');
+  const btn = document.getElementById('hamburger');
+  if (menu.classList.contains('open') && \!menu.contains(e.target) && \!btn.contains(e.target)) {
+    closeMobileMenu();
+  }
+});</script>
+
+</body>
+</html>
