@@ -466,7 +466,7 @@
     <div class="content-right">
       <div class="content-block">
         <h3>Solution</h3>
-        <p>Redesigned the Policy Builder interface with clearer information hierarchy, improved sorting and filtering capabilities, customizable dashboards for real-time status visibility, and streamlined workflows for policy deployment. Introduced features like "add above/below" for rule ordering, better bundle dependency visualization, and separated installation/deployment schedules for improved admin control.</p>
+        <p>Redesigned the IDM Policy Builder from a cumbersome XML-based interface into an intuitive, visual policy editor. Introduced a Canvas View for guided rule creation with a node-to-node structure, enhanced XML Tree View for navigation, and multiple viewing modes (Canvas, XML Tree, XML Source) allowing users to pivot between visual and technical representations seamlessly. The design reduces reliance on deep XML expertise while maintaining full control for advanced administrators.</p>
       </div>
       <div class="content-block">
         <h3>Outcome</h3>
@@ -476,6 +476,43 @@
           <li>Stronger customer relationships through collaborative research and validation process</li>
           <li>UX research methodology established for future enterprise product development</li>
         </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header">
+    <div class="section-label">Design Features</div>
+    <h2 class="section-title">Key Interface Innovations</h2>
+  </div>
+  <div class="project-content">
+    <div class="content-left">
+      <div class="content-block">
+        <h3>Canvas View</h3>
+        <p>The centerpiece of the redesign. Users create and organize rules, conditions, and actions in an intuitive, card-based visual layout. The canvas displays a node-to-node structure showing relationships between elements, enabling users to visualize complex, nested policy structures all in one unified workspace.</p>
+      </div>
+      <div class="content-block">
+        <h3>XML Tree View (Enhanced)</h3>
+        <p>Appears in a sidecar panel for efficient navigation. Users click on nodes to view details on the canvas, with interactive highlighting showing exactly where each condition or action fits within the overall policy structure. Side-by-side navigation enables seamless editing without losing context.</p>
+      </div>
+      <div class="content-block">
+        <h3>Multi-View Toggle</h3>
+        <p>Top and lower panel toolbars provide instant access to three perspectives: Canvas View (visual), XML Tree View (hierarchical), and XML Source View (technical). Users seamlessly pivot between views based on their task and expertise level.</p>
+      </div>
+    </div>
+    <div class="content-right">
+      <div class="content-block">
+        <h3>Guided Rule Creation</h3>
+        <p>Contextual instructions and empty states guide users through creating rules with attached policies. Users can view multiple rules on the same canvas and pivot to deep-dive nested rules while maintaining a cohesive workflow. Even complex rules become manageable.</p>
+      </div>
+      <div class="content-block">
+        <h3>Interactive Highlighting</h3>
+        <p>Selecting a condition or action in Canvas Mode automatically highlights its corresponding location in the policy structure. Users immediately see relationships and can make informed adjustments with confidence.</p>
+      </div>
+      <div class="content-block">
+        <h3>Reduced XML Dependency</h3>
+        <p>Administrators can now create, edit, and manage complex policies without deep XML knowledge. The visual interface eliminates reliance on consulting support while maintaining technical depth for power users who need it.</p>
       </div>
     </div>
   </div>
