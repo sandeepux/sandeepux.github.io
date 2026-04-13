@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prisma Cloud Onboarding — Sandeep Virmani</title>
+<link rel="icon" type="image/png" href="images/Favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1e2d42;
+    --slate: #2a3f5f;
+    --mid: #3a6a9a;
+    --light: #7a9ec4;
+    --pale: #e8f0f8;
+    --cream: #faf9f7;
+    --ink: #111111;
+    --muted: #444;
+    --rule: #e0e0e0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 400;
+    color: var(--ink);
+    background: #fff;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 0 48px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: -0.2px;
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-family: 'Source Serif 4', serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--navy); }
+
+  .back-link {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--navy); }
+
+  .project-header {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 48px 80px;
+    background: linear-gradient(135deg, var(--pale) 0%, rgba(232,240,248,0.5) 100%);
+    max-width: 100%;
+  }
+
+  .project-header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .project-co {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 16px;
+  }
+
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.1;
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
+  }
+
+  .project-summary {
+    font-size: 18px;
+    color: #222;
+    line-height: 1.8;
+    max-width: 800px;
+    margin-bottom: 0;
+  }
+
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 48px;
+  }
+
+  .section-header {
+    margin-bottom: 48px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+  }
+
+  .project-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+    margin-bottom: 48px;
+    padding: 48px;
+    background: var(--pale);
+    border-radius: 8px;
+  }
+
+  .metric-card {
+    text-align: left;
+  }
+
+  .metric-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .metric-label {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .project-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    margin-bottom: 48px;
+  }
+
+  .content-left, .content-right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .content-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+
+  .content-block p {
+    font-size: 16px;
+    color: #222;
+    line-height: 1.8;
+  }
+
+  .content-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .content-list li {
+    font-size: 15px;
+    color: #222;
+    line-height: 1.7;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .content-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--mid);
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .project-header { padding: 100px 24px 60px; }
+    section { padding: 60px 24px; }
+    .project-content { grid-template-columns: 1fr; gap: 40px; }
+    .project-metrics { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 16px; }
+    nav .nav-links { display: none; }
+    .project-title { font-size: clamp(28px, 5vw, 36px); }
+    .project-header { padding: 80px 16px 48px; }
+    section { padding: 48px 16px; }
+    .section-title { font-size: 24px; }
+    .project-metrics { grid-template-columns: 1fr; padding: 32px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name">Sandeep Virmani</a>
+  <a href="index.html#work" class="back-link">← Back to Work</a>
+</nav>
+
+<div class="project-header">
+  <div class="project-header-inner">
+    <div class="project-co">Palo Alto Networks · 2023–2024</div>
+    <h1 class="project-title">Prisma Cloud Onboarding</h1>
+    <p class="project-summary">
+      Redesigned the cloud security onboarding experience to unify fragmented multi-step processes into an elegant 3-step flow. Through strategic research with Cloud Security Engineers, IT Operations, Super Admins, and System Administrators, I identified critical pain points in onboarding across AWS, Azure, and Google Cloud. The result: a 57% reduction in touch points, 8X improvement in customer sentiment, and 150% growth in credit consumption within 6 weeks.
+    </p>
+    <p style="font-size: 15px; color: #5a7fa8; margin-top: 20px; line-height: 1.7; max-width: 800px;">
+      <strong>Role:</strong> Principal Product Designer leading user research, competitive strategy analysis, and design solution across 4 distinct personas, collaborating with Product, Engineering, and Customer Success to define a unified onboarding standard.
+    </p>
+  </div>
+</div>
+
+<section>
+  <div class="section-header">
+    <div class="section-label">Key Outcomes</div>
+    <h2 class="section-title">Metrics & Impact</h2>
+  </div>
+  <div class="project-metrics">
+    <div class="metric-card">
+      <div class="metric-value">57%</div>
+      <div class="metric-label">Reduction in touch points (wizards/screens)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">3-step</div>
+      <div class="metric-label">Unified process across AWS, Azure, GCP</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">8X</div>
+      <div class="metric-label">Customer sentiment improvement</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">150%</div>
+      <div class="metric-label">Credit consumption growth in 6 weeks</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header">
+    <div class="section-label">Design Process</div>
+    <h2 class="section-title">Research & User Psychology</h2>
+  </div>
+  <div class="project-content">
+    <div class="content-left">
+      <div class="content-block">
+        <h3>The Fragmentation Problem</h3>
+        <p>Onboarding felt fragmented. Existing flows lacked immediate gratification. Too many steps for a process that should feel seamless. Customers needed to onboard faster with multi-cloud accounts, yet there was no single place to handle everything. And crucially, post-onboarding education was scattered—users didn't understand why or how to configure features after they signed up.</p>
+        <p style="margin-top: 16px;">The underlying issue wasn't complexity; it was <strong>cognitive overhead</strong>. Each decision point required users to jump between systems, remember settings, and understand how disconnected modules related to each other.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>User Research: 4 Distinct Personas</h3>
+        <ul class="content-list">
+          <li><strong>Cloud Security Engineer:</strong> Needs control over configurations but values clarity and simplicity. Motivated by speed to deployment and validation</li>
+          <li><strong>Cloud Security IT Operations:</strong> Manages multi-cloud infrastructure. Driven by operational efficiency and governance compliance</li>
+          <li><strong>Super Admin:</strong> Central platform owner. Needs visibility and control across all modules and security capabilities</li>
+          <li><strong>System Administrator:</strong> Hands-on executor. Requires step-by-step guidance and clear error messaging</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>Human Psychology Insights</h3>
+        <div style="padding: 20px; background: rgba(58, 106, 154, 0.1); border-left: 3px solid var(--mid); border-radius: 4px; margin-top: 16px;">
+          <p style="font-size: 15px; color: var(--navy); font-weight: 500; margin: 0; line-height: 1.7;">
+            Users delay onboarding when the value is unclear. By surfacing "First Time Value" immediately—showing what they can accomplish in 3 steps—we reduced the cognitive friction and decision paralysis. Consolidating fragmented settings into unified screens eliminated context-switching fatigue. Progressive disclosure meant showing only relevant options at the right moment, not overwhelming with all 50 configuration choices upfront.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-right">
+      <div class="content-block">
+        <h3>Strategic Research Approach</h3>
+        <ul class="content-list">
+          <li><strong>Contextual Inquiry:</strong> Observed users during actual onboarding across different cloud providers and deployment types</li>
+          <li><strong>Customer Interviews:</strong> 12+ interviews with each persona uncovering mental models, decision points, and pain moments</li>
+          <li><strong>Competitive Deep Dive:</strong> Analyzed WIZ's 2-step onboarding, visibility of options, and cloud event integration patterns</li>
+          <li><strong>Multi-Cloud Analysis:</strong> Studied AWS (Standalone/Organization), Azure (Subscription/Tenant), GCP (Project/Organization) differences</li>
+          <li><strong>Error Analysis:</strong> Mapped remediation patterns and what users needed to understand to resolve configuration issues</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>Design Principle</h3>
+        <p><strong>Unification reduces cognitive load.</strong> By bringing all onboarding and permissions into a single, coherent experience, users build a mental model of how the system works. They stop thinking about "AWS onboarding" and "permissions management" as separate tasks. They think: "Activate my cloud, configure security, review." Simple. Linear. Clear.</p>
+        <p style="margin-top: 16px; font-size: 14px; color: var(--mid);">This principle shaped the entire solution and influenced how future onboarding workflows are built at Palo Alto Networks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header">
+    <div class="section-label">Design Evolution</div>
+    <h2 class="section-title">From Discovery to Breakthrough Design</h2>
+  </div>
+  <p style="font-size: 16px; color: #222; line-height: 1.8; margin-bottom: 32px;">
+    The design was iterative and informed by continuous user feedback. Started by mapping the "As Is" journey across all cloud providers, identified pain points in permissions and error handling, then designed a unified modal-based solution that could be accessed from any page.
+  </p>
+
+  <div style="margin-bottom: 48px;">
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: var(--navy); margin-bottom: 24px;">Phase 1: First Time User Journey Discovery</h3>
+    <p style="font-size: 14px; color: var(--muted); margin-bottom: 16px; font-style: italic;">Mapped the existing "As Is" journey from CSP Marketplace through Confirmation Email, Home Page, Dashboard, and into the platform. Identified that users lacked immediate gratification. Security Foundations and Security Advisories were scattered. Cloud Accounts, Repositories, and onboarding capabilities were disconnected.</p>
+  </div>
+
+  <div style="margin-bottom: 48px;">
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: var(--navy); margin-bottom: 24px;">Phase 2: Pain Point Mapping</h3>
+    <p style="font-size: 14px; color: var(--muted); margin-bottom: 16px; font-style: italic;">Deep dive into onboarding complexity: AWS (8-10 steps), Azure (6-8 steps), Google Cloud (8-10 steps). Discovered key pain points: visibility of options unclear, too many security features to configure, terminology barriers, and error remediation paths not clear.</p>
+  </div>
+
+  <div style="margin-bottom: 48px;">
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: var(--navy); margin-bottom: 24px;">Phase 3: Design Breakthrough — Unified Modal Experience</h3>
+    <p style="font-size: 14px; color: var(--muted); margin-bottom: 16px; font-style: italic;">After testing multiple approaches, designed a larger-sized modal that could be accessed from any page. Cards-based approach for security modules. Consolidated "Get Started" → "Configure Details" → "Review Status" into 3 cohesive steps. Each step built collaboratively with Engineering Head and UI Managers, requiring API rewrites to support single-screen configurations instead of multi-page wizards.</p>
+    <div style="padding: 20px; background: linear-gradient(135deg, rgba(232,240,248,0.5) 0%, rgba(232,240,248,0.2) 100%); border-left: 4px solid var(--mid); border-radius: 8px;">
+      <p style="font-size: 15px; color: var(--navy); margin: 0; line-height: 1.7;">
+        <strong>"My idea was to have a unified page design to onboard all providers. It was challenging to get all product owners to agree, but I succeeded through collaborative efforts and persuasive skills."</strong> This breakthrough design removed the cognitive burden of learning different wizards for each cloud provider.
+      </p>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 48px;">
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: var(--navy); margin-bottom: 24px;">Phase 4: User Testing & Refinement</h3>
+    <p style="font-size: 14px; color: var(--muted); margin-bottom: 16px; font-style: italic;">Tested design options that kept all choices available based on contextual inquiries and customer interviews. Key findings: Users appreciated cards for security modules (quick comprehension), single screens for ease of use, and clear error messaging with remediation steps.</p>
+  </div>
+
+  <div style="margin-bottom: 48px;">
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: var(--navy); margin-bottom: 24px;">Phase 5: Land and Expand Interface</h3>
+    <p style="font-size: 14px; color: var(--muted); margin-bottom: 16px; font-style: italic;">After initial onboarding, customers land in a basic configuration view. The redesigned "Land and Expand" interface helps them discover and enable advanced security capabilities without overwhelming complexity. Transformed a dense, error-prone configuration form into an organized, status-aware dashboard.</p>
+
+    <div style="margin-bottom: 24px;">
+      <p style="font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 12px; text-align: center;">Before: Dense Configuration Form → After: Organized Dashboard with Status Indicators</p>
+      <p style="font-size: 12px; color: var(--muted); margin-bottom: 16px; text-align: center; font-style: italic;">The evolved design provides clear account overview, health status for each security capability, and organized access controls. Users can now easily discover what's enabled, what has errors, and what's available to activate.</p>
+    </div>
+
+    <p style="font-size: 14px; color: #222; line-height: 1.7; margin-top: 20px;"><strong>Key Improvements:</strong></p>
+    <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 12px;">
+      <li style="font-size: 14px; color: #222; padding-left: 20px; position: relative;">
+        <span style="position: absolute; left: 0; color: var(--mid);">→</span> Visual status indicators (green/red) for each security module
+      </li>
+      <li style="font-size: 14px; color: #222; padding-left: 20px; position: relative;">
+        <span style="position: absolute; left: 0; color: var(--mid);">→</span> Tabbed navigation separating Cloud Accounts from configurations
+      </li>
+      <li style="font-size: 14px; color: #222; padding-left: 20px; position: relative;">
+        <span style="position: absolute; left: 0; color: var(--mid);">→</span> Organized "Security Capabilities and Permissions" section for feature discovery
+      </li>
+      <li style="font-size: 14px; color: #222; padding-left: 20px; position: relative;">
+        <span style="position: absolute; left: 0; color: var(--mid);">→</span> Clear account details panel reducing information density
+      </li>
+      <li style="font-size: 14px; color: #222; padding-left: 20px; position: relative;">
+        <span style="position: absolute; left: 0; color: var(--mid);">→</span> "Land with working setup, expand by discovering capabilities" UX pattern
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="section-header">
+    <div class="section-label">Competitive Strategy</div>
+    <h2 class="section-title">How WIZ Wins & Where We Differentiate</h2>
+  </div>
+  <p style="font-size: 16px; color: #222; line-height: 1.8; margin-bottom: 32px;">
+    Analyzed WIZ's onboarding approach as the market leader. They display cloud providers and connectors at a unified place, onboard accounts in 2 steps with clear communication, and connect with CloudTrail for fast data ingestion. Their win: simplifying multi-step processes into clear workflows with transparent options.
+  </p>
+
+  <div style="margin-bottom: 48px;">
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: var(--navy); margin-bottom: 24px;">Our Differentiation</h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+      <div style="padding: 24px; background: var(--pale); border-radius: 8px;">
+        <h4 style="font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;">What We Do Better</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px;">
+          <li style="font-size: 14px; color: #222; padding-left: 16px; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--mid); font-weight: 600;">+</span> Unified permissions across all modules in one view
+          </li>
+          <li style="font-size: 14px; color: #222; padding-left: 16px; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--mid); font-weight: 600;">+</span> Cards-based security module selection (faster mental model building)
+          </li>
+          <li style="font-size: 14px; color: #222; padding-left: 16px; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--mid); font-weight: 600;">+</span> Clear error handling and remediation guidance
+          </li>
+          <li style="font-size: 14px; color: #222; padding-left: 16px; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--mid); font-weight: 600;">+</span> Progressive disclosure—only show relevant options at each step
+          </li>
+        </ul>
+      </div>
+      <div style="padding: 24px; background: rgba(58, 106, 154, 0.08); border: 1px solid var(--light); border-radius: 8px;">
+        <h4 style="font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;">User Psychology Edge</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px;">
+          <li style="font-size: 14px; color: #222; padding-left: 16px; position: relative;">
+            <span style="position: absolute; left: 0; color: #059669; font-weight: 600;">✓</span> First Time Value demonstrated immediately (reduces decision paralysis)
+          </li>
+          <li style="font-size: 14px; color: #222; padding-left: 16px; position: relative;">
+            <span style="position: absolute; left: 0; color: #059669; font-weight: 600;">✓</span> No context-switching fatigue (single coherent experience)
+          </li>
+          <li style="font-size: 14px; color: #222; padding-left: 16px; position: relative;">
+            <span style="position: absolute; left: 0; color: #059669; font-weight: 600;">✓</span> Cognitive load reduced via unification principle
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header">
+    <div class="section-label">Validation & Outcomes</div>
+    <h2 class="section-title">Quantified Impact & User Validation</h2>
+  </div>
+
+  <div style="margin-bottom: 48px;">
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: var(--navy); margin-bottom: 24px;">First-Time Onboarding Value Realization</h3>
+    <p style="font-size: 14px; color: var(--muted); margin-bottom: 20px;">Across all cloud providers, the redesigned 3-step process dramatically reduced complexity:</p>
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+        <thead>
+          <tr style="background: var(--pale);">
+            <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--rule); color: var(--navy); font-weight: 600;">Provider</th>
+            <th style="padding: 12px; text-align: center; border-bottom: 2px solid var(--rule); color: var(--navy); font-weight: 600;">Deployment Scope</th>
+            <th style="padding: 12px; text-align: center; border-bottom: 2px solid var(--rule); color: var(--navy); font-weight: 600;">Wizards: Before → After</th>
+            <th style="padding: 12px; text-align: center; border-bottom: 2px solid var(--rule); color: var(--navy); font-weight: 600;">% Reduction</th>
+            <th style="padding: 12px; text-align: center; border-bottom: 2px solid var(--rule); color: var(--navy); font-weight: 600;">Clicks: Before → After</th>
+            <th style="padding: 12px; text-align: center; border-bottom: 2px solid var(--rule); color: var(--navy); font-weight: 600;">% Reduction</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid var(--rule);">
+            <td style="padding: 12px; color: #222;"><strong>AWS</strong></td>
+            <td style="padding: 12px; text-align: center; color: #222;">Standalone</td>
+            <td style="padding: 12px; text-align: center; color: #222;">5 → 3</td>
+            <td style="padding: 12px; text-align: center; color: #222;"><strong>40%</strong></td>
+            <td style="padding: 12px; text-align: center; color: #222;">10 → 6</td>
+            <td style="padding: 12px; text-align: center; color: #222;"><strong>40%</strong></td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--rule);">
+            <td style="padding: 12px; color: #222;"></td>
+            <td style="padding: 12px; text-align: center; color: #222;">Organization</td>
+            <td style="padding: 12px; text-align: center; color: #222;">6 → 3</td>
+            <td style="padding: 12px; text-align: center; color: #222;"><strong>50%</strong></td>
+            <td style="padding: 12px; text-align: center; color: #222;">15 → 6</td>
+            <td style="padding: 12px; text-align: center; color: #222;"><strong>60%</strong></td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--rule);">
+            <td style="padding: 12px; color: #222;"><strong>GCP</strong></td>
+            <td style="padding: 12px; text-align: center; color: #222;">Project</td>
+            <td style="padding: 12px; text-align: center; color: #222;">6 → 3</td>
+            <td style="padding: 12px; text-align: center; color: #222;"><strong>50%</strong></td>
+            <td style="padding: 12px; text-align: center; color: #222;">11 → 6</td>
+            <td style="padding: 12px; text-align: center; color: #222;"><strong>45.45%</strong></td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--rule);">
+            <td style="padding: 12px; color: #222;"></td>
+            <td style="padding: 12px; text-align: center; color: #222;">Organization</td>
+            <td style="padding: 12px; text-align: center; color: #222;">7 → 3</td>
+            <td style="padding: 12px; text-align: center; color: #222;"><strong>57.1%</strong></td>
+            <td style="padding: 12px; text-align: center; color: #222;">17 → 9</td>
+            <td style="padding: 12px; text-align: center; color: #222;"><strong>47.06%</strong></td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--rule);">
+            <td style="padding: 12px; color: #222;"><strong>Azure</strong></td>
+            <td style="padding: 12px; text-align: center; color: #222;">Subscription</td>
+            <td style="padding: 12px; text-align: center; color: #222;">6 → 3</td>
+            <td style="padding: 12px; text-align: center; color: #222;"><strong>50%</strong></td>
+            <td style="padding: 12px; text-align: center; color: #222;">16 → 10</td>
+            <td style="padding: 12px; text-align: center; color: #222;"><strong>37.5%</strong></td>
+          </tr>
+          <tr>
+            <td style="padding: 12px; color: #222;"></td>
+            <td style="padding: 12px; text-align: center; color: #222;">Tenant</td>
+            <td style="padding: 12px; text-align: center; color: #222;">7 → 3</td>
+            <td style="padding: 12px; text-align: center; color: #222;"><strong>57.1%</strong></td>
+            <td style="padding: 12px; text-align: center; color: #222;">19 → 8</td>
+            <td style="padding: 12px; text-align: center; color: #222;"><strong>57.89%</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 16px; font-style: italic;">All cloud deployments now share the same 3-step modal experience, eliminating the need to learn different interaction patterns.</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 48px;">
+    <div style="padding: 24px; background: var(--pale); border-radius: 8px;">
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 16px;">Customer Sentiment & Engagement</h3>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px;">
+        <li style="font-size: 14px; color: #222; padding-left: 16px; position: relative;">
+          <span style="position: absolute; left: 0; color: var(--mid);">✓</span> <strong>8X increase</strong> in customer sentiment post-launch
+        </li>
+        <li style="font-size: 14px; color: #222; padding-left: 16px; position: relative;">
+          <span style="position: absolute; left: 0; color: var(--mid);">✓</span> <strong>150% growth</strong> in credit consumption within 6 weeks
+        </li>
+        <li style="font-size: 14px; color: #222; padding-left: 16px; position: relative;">
+          <span style="position: absolute; left: 0; color: var(--mid);">✓</span> <strong>57% reduction</strong> in total onboarding touch points
+        </li>
+        <li style="font-size: 14px; color: #222; padding-left: 16px; position: relative;">
+          <span style="position: absolute; left: 0; color: var(--mid);">✓</span> Unified experience adopted as platform standard
+        </li>
+      </ul>
+    </div>
+    <div style="padding: 24px; background: rgba(58, 106, 154, 0.08); border: 1px solid var(--light); border-radius: 8px;">
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 16px;">Product & Business Impact</h3>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px;">
+        <li style="font-size: 14px; color: #222; padding-left: 16px; position: relative;">
+          <span style="position: absolute; left: 0; color: var(--mid);">→</span> Accelerated time-to-value for enterprise customers
+        </li>
+        <li style="font-size: 14px; color: #222; padding-left: 16px; position: relative;">
+          <span style="position: absolute; left: 0; color: var(--mid);">→</span> Reduced support costs via clearer error guidance
+        </li>
+        <li style="font-size: 14px; color: #222; padding-left: 16px; position: relative;">
+          <span style="position: absolute; left: 0; color: var(--mid);">→</span> Increased feature adoption and upsell opportunities
+        </li>
+        <li style="font-size: 14px; color: #222; padding-left: 16px; position: relative;">
+          <span style="position: absolute; left: 0; color: var(--mid);">→</span> Competitive advantage in onboarding simplicity
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header">
+    <div class="section-label">Lessons & Principles</div>
+    <h2 class="section-title">What This Project Taught Me About Design Leadership</h2>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 48px;">
+    <div>
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 16px;">1. Unification as Strategy, Not Just Simplification</h3>
+      <p style="font-size: 14px; color: #222; line-height: 1.7;">Consolidating fragmented wizards into a single modal wasn't about making things prettier. It was about reducing cognitive load at a psychological level. When users build one mental model instead of four, they become more confident and efficient.</p>
+    </div>
+    <div>
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 16px;">2. Stakeholder Alignment Through Design Thinking</h3>
+      <p style="font-size: 14px; color: #222; line-height: 1.7;">Getting product owners to agree on a unified experience required more than sketches. It required framing the problem through their lens: customer satisfaction, support costs, competitive positioning. Design + business language = alignment.</p>
+    </div>
+    <div>
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 16px;">3. Human Psychology > Feature Completeness</h3>
+      <p style="font-size: 14px; color: #222; line-height: 1.7;">Progressive disclosure and "First Time Value" drove adoption more than exposing all options. Understanding user decision fatigue and cognitive load is as important as understanding feature requirements.</p>
+    </div>
+    <div>
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 16px;">4. Collaboration Shapes Implementation</h3>
+      <p style="font-size: 14px; color: #222; line-height: 1.7;">Designs are only as good as their execution. Working closely with Engineering to rewrite APIs and rebuild the modal architecture ensured the vision became reality, not a design artifact.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header">
+    <div class="section-label">Impact</div>
+    <h2 class="section-title">User Validation & Feedback</h2>
+  </div>
+  <p style="font-size: 16px; color: #222; line-height: 1.8; margin-bottom: 48px;">
+    Real customer feedback from enterprise organizations that experienced the new unified onboarding:
+  </p>
+
+  <div style="display: grid; grid-template-columns: 1fr; gap: 32px; margin-bottom: 48px;">
+    <div style="padding: 32px; background: var(--pale); border-radius: 12px; border-left: 4px solid var(--mid);">
+      <div style="display: flex; align-items: flex-start; gap: 24px;">
+        <div style="flex-shrink: 0; font-size: 32px; color: var(--mid);">💼</div>
+        <div style="flex: 1;">
+          <p style="font-size: 15px; color: #222; line-height: 1.8; margin: 0; font-style: italic;">
+            "This is exactly what builds our confidence in Prisma Cloud, we really feel Prisma Cloud is listening to customers and improving what matters to us. This simplifies our effort as we plan to add more accounts in the next few months."
+          </p>
+          <p style="font-size: 13px; color: var(--muted); margin-top: 12px; font-weight: 600;">Informatica</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding: 32px; background: var(--pale); border-radius: 12px; border-left: 4px solid var(--mid);">
+      <div style="display: flex; align-items: flex-start; gap: 24px;">
+        <div style="flex-shrink: 0; font-size: 32px; color: var(--mid);">🎓</div>
+        <div style="flex: 1;">
+          <p style="font-size: 15px; color: #222; line-height: 1.8; margin: 0; font-style: italic;">
+            "We currently have a 10-step onboarding checklist for each cloud type and based on what we see currently, I can reduce that to just a couple for each cloud. This is a huge improvement for us in terms of how we enable different capabilities Prisma Cloud offers."
+          </p>
+          <p style="font-size: 13px; color: var(--muted); margin-top: 12px; font-weight: 600;">Unacademy</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding: 32px; background: var(--pale); border-radius: 12px; border-left: 4px solid var(--mid);">
+      <div style="display: flex; align-items: flex-start; gap: 24px;">
+        <div style="flex-shrink: 0; font-size: 32px; color: var(--mid);">⚡</div>
+        <div style="flex: 1;">
+          <p style="font-size: 15px; color: #222; line-height: 1.8; margin: 0; font-style: italic;">
+            "Unified Onboarding experience in PCEE was very positive experience. Everything just worked."
+          </p>
+          <p style="font-size: 13px; color: var(--muted); margin-top: 12px; font-weight: 600;">NVIDIA POC Team</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header">
+    <div class="section-label">Recognition</div>
+    <h2 class="section-title">Cross-Functional Team Feedback</h2>
+  </div>
+  <p style="font-size: 16px; color: #222; line-height: 1.8; margin-bottom: 48px;">
+    Internal recognition from Engineering leadership, Product, and UX teams across multiple regions:
+  </p>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+    <div style="padding: 24px; background: linear-gradient(135deg, rgba(232,240,248,0.5) 0%, rgba(232,240,248,0.2) 100%); border-radius: 8px;">
+      <p style="font-size: 12px; font-weight: 600; color: var(--mid); margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 1px;">Director Engineering, India</p>
+      <p style="font-size: 14px; color: #222; line-height: 1.7; margin: 0; font-weight: 500;">Quadir Kareemullah</p>
+      <p style="font-size: 13px; color: #222; line-height: 1.6; margin-top: 8px; margin: 0; font-style: italic;">Collaboration & execution for the fabulous cloud account onboarding UX</p>
+    </div>
+
+    <div style="padding: 24px; background: linear-gradient(135deg, rgba(232,240,248,0.5) 0%, rgba(232,240,248,0.2) 100%); border-radius: 8px;">
+      <p style="font-size: 12px; font-weight: 600; color: var(--mid); margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 1px;">UX Researcher, USA</p>
+      <p style="font-size: 14px; color: #222; line-height: 1.7; margin: 0; font-weight: 500;">Stephanie Chen</p>
+      <p style="font-size: 13px; color: #222; line-height: 1.6; margin-top: 8px; margin: 0; font-style: italic;">Thank you for walking through the complexity of cloud account onboarding</p>
+    </div>
+
+    <div style="padding: 24px; background: linear-gradient(135deg, rgba(232,240,248,0.5) 0%, rgba(232,240,248,0.2) 100%); border-radius: 8px;">
+      <p style="font-size: 12px; font-weight: 600; color: var(--mid); margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 1px;">Reporting Manager, USA</p>
+      <p style="font-size: 14px; color: #222; line-height: 1.7; margin: 0; font-weight: 500;">Jason Davila</p>
+      <p style="font-size: 13px; color: #222; line-height: 1.6; margin-top: 8px; margin: 0; font-style: italic;">Onboarding efforts deserve an award for most feedback ever from the most people</p>
+    </div>
+
+    <div style="padding: 24px; background: linear-gradient(135deg, rgba(232,240,248,0.5) 0%, rgba(232,240,248,0.2) 100%); border-radius: 8px;">
+      <p style="font-size: 12px; font-weight: 600; color: var(--mid); margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 1px;">UI Development Principal</p>
+      <p style="font-size: 14px; color: #222; line-height: 1.7; margin: 0; font-weight: 500;">Rahul Kumar</p>
+      <p style="font-size: 13px; color: #222; line-height: 1.6; margin-top: 8px; margin: 0; font-style: italic;">Consistent help to deliver Cloud Account onboarding UX faster</p>
+    </div>
+
+    <div style="padding: 24px; background: linear-gradient(135deg, rgba(232,240,248,0.5) 0%, rgba(232,240,248,0.2) 100%); border-radius: 8px;">
+      <p style="font-size: 12px; font-weight: 600; color: var(--mid); margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 1px;">Senior Director Engineering, USA</p>
+      <p style="font-size: 14px; color: #222; line-height: 1.7; margin: 0; font-weight: 500;">Hari Srinivasan</p>
+      <p style="font-size: 13px; color: #222; line-height: 1.6; margin-top: 8px; margin: 0; font-style: italic;">Hard work bringing screens to this level. Makes it easy for review.</p>
+    </div>
+
+    <div style="padding: 24px; background: linear-gradient(135deg, rgba(232,240,248,0.5) 0%, rgba(232,240,248,0.2) 100%); border-radius: 8px;">
+      <p style="font-size: 12px; font-weight: 600; color: var(--mid); margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 1px;">UX Manager, USA</p>
+      <p style="font-size: 14px; color: #222; line-height: 1.7; margin: 0; font-weight: 500;">Justin Lancaster</p>
+      <p style="font-size: 13px; color: #222; line-height: 1.6; margin-top: 8px; margin: 0; font-style: italic;">Love working with you on Prisma Cloud Onboarding UX</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header">
+    <div class="section-label">Further Details</div>
+    <h2 class="section-title">Full Case Study & Documentation</h2>
+  </div>
+  <div style="padding: 48px; background: var(--pale); border-radius: 8px; text-align: center;">
+    <p style="font-size: 15px; color: var(--muted); margin-bottom: 20px;">Complete case study PDF with detailed research findings, design iterations, and competitive analysis available upon request.</p>
+    <a href="casestudies/prisma-cloud-onboarding.pdf" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--navy); text-decoration: none; padding: 12px 24px; border: 1px solid var(--mid); border-radius: 4px; transition: all 0.2s;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Download Full Case Study PDF
+    </a>
+    <p style="font-size: 13px; color: var(--mid); margin-top: 16px; font-style: italic;">Research artifacts, design iterations, and stakeholder feedback included.</p>
+  </div>
+</section>
+
+</body>
+</html>
