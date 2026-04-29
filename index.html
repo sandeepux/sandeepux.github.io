@@ -4,912 +4,1190 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sandeep Virmani — Principal Product Designer</title>
+<meta name="description" content="Principal Product Designer with 15+ years designing enterprise security, cloud, and data platforms. OpenText · Palo Alto Networks · Oracle.">
 <link rel="icon" type="image/png" href="images/Favicon.png">
 <link rel="apple-touch-icon" href="images/Favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #1e2d42;
-    --slate: #2a3f5f;
-    --mid: #3a6a9a;
-    --light: #7a9ec4;
-    --pale: #e8f0f8;
-    --cream: #faf9f7;
-    --ink: #111111;
-    --muted: #444;
-    --rule: #e0e0e0;
-  }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-weight: 400;
-    color: var(--ink);
-    background: #fff;
-    line-height: 1.75;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* ── FADE IN ── */
-  .fade { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .fade.visible { opacity: 1; transform: none; }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 0 48px;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .nav-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--navy);
-    letter-spacing: -0.2px;
-    text-decoration: none;
-  }
-
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a {
-    font-family: 'Source Serif 4', serif;
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: 0.3px;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--navy); }
-
-  /* ── HERO ── */
-  #hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 420px;
-    gap: 56px;
-    align-items: center;
-    padding: 120px 48px 80px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .hero-inner { max-width: none; }
-
-  /* ── HERO PHOTO GRID ── */
-  .hero-photos {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    grid-template-rows: 200px 200px;
-    gap: 8px;
-    opacity: 0;
-    animation: fadeUp 0.9s 0.7s forwards;
-  }
-  .hero-photo {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(135deg, #e8f0f8 0%, #d4e4f0 100%);
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hero-photo:first-child {
-    grid-row: span 1;
-  }
-  .hero-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    filter: grayscale(100%) brightness(1) contrast(1.1);
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s ease;
-    backface-visibility: hidden;
-    will-change: transform, filter;
-  }
-  .hero-photo:hover img {
-    transform: scale(1.05);
-    filter: grayscale(0%) brightness(1.05) contrast(1.1);
-  }
-  .hero-photo-cap {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    background: linear-gradient(to top, rgba(20,34,54,0.88) 0%, transparent 100%);
-    padding: 20px 12px 8px;
-    font-size: 10px;
-    letter-spacing: 1px;
-    color: rgba(255,255,255,0.88);
-    text-transform: uppercase;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .hero-photo:hover .hero-photo-cap { opacity: 1; }
-
-  .hero-tag {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: 24px;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.1s forwards;
-  }
-
-  .hero-name {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(48px, 7vw, 82px);
-    font-weight: 700;
-    color: var(--navy);
-    line-height: 1.05;
-    letter-spacing: -1.5px;
-    margin-bottom: 28px;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.25s forwards;
-  }
-
-  .hero-sub {
-    font-size: clamp(17px, 2vw, 20px);
-    font-weight: 400;
-    color: #1a1a1a;
-    line-height: 1.7;
-    max-width: 580px;
-    margin-bottom: 40px;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.4s forwards;
-  }
-
-  .hero-sub strong { font-weight: 600; color: var(--navy); }
-
-  .hero-cta {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.55s forwards;
-  }
-
-  .btn-primary {
-    display: inline-block;
-    padding: 12px 28px;
-    background: var(--navy);
-    color: #fff;
-    font-family: 'Source Serif 4', serif;
-    font-size: 14px;
-    font-weight: 400;
-    text-decoration: none;
-    letter-spacing: 0.3px;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .btn-primary:hover { background: var(--slate); transform: translateY(-1px); }
-
-  .btn-secondary {
-    display: inline-block;
-    padding: 12px 28px;
-    border: 1px solid var(--navy);
-    color: var(--navy);
-    font-family: 'Source Serif 4', serif;
-    font-size: 14px;
-    font-weight: 400;
-    text-decoration: none;
-    letter-spacing: 0.3px;
-    transition: background 0.2s, color 0.2s;
-  }
-  .btn-secondary:hover { background: var(--pale); }
-
-  .hero-scroll {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    opacity: 0;
-    animation: fadeIn 1s 1.2s forwards;
-  }
-
-  .scroll-line {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom, var(--mid), transparent);
-    animation: scrollDrop 2s 1.5s infinite;
-  }
-
-  @keyframes scrollDrop {
-    0% { transform: scaleY(0); transform-origin: top; }
-    50% { transform: scaleY(1); transform-origin: top; }
-    51% { transform: scaleY(1); transform-origin: bottom; }
-    100% { transform: scaleY(0); transform-origin: bottom; }
-  }
-
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-    from { opacity: 0; transform: translateY(20px); }
-  }
-
-  @keyframes fadeIn {
-    to { opacity: 0.5; }
-  }
-
-  /* ── SECTIONS ── */
-  section { padding: 96px 48px; max-width: 1100px; margin: 0 auto; }
-
-  .section-label {
-    font-size: 10px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: 12px;
-    font-weight: 400;
-  }
-
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(30px, 4vw, 44px);
-    font-weight: 600;
-    color: var(--navy);
-    line-height: 1.15;
-    letter-spacing: -0.5px;
-    margin-bottom: 48px;
-  }
-
-  hr.rule {
-    border: none;
-    border-top: 1px solid var(--rule);
-    margin: 0;
-  }
-
-  /* ── METRICS STRIP ── */
-  #metrics {
-    background: var(--navy);
-    padding: 64px 48px;
-    max-width: 100%;
-    margin: 0;
-  }
-
-  .metrics-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 40px;
-  }
-
-  .metric-item { text-align: center; }
-
-  .metric-num {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 5vw, 56px);
-    font-weight: 700;
-    color: #fff;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .metric-num span { color: var(--light); }
-
-  .metric-label {
-    font-size: 12px;
-    color: rgba(255,255,255,0.55);
-    letter-spacing: 0.5px;
-    line-height: 1.5;
-  }
-
-  .metric-project {
-    font-size: 10px;
-    color: var(--light);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-top: 4px;
-  }
-
-  /* ── WORK ── */
-  .work-intro {
-    font-size: 17px;
-    color: #111;
-    max-width: 720px;
-    margin-top: -24px;
-    margin-bottom: 56px;
-    line-height: 1.8;
-  }
-
-  .work-company {
-    margin-bottom: 72px;
-  }
-
-  .work-company:last-child {
-    margin-bottom: 0;
-  }
-
-  .work-company-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 22px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-  }
-
-  .work-company-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--navy);
-    letter-spacing: -0.3px;
-  }
-
-  .work-company-meta {
-    font-size: 12px;
-    color: var(--muted);
-    font-style: italic;
-  }
-
-  .work-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-
-  .work-featured {
-    grid-column: span 1;
-    background: #fff;
-    border: 1px solid var(--rule);
-    border-radius: 18px;
-    cursor: pointer;
-    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-  }
-
-  .work-featured:hover {
-    border-color: var(--light);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(20, 30, 45, 0.08);
-  }
-
-  .wf-right {
-    display: none;
-  }
-
-  .wf-visual {
-    width: 100%;
-    min-height: 240px;
-    border-radius: 14px;
-    background: linear-gradient(135deg, #eef3f8, #f8f6f2);
-    border: 1px solid #e4e4e4;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-  }
-
-  .wf-caption {
-    padding: 16px;
-    font-size: 12px;
-    color: rgba(0,0,0,0.55);
-    line-height: 1.4;
-  }
-
-  .work-card {
-    background: var(--cream);
-    padding: 32px;
-    border: 1px solid var(--rule);
-    border-radius: 16px;
-    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-  }
-
-  .work-card > div:first-child {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .work-card:hover {
-    border-color: var(--light);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(20, 30, 45, 0.06);
-  }
-
-  .work-co {
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: 10px;
-  }
-
-  .work-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--navy);
-    line-height: 1.2;
-    margin-bottom: 14px;
-    min-height: 52px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .work-desc {
-    font-size: 14px;
-    color: #1a1a1a;
-    line-height: 1.7;
-    margin-bottom: 20px;
-  }
-
-  .work-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .tag {
-    font-size: 10px;
-    letter-spacing: 0.5px;
-    padding: 4px 10px;
-    background: var(--pale);
-    color: var(--slate);
-    border: 1px solid #c5d8ea;
-    border-radius: 999px;
-  }
-
-  .work-metrics {
-    display: flex;
-    gap: 18px;
-    margin: 18px 0;
-    padding: 14px 0;
-    border-top: 1px solid rgba(0,0,0,0.06);
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-  }
-
-  .wm { text-align: left; }
-  .wm-n { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--navy); line-height: 1; }
-  .wm-l { font-size: 10px; color: var(--muted); margin-top: 2px; }
-
-  /* ── CAREER ── */
-  .career-list { display: flex; flex-direction: column; }
-
-  .career-item {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 40px;
-    padding: 36px 0;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .career-item:first-child { border-top: 1px solid var(--rule); }
-
-  .career-left {}
-
-  .career-co {
-    font-family: 'Playfair Display', serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 4px;
-  }
-
-  .career-date {
-    font-size: 12px;
-    color: var(--muted);
-    font-style: italic;
-  }
-
-  .career-role {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--mid);
-    margin-top: 4px;
-    letter-spacing: 0.2px;
-  }
-
-  .career-right {}
-
-  .career-bullets {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .career-bullets li {
-    font-size: 16px;
-    color: #111;
-    line-height: 1.7;
-    padding-left: 16px;
-    position: relative;
-  }
-
-  .career-bullets li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 10px;
-    width: 5px;
-    height: 1px;
-    background: var(--mid);
-  }
-
-  .career-bullets li strong { font-weight: 600; color: var(--navy); }
-
-  /* ── SKILLS ── */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 32px;
-  }
-
-  .skill-block {}
-
-  .skill-label {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .skill-items {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .skill-item {
-    font-size: 14px;
-    color: #111;
-    line-height: 1.5;
-  }
-
-  /* ── ABOUT ── */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-  }
-
-  .about-text p {
-    font-size: 16px;
-    color: #111;
-    line-height: 1.8;
-    margin-bottom: 20px;
-  }
-
-  .about-text p:last-child { margin-bottom: 0; }
-
-  .about-aside {}
-
-  .aside-block { margin-bottom: 32px; }
-
-  .aside-label {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: 10px;
-  }
-
-  .aside-item {
-    font-size: 14px;
-    color: #111;
-    line-height: 1.7;
-    padding-left: 12px;
-    border-left: 2px solid var(--pale);
-    margin-bottom: 6px;
-  }
-
-  /* ── CONTACT ── */
-  #contact { background: var(--navy); max-width: 100%; padding: 80px 48px; }
-
-  .contact-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 32px;
-  }
-
-  .contact-left .contact-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 4vw, 42px);
-    font-weight: 600;
-    color: #fff;
-    line-height: 1.2;
-    margin-bottom: 12px;
-  }
-
-  .contact-left p {
-    font-size: 15px;
-    color: rgba(255,255,255,0.6);
-    max-width: 400px;
-    line-height: 1.7;
-  }
-
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 14px;
-    color: rgba(255,255,255,0.8);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .contact-link:hover { color: #fff; }
-
-  .contact-link-label {
-    font-size: 10px;
-    color: var(--light);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    width: 70px;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    background: #111820;
-    padding: 24px 48px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  footer p { font-size: 12px; color: rgba(255,255,255,0.3); }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    nav { padding: 0 24px; }
-    nav .nav-links { display: none; }
-    #hero { grid-template-columns: 1fr; gap: 32px; padding-bottom: 48px; }
-    .hero-photos { grid-template-rows: 140px 140px 140px; }
-    #hero, section { padding-left: 24px; padding-right: 24px; }
-    #metrics { padding: 48px 24px; }
-    .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .career-item { grid-template-columns: 1fr; gap: 12px; }
-    #contact { padding: 64px 24px; }
-    .contact-inner { flex-direction: column; }
-    footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
-    .modal-inner { padding: 32px 24px; }
-    .modal-grid { grid-template-columns: 1fr; }
-  }
-
-  .card-hint {
-    font-size: 11px;
-    color: var(--mid);
-    letter-spacing: 0.5px;
-    margin-top: auto;
-    padding-top: 16px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: color 0.2s;
-  }
-  .card-hint::after { content: '→'; transition: transform 0.2s; }
-  .work-card:hover .card-hint { color: var(--navy); }
-  .work-card:hover .card-hint::after { transform: translateX(4px); }
-  .work-featured:hover .card-hint { color: var(--navy); }
-  .work-featured:hover .card-hint::after { transform: translateX(4px); }
-  .card-download {
-    font-size: 11px;
-    color: #444;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border: 1.5px solid #999;
-    border-radius: 999px;
-    transition: all 0.2s;
-    letter-spacing: 0.3px;
-    margin-top: auto;
-    padding-top: 16px;
-    align-self: flex-start;
-    font-weight: 500;
-  }
-  .card-download:hover {
-    border-color: var(--navy);
-    color: #fff;
-    background: var(--navy);
-    box-shadow: 0 4px 12px rgba(30, 45, 66, 0.15);
-  }
-
-  /* ── TIMELINE BAR ── */
-  .timeline-wrap {
-    margin-bottom: 48px;
-  }
-
-  .timeline-bar {
-    display: flex;
-    height: 36px;
-    border-radius: 2px;
-    overflow: hidden;
-    margin-bottom: 0;
-  }
-
-  .tl-seg {
-    background: var(--pale);
-    border: 1px solid #c5d8ea;
-    border-right: none;
-    display: flex;
-    align-items: center;
-    padding: 0 14px;
-    position: relative;
-    transition: background 0.2s;
-  }
-
-  .tl-seg:last-child { border-right: 1px solid #c5d8ea; }
-
-  .tl-ux {
-    background: var(--slate);
-    border-color: var(--slate);
-  }
-
-  .tl-seg-label {
-    font-size: 10px;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    font-weight: 400;
-    color: var(--slate);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .tl-ux .tl-seg-label { color: rgba(255,255,255,0.85); }
-
-  .tl-years {
-    position: relative;
-    height: 24px;
-    margin-top: 4px;
-  }
-
-  .tl-year {
-    position: absolute;
-    font-size: 11px;
-    color: var(--muted);
-    transform: translateX(-50%);
-    font-style: italic;
-  }
-
-  .tl-year-mid {
-    font-size: 10px;
-    color: #bbb;
-  }
-
-  .tl-companies {
-    position: relative;
-    height: 22px;
-    margin-top: 2px;
-  }
-
-  .tl-co {
-    position: absolute;
-    font-size: 10px;
-    color: var(--muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 0 2px;
-    letter-spacing: 0.2px;
-  }
-
-  .tl-co-ux { color: var(--mid); font-weight: 400; }
-
-  @media (max-width: 768px) {
-    .tl-seg-label { display: none; }
-    .tl-year-mid { display: none; }
-    .tl-co { display: none; }
-  }
+/* ══════════════════════════════════════════
+   TOKENS
+══════════════════════════════════════════ */
+:root {
+  --navy:    #1e2d42;
+  --slate:   #2a3f5f;
+  --mid:     #3a6a9a;
+  --light:   #7a9ec4;
+  --pale:    #e8f0f8;
+  --cream:   #faf9f7;
+  --ink:     #111111;
+  --muted:   #555;
+  --rule:    #e0e0e0;
+  --accent:  #d4453e;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 400;
+  color: var(--ink);
+  background: #fff;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── FADE IN ── */
+.fade { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade.visible { opacity: 1; transform: none; }
+
+/* ══════════════════════════════════════════
+   NAV
+══════════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 48px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
+}
+
+.nav-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: -0.2px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Source Serif 4', serif;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--navy); }
+
+.nav-cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Source Serif 4', serif;
+  font-size: 12px;
+  color: var(--navy);
+  text-decoration: none;
+  border: 1px solid var(--navy);
+  padding: 5px 14px;
+  border-radius: 3px;
+  letter-spacing: 0.3px;
+  transition: background 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+.nav-cv:hover { background: var(--navy); color: #fff; }
+.nav-cv svg { flex-shrink: 0; }
 
 /* ── HAMBURGER + MOBILE MENU ── */
-  .nav-hamburger {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 6px;
-    flex-direction: column;
-    gap: 5px;
-  }
-  .nav-hamburger span {
-    display: block;
-    width: 22px;
-    height: 1.5px;
-    background: var(--navy);
-    transition: transform 0.25s, opacity 0.25s;
-  }
-  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-  .mobile-menu {
-    display: none;
-    position: fixed;
-    top: 64px; left: 0; right: 0;
-    background: #fff;
-    border-bottom: 2px solid var(--navy);
-    z-index: 99;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-  }
-  .mobile-menu.open { display: block; }
-  .mobile-menu a {
-    display: block;
-    padding: 16px 24px;
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    color: var(--navy);
-    text-decoration: none;
-    border-bottom: 1px solid var(--rule);
-    transition: background 0.15s, padding-left 0.15s;
-  }
-  .mobile-menu a:last-child { border-bottom: none; }
-  .mobile-menu a:hover { background: var(--pale); padding-left: 32px; }
-  @media (max-width: 768px) { .nav-hamburger { display: flex; } }
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  flex-direction: column;
+  gap: 5px;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--navy);
+  transition: transform 0.25s, opacity 0.25s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-/* ── REFERENCES STRIP ── */
-  .ref-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-  .ref-strip-item { background: var(--cream); border: 1px solid var(--rule); padding: 22px 26px; }
-  .ref-strip-co { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); margin-bottom: 5px; }
-  .ref-strip-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 10px; line-height: 1.3; }
-  .ref-strip-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-  .ref-strip-dl { font-size: 11px; color: var(--mid); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; margin-top: 10px; transition: color 0.2s; }
-  .ref-strip-dl:hover { color: var(--navy); }
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 64px; left: 0; right: 0;
+  background: #fff;
+  border-bottom: 2px solid var(--navy);
+  z-index: 99;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+.mobile-menu.open { display: block; }
+.mobile-menu a {
+  display: block;
+  padding: 16px 24px;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: var(--navy);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: background 0.15s, padding-left 0.15s;
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { background: var(--pale); padding-left: 32px; }
 
-  /* Responsive — work section */
-  @media (max-width: 900px) {
-    .work-grid { grid-template-columns: 1fr; }
-    .work-featured { grid-column: span 1; grid-template-columns: 1fr; }
-    .wf-right { display: none; }
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 56px;
+  align-items: center;
+  padding: 120px 48px 80px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hero-inner { max-width: none; }
+
+/* Eyebrow */
+.hero-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.1s forwards;
+}
+
+/* Name */
+.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 7vw, 82px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.25s forwards;
+}
+
+/* ── NEW: Positioning statement ── */
+.hero-positioning {
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(17px, 2vw, 20px);
+  font-weight: 300;
+  color: #1a1a1a;
+  line-height: 1.65;
+  max-width: 520px;
+  margin-bottom: 22px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.38s forwards;
+}
+
+/* ── NEW: Company strip ── */
+.hero-co-strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.5s forwards;
+}
+
+.hero-co-item {
+  font-size: 10px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: #888;
+  padding: 0 14px;
+  border-right: 1px solid var(--rule);
+  line-height: 1;
+  white-space: nowrap;
+}
+.hero-co-item:first-child { padding-left: 0; }
+.hero-co-item:last-child  { border-right: none; }
+
+/* CTAs */
+.hero-cta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.62s forwards;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 12px 28px;
+  background: var(--navy);
+  color: #fff;
+  font-family: 'Source Serif 4', serif;
+  font-size: 14px;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  border-radius: 3px;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--slate); transform: translateY(-1px); }
+
+.btn-secondary {
+  display: inline-block;
+  padding: 12px 28px;
+  border: 1px solid var(--navy);
+  color: var(--navy);
+  font-family: 'Source Serif 4', serif;
+  font-size: 14px;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  border-radius: 3px;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-secondary:hover { background: var(--pale); }
+
+/* ── NEW: CV download text-link ── */
+.hero-cv-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--mid);
+  text-decoration: none;
+  letter-spacing: 0.2px;
+  transition: color 0.2s;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+}
+.hero-cv-link:hover { color: var(--navy); border-bottom-color: var(--navy); }
+.hero-cv-link svg { flex-shrink: 0; }
+
+/* ── HERO PHOTO GRID ── */
+.hero-photos {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  grid-template-rows: 200px 200px;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.7s forwards;
+}
+
+.hero-photo {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #e8f0f8 0%, #d4e4f0 100%);
+  border-radius: 6px;
+}
+
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  filter: grayscale(100%) brightness(1) contrast(1.1);
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s ease;
+  backface-visibility: hidden;
+  will-change: transform, filter;
+}
+
+/* Journey mapping photo always in colour — most evocative field-research image */
+.hero-photo:nth-child(2) img {
+  filter: grayscale(0%) brightness(1.02) contrast(1.05);
+}
+.hero-photo:nth-child(2):hover img {
+  filter: grayscale(0%) brightness(1.07) contrast(1.1);
+}
+
+.hero-photo:hover img {
+  transform: scale(1.05);
+  filter: grayscale(0%) brightness(1.05) contrast(1.1);
+}
+
+/* Captions visible by default — not hidden until hover */
+.hero-photo-cap {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(20,34,54,0.85) 0%, transparent 100%);
+  padding: 20px 12px 8px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.88);
+  text-transform: uppercase;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+.hero-photo:hover .hero-photo-cap { opacity: 1; }
+
+/* Scroll indicator */
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  animation: fadeIn 1s 1.2s forwards;
+}
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--mid), transparent);
+  animation: scrollDrop 2s 1.5s infinite;
+}
+
+/* ── KEYFRAMES ── */
+@keyframes scrollDrop {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  to { opacity: 0.5; }
+}
+
+/* ══════════════════════════════════════════
+   SHARED SECTION STYLES
+══════════════════════════════════════════ */
+section { padding: 96px 48px; max-width: 1100px; margin: 0 auto; }
+
+.section-label {
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-bottom: 48px;
+}
+
+hr.rule { border: none; border-top: 1px solid var(--rule); margin: 0; }
+
+/* ══════════════════════════════════════════
+   METHODOLOGY
+══════════════════════════════════════════ */
+#methodology {
+  background: linear-gradient(160deg, #faf9f7 0%, #f0ece4 100%);
+  padding: 96px 48px;
+  max-width: 100%;
+  margin: 0;
+}
+
+.methodology-inner { max-width: 1100px; margin: 0 auto; }
+
+.methodology-intro {
+  font-size: 17px;
+  color: #111;
+  max-width: 600px;
+  margin-bottom: 56px;
+  line-height: 1.85;
+  padding-left: 18px;
+  border-left: 3px solid #d4c8b8;
+}
+
+/* ── Numbered agenda grid ── */
+.method-agenda-header {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 40px;
+  letter-spacing: -0.3px;
+}
+.method-agenda-header em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--mid);
+}
+
+.method-agenda {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 40px;
+  border-top: 2px solid var(--navy);
+}
+
+.method-agenda-item {
+  display: flex;
+  gap: 20px;
+  padding: 28px 32px 28px 0;
+  border-bottom: 1px solid #ddd6cc;
+  transition: background 0.2s;
+}
+.method-agenda-item:nth-child(even) {
+  padding: 28px 0 28px 36px;
+  border-left: 1px solid #ddd6cc;
+}
+.method-agenda-item:hover {
+  background: rgba(255,255,255,0.55);
+}
+
+.method-agenda-num {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: background 0.2s;
+}
+.method-agenda-item:hover .method-agenda-num {
+  background: var(--mid);
+}
+
+.method-agenda-body {}
+
+.method-agenda-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+  margin-bottom: 7px;
+}
+
+.method-agenda-desc {
+  font-size: 13.5px;
+  color: #555;
+  line-height: 1.65;
+}
+
+/* ══════════════════════════════════════════
+   METRICS STRIP
+══════════════════════════════════════════ */
+#metrics {
+  background: var(--navy);
+  padding: 64px 48px;
+  max-width: 100%;
+  margin: 0;
+}
+
+.metrics-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 40px;
+}
+
+.metric-item { text-align: center; }
+
+.metric-num {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.metric-num span { color: var(--light); }
+
+.metric-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+}
+
+.metric-project {
+  font-size: 10px;
+  color: var(--light);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ══════════════════════════════════════════
+   SELECTED WORK — DESIGN + RESEARCH DUAL PANEL
+══════════════════════════════════════════ */
+.work-intro {
+  font-size: 16px;
+  color: #444;
+  max-width: 580px;
+  margin-top: -24px;
+  margin-bottom: 64px;
+  line-height: 1.85;
+  padding-left: 18px;
+  border-left: 3px solid var(--pale);
+}
+
+.work-row {
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  gap: 64px;
+  align-items: center;
+  padding: 72px 0;
+  border-top: 1px solid var(--rule);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+.work-row::before {
+  content: '';
+  position: absolute;
+  left: -72px; top: 0; bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: background 0.25s;
+  border-radius: 0 2px 2px 0;
+}
+.work-row:hover::before          { background: var(--mid); }
+.work-row:hover .row-cta         { color: var(--navy); }
+.work-row:hover .row-cta-arrow   { transform: translateX(6px); }
+.work-row:hover .row-visual-inner {
+  box-shadow: 0 24px 52px rgba(20,30,45,0.12);
+  transform: translateY(-3px);
+}
+
+.work-row.reverse .row-text   { order: 2; }
+.work-row.reverse .row-visual { order: 1; }
+
+/* ── Strategic scope chip ── */
+.row-scope {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--mid);
+  background: var(--pale);
+  border: 1px solid #c5d8ea;
+  padding: 3px 10px 3px 8px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+.row-scope::before {
+  content: '';
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--mid);
+  flex-shrink: 0;
+}
+
+/* ── Text side ── */
+.row-co {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.row-co::before {
+  content: '';
+  display: inline-block;
+  width: 20px; height: 1px;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.row-impact {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+
+.row-metric {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(56px, 6.5vw, 80px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 0.9;
+  letter-spacing: -3px;
+}
+
+.row-metric-label {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  max-width: 110px;
+  padding-bottom: 8px;
+}
+
+.row-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(19px, 2.3vw, 24px);
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.25;
+  margin: 16px 0 10px;
+  letter-spacing: -0.2px;
+}
+
+.row-context {
+  font-size: 14px;
+  font-style: italic;
+  color: #444;
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+
+.row-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 26px;
+}
+
+.tag {
+  font-size: 10px;
+  letter-spacing: 0.4px;
+  padding: 4px 10px;
+  background: var(--pale);
+  color: var(--slate);
+  border: 1px solid #c5d8ea;
+  border-radius: 999px;
+}
+
+.row-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--mid);
+  letter-spacing: 0.3px;
+  transition: color 0.2s;
+}
+.row-cta-arrow {
+  display: inline-block;
+  font-size: 16px;
+  transition: transform 0.2s;
+}
+
+/* ── Visual side — browser frame ── */
+.row-visual {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+
+.row-visual-inner {
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  background: var(--cream);
+  transition: box-shadow 0.3s, transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Browser chrome bar */
+.frame-chrome {
+  background: #f2f2f2;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 7px;
+  border-bottom: 1px solid #e4e4e4;
+  flex-shrink: 0;
+}
+
+.chrome-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.cd-r { background: #ff6057; }
+.cd-y { background: #febc2e; }
+.cd-g { background: #28c840; }
+
+/* Screenshot fills the rest */
+.frame-screen {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+.frame-screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  display: block;
+}
+
+/* Row description body text */
+.row-desc {
+  font-size: 14px;
+  color: #2a2a2a;
+  line-height: 1.8;
+  margin-bottom: 22px;
+}
+
+/* Scope chip — hidden in current layout */
+.row-scope { display: none; }
+
+/* Design panel — kept for label chip */
+.row-panel-design {
+  display: none;
+}
+.row-panel-research {
+  display: none;
+}
+
+.panel-screen {
+  width: 100%; height: 100%;
+  overflow: hidden;
+}
+.panel-screen img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  display: block;
+}
+
+/* Panel label chip */
+.panel-label {
+  position: absolute;
+  top: 10px; left: 12px;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 999px;
+  z-index: 5;
+  pointer-events: none;
+  line-height: 1.6;
+}
+.panel-label.design {
+  background: rgba(20,30,45,0.68);
+  color: rgba(255,255,255,0.9);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.panel-label.research {
+  background: rgba(255,255,255,0.88);
+  color: var(--mid);
+  border: 1px solid rgba(58,106,154,0.25);
+}
+
+/* ── FigJam-style research board ── */
+.fj-board {
+  width: 100%; height: 100%;
+  position: relative;
+  background: #f4f1eb;
+  overflow: hidden;
+}
+.fj-board::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(0,0,0,0.065) 1px, transparent 1px);
+  background-size: 18px 18px;
+  pointer-events: none;
+}
+
+.fj-sticky {
+  position: absolute;
+  padding: 7px 9px;
+  border-radius: 2px;
+  font-size: 9.5px;
+  line-height: 1.5;
+  color: rgba(0,0,0,0.72);
+  font-family: 'Source Serif 4', serif;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.14);
+  max-width: 108px;
+}
+.fj-y { background: #fef3a0; }
+.fj-b { background: #bbd8f8; }
+.fj-g { background: #b8f0c8; }
+.fj-p { background: #f8c8d8; }
+
+.fj-label {
+  position: absolute;
+  font-size: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.28);
+  font-family: 'Source Serif 4', serif;
+}
+
+.fj-connector {
+  position: absolute;
+  height: 1px;
+  background: rgba(0,0,0,0.12);
+  transform-origin: left center;
+}
+
+/* ── Reference strip ── */
+.ref-strip {
+  margin-top: 72px;
+  padding-top: 40px;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+.ref-item {
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  padding: 22px 26px;
+}
+.ref-co {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 5px;
+}
+.ref-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.ref-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.ref-dl {
+  font-size: 11px;
+  color: var(--mid);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  transition: color 0.2s;
+}
+.ref-dl:hover { color: var(--navy); }
+
+/* ══════════════════════════════════════════
+   ABOUT
+══════════════════════════════════════════ */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.about-text p {
+  font-size: 16px;
+  color: #111;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+.about-text p:last-child { margin-bottom: 0; }
+
+.aside-block { margin-bottom: 32px; }
+
+.aside-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 10px;
+}
+
+.aside-item {
+  font-size: 14px;
+  color: #111;
+  line-height: 1.7;
+  padding-left: 12px;
+  border-left: 2px solid var(--pale);
+  margin-bottom: 6px;
+}
+
+/* ══════════════════════════════════════════
+   CAREER
+══════════════════════════════════════════ */
+.career-list { display: flex; flex-direction: column; }
+
+.career-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.career-item:first-child { border-top: 1px solid var(--rule); }
+
+.career-co {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.career-date {
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.career-role {
+  font-size: 14px;
+  color: var(--mid);
+  margin-top: 4px;
+  letter-spacing: 0.2px;
+}
+
+.career-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.career-bullets li {
+  font-size: 15px;
+  color: #111;
+  line-height: 1.7;
+  padding-left: 16px;
+  position: relative;
+}
+.career-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 11px;
+  width: 5px; height: 1px;
+  background: var(--mid);
+}
+.career-bullets li strong { font-weight: 600; color: var(--navy); }
+
+/* Timeline */
+.timeline-wrap { margin-bottom: 48px; }
+
+.timeline-bar {
+  display: flex;
+  height: 36px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.tl-seg {
+  background: var(--pale);
+  border: 1px solid #c5d8ea;
+  border-right: none;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  transition: background 0.2s;
+}
+.tl-seg:last-child { border-right: 1px solid #c5d8ea; }
+
+.tl-ux { background: var(--slate); border-color: var(--slate); }
+
+.tl-seg-label {
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--slate);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tl-ux .tl-seg-label { color: rgba(255,255,255,0.85); }
+
+.tl-years  { position: relative; height: 24px; margin-top: 4px; }
+.tl-year   { position: absolute; font-size: 11px; color: var(--muted); transform: translateX(-50%); font-style: italic; }
+.tl-year-mid { font-size: 10px; color: #bbb; }
+.tl-companies { position: relative; height: 22px; margin-top: 2px; }
+.tl-co {
+  position: absolute;
+  font-size: 10px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 2px;
+}
+.tl-co-ux { color: var(--mid); }
+
+/* ══════════════════════════════════════════
+   CONTACT
+══════════════════════════════════════════ */
+#contact { background: var(--navy); max-width: 100%; padding: 80px 48px; }
+
+.contact-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.contact-left .contact-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.contact-left p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+  max-width: 400px;
+  line-height: 1.7;
+}
+
+.contact-links { display: flex; flex-direction: column; gap: 14px; }
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.contact-link:hover { color: #fff; }
+
+.contact-link-label {
+  font-size: 10px;
+  color: var(--light);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  width: 70px;
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 1020px) {
+  #hero { grid-template-columns: 1fr; gap: 40px; min-height: auto; padding-top: 100px; }
+  .hero-photos { grid-template-rows: 160px 160px; }
+}
+
+@media (max-width: 700px) {
+  .method-agenda {
+    grid-template-columns: 1fr;
+    border-top: 2px solid var(--navy);
   }
-  @media (max-width: 768px) {
-    .work-company-header { flex-direction: column; gap: 4px; align-items: flex-start; }
-    .ref-strip { grid-template-columns: 1fr; }
+  .method-agenda-item:nth-child(even) {
+    padding: 28px 0 28px 0;
+    border-left: none;
   }
+  .method-agenda-item { padding-right: 0; }
+}
+
+@media (max-width: 900px) {
+  .work-row {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 52px 0;
+  }
+  .work-row.reverse .row-text  { order: 1; }
+  .work-row.reverse .row-visual { order: 2; }
+  .work-row::before { display: none; }
+  .ref-strip { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  nav { padding: 0 24px; }
+  nav .nav-links { display: none; }
+  nav .nav-cv { display: none; }
+  .nav-hamburger { display: flex; }
+
+  #hero { padding-left: 24px; padding-right: 24px; }
+  .hero-photos { grid-template-rows: 130px 130px; }
+
+  section { padding-left: 24px; padding-right: 24px; }
+  #methodology { padding: 56px 24px; }
+  #metrics { padding: 48px 24px; }
+  #contact { padding: 64px 24px; }
+
+  .methodology-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .career-item { grid-template-columns: 1fr; gap: 12px; }
+  .contact-inner { flex-direction: column; }
+
+  .tl-seg-label { display: none; }
+  .tl-year-mid  { display: none; }
+  .tl-co        { display: none; }
+}
+
+@media (max-width: 480px) {
+  .hero-co-strip { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .hero-co-item  { border-right: none; padding: 0; }
+  .methodology-grid { grid-template-columns: 1fr; }
+}
+
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ═══════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════ -->
 <nav>
   <a href="#hero" class="nav-name">Sandeep Virmani</a>
+
   <ul class="nav-links">
+    <li><a href="#methodology">Process</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#career">Career</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+
+  <a href="Resume/SandeepVirmani_UX26.pdf" id="cv-link" class="nav-cv" download>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    Download CV
+  </a>
+
   <button class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Open menu">
     <span></span><span></span><span></span>
   </button>
@@ -917,47 +1195,79 @@
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobile-menu">
-  <a href="#work" onclick="closeMobileMenu()">Work</a>
-  <a href="#about" onclick="closeMobileMenu()">About</a>
-  <a href="#career" onclick="closeMobileMenu()">Career</a>
-  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+  <a href="#methodology" onclick="closeMobileMenu()">Process</a>
+  <a href="#work"        onclick="closeMobileMenu()">Work</a>
+  <a href="#about"       onclick="closeMobileMenu()">About</a>
+  <a href="#career"      onclick="closeMobileMenu()">Career</a>
+  <a href="#contact"     onclick="closeMobileMenu()">Contact</a>
+  <a href="Resume/SandeepVirmani_UX26.pdf" onclick="closeMobileMenu()" download>Download CV</a>
 </div>
 
-<!-- HERO -->
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
 <div style="position:relative;">
   <div id="hero">
+
     <div class="hero-inner">
-      <div class="hero-tag">Principal Product Designer · Bangalore, India</div>
+
+      <!-- Eyebrow -->
+      <div class="hero-tag">Principal Product Designer &middot; Bangalore, India</div>
+
+      <!-- Name -->
       <h1 class="hero-name">Sandeep<br>Virmani</h1>
-      <p class="hero-sub">
-        Full-stack Principal Designer with 15+ years embedded in <strong>Engineering, Product Management,
-        and cross-functional teams</strong> across enterprise security, cloud, and data platforms.
-        I translate complex systems into validated, scalable experiences — owning the full arc
-        from user research and interaction design to design systems and AI-integrated practice.
+
+      <!-- Positioning statement -->
+      <p class="hero-positioning">
+        Full-stack Principal Designer embedded in Engineering, Product,
+        and cross-functional teams — translating complex enterprise systems
+        into validated, scalable experiences that change how thousands of people work.
       </p>
+
+      <!-- Company strip — social proof above the fold -->
+      <div class="hero-co-strip">
+        <span class="hero-co-item">OpenText</span>
+        <span class="hero-co-item">Palo Alto Networks</span>
+        <span class="hero-co-item">Oracle</span>
+        <span class="hero-co-item">IBM</span>
+        <span class="hero-co-item">15+ years</span>
+      </div>
+
+      <!-- CTAs — work first, process second -->
       <div class="hero-cta">
         <a href="#work" class="btn-primary">View selected work</a>
-        <a href="#contact" class="btn-secondary">Get in touch</a>
+        <a href="#methodology" class="btn-secondary">See how I work</a>
+        <!-- UPDATE href once PDF filename is shared -->
+        <a href="Resume/SandeepVirmani_UX26.pdf" id="cv-hero-link" class="hero-cv-link" download>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download CV
+        </a>
       </div>
+
     </div>
 
-    <!-- HERO PHOTO GRID -->
+    <!-- Photo grid — journey mapping photo in colour by default -->
     <div class="hero-photos">
       <div class="hero-photo">
-        <img src="work-pictures/selected/Eng_PM_062301839_iOS.jpg" alt="Engineering and Product Manager collaboration" >
-        <div class="hero-photo-cap">Eng & PM collaboration · Cross-functional</div>
+        <img src="work-pictures/selected/Eng_PM_062301839_iOS.jpg" alt="Engineering and PM collaboration">
+        <div class="hero-photo-cap">Eng &amp; PM collaboration</div>
       </div>
       <div class="hero-photo">
-        <img src="work-pictures/selected/UsrJourny_055953163_iOS.jpg" alt="User Journey mapping session with post-it notes" >
-        <div class="hero-photo-cap">User journey mapping · Enterprise research</div>
+        <img src="work-pictures/selected/UsrJourny_055953163_iOS.jpg" alt="User journey mapping session">
+        <div class="hero-photo-cap">Journey mapping &middot; Enterprise research</div>
       </div>
       <div class="hero-photo">
-        <img src="work-pictures/selected/Customer_VisitNovell_003307019_iOS.jpg" alt="On-site customer visit and contextual inquiry" >
-        <div class="hero-photo-cap">Customer visit · Contextual research</div>
+        <img src="work-pictures/selected/Customer_VisitNovell_003307019_iOS.jpg" alt="On-site customer contextual inquiry">
+        <div class="hero-photo-cap">Customer visit &middot; Contextual inquiry</div>
       </div>
       <div class="hero-photo">
-        <img src="work-pictures/selected/PA_teamcollb_224431121_iOS.jpg" alt="Cross-functional team collaboration at Palo Alto Networks" >
-        <div class="hero-photo-cap">Team collaboration · Palo Alto Networks</div>
+        <img src="work-pictures/selected/PA_teamcollb_224431121_iOS.jpg" alt="Cross-functional team at Palo Alto Networks">
+        <div class="hero-photo-cap">Team collaboration &middot; Palo Alto Networks</div>
       </div>
     </div>
 
@@ -965,203 +1275,365 @@
   <div class="hero-scroll"><div class="scroll-line"></div></div>
 </div>
 
-<!-- METRICS STRIP -->
-<div id="metrics">
-  <div class="metrics-inner">
-    <div class="metric-item fade">
-      <div class="metric-num">83<span>/100</span></div>
-      <div class="metric-label">System Usability Score</div>
-      <div class="metric-project">ILM Policy Builder · OpenText</div>
+
+<!-- ═══════════════════════════════════════════
+     METHODOLOGY
+═══════════════════════════════════════════ -->
+<div id="methodology">
+  <div class="methodology-inner">
+    <div class="section-label">How I Work</div>
+
+    <div class="method-agenda-header fade">
+      My process on every project &mdash;<br>
+      <em>structured, repeatable, always research-first.</em>
     </div>
-    <div class="metric-item fade">
-      <div class="metric-num"><span>+</span>63</div>
-      <div class="metric-label">Net Promoter Score</div>
-      <div class="metric-project">ILM Policy Builder · OpenText</div>
+
+    <p class="methodology-intro fade">
+      Before I open Figma, I understand the domain. Before I propose a direction,
+      I've spoken to the people who live inside the problem.
+      Every project below follows this agenda — from brief to validated outcome.
+    </p>
+
+    <div class="method-agenda">
+
+      <div class="method-agenda-item fade">
+        <div class="method-agenda-num">1</div>
+        <div class="method-agenda-body">
+          <div class="method-agenda-title">Project Brief &amp; Context</div>
+          <div class="method-agenda-desc">The assignment, business case, technical constraints, and the design opportunity I'm being asked to unlock.</div>
+        </div>
+      </div>
+
+      <div class="method-agenda-item fade">
+        <div class="method-agenda-num">4</div>
+        <div class="method-agenda-body">
+          <div class="method-agenda-title">Ideation</div>
+          <div class="method-agenda-desc">Information architecture, interaction patterns, design principles — the structure before the pixels.</div>
+        </div>
+      </div>
+
+      <div class="method-agenda-item fade">
+        <div class="method-agenda-num">2</div>
+        <div class="method-agenda-body">
+          <div class="method-agenda-title">Discovery &amp; Research</div>
+          <div class="method-agenda-desc">Contextual inquiry on-site, user interviews, CSAT data, competitive benchmarking — what people actually do, not what they say they do.</div>
+        </div>
+      </div>
+
+      <div class="method-agenda-item fade">
+        <div class="method-agenda-num">5</div>
+        <div class="method-agenda-body">
+          <div class="method-agenda-title">Design &amp; Iteration</div>
+          <div class="method-agenda-desc">v1 to v4+ evolution, design system integration, before/after comparisons — decisions made visible.</div>
+        </div>
+      </div>
+
+      <div class="method-agenda-item fade">
+        <div class="method-agenda-num">3</div>
+        <div class="method-agenda-body">
+          <div class="method-agenda-title">Define</div>
+          <div class="method-agenda-desc">Persona synthesis, user journey mapping, key insights — turning raw research into a problem worth solving.</div>
+        </div>
+      </div>
+
+      <div class="method-agenda-item fade">
+        <div class="method-agenda-num">6</div>
+        <div class="method-agenda-body">
+          <div class="method-agenda-title">North Star Vision</div>
+          <div class="method-agenda-desc">Hi-fi at full prototype fidelity — the design I'd stake my name on, tested and ready for stakeholder alignment.</div>
+        </div>
+      </div>
+
+      <div class="method-agenda-item fade" style="border-bottom:none;">
+        <div class="method-agenda-num" style="background:var(--mid);">7</div>
+        <div class="method-agenda-body">
+          <div class="method-agenda-title">Decisions &amp; Impact</div>
+          <div class="method-agenda-desc">Three decisions I would defend, phased delivery plan, and the business metrics that tell me the design worked.</div>
+        </div>
+      </div>
+
     </div>
-    <div class="metric-item fade">
-      <div class="metric-num">150<span>%</span></div>
-      <div class="metric-label">Increase in credit consumption</div>
-      <div class="metric-project">Prisma Cloud · Palo Alto Networks</div>
-    </div>
-    <div class="metric-item fade">
-      <div class="metric-num">57<span>%</span></div>
-      <div class="metric-label">Reduction in screens</div>
-      <div class="metric-project">Prisma Cloud · Palo Alto Networks</div>
-    </div>
-    <div class="metric-item fade">
-      <div class="metric-num">8<span>×</span></div>
-      <div class="metric-label">Customer sentiment improvement</div>
-      <div class="metric-project">Prisma Cloud · Palo Alto Networks</div>
-    </div>
+
+    <p style="font-size:13.5px;color:var(--muted);padding-top:24px;border-top:1px solid #ddd6cc;line-height:1.7;">
+      <strong style="color:var(--navy);">Each case study below shows this agenda applied to a real enterprise brief.</strong>
+      The research panels are windows into steps 2 &amp; 3 — the thinking before the design.
+    </p>
   </div>
 </div>
 
-<!-- WORK -->
+
+<!-- ═══════════════════════════════════════════
+     METRICS STRIP
+═══════════════════════════════════════════ -->
+<div id="metrics">
+  <div class="metrics-inner">
+
+    <div class="metric-item fade">
+      <div class="metric-num">83<span>/100</span></div>
+      <div class="metric-label">System Usability Score</div>
+      <div class="metric-project">ILM Policy Builder &middot; OpenText</div>
+    </div>
+
+    <div class="metric-item fade">
+      <div class="metric-num"><span>+</span>63</div>
+      <div class="metric-label">Net Promoter Score</div>
+      <div class="metric-project">ILM Policy Builder &middot; OpenText</div>
+    </div>
+
+    <div class="metric-item fade">
+      <div class="metric-num">150<span>%</span></div>
+      <div class="metric-label">Increase in credit consumption</div>
+      <div class="metric-project">Prisma Cloud &middot; Palo Alto Networks</div>
+    </div>
+
+    <div class="metric-item fade">
+      <div class="metric-num">57<span>%</span></div>
+      <div class="metric-label">Reduction in screens</div>
+      <div class="metric-project">Prisma Cloud &middot; Palo Alto Networks</div>
+    </div>
+
+    <div class="metric-item fade">
+      <div class="metric-num">8<span>&times;</span></div>
+      <div class="metric-label">Customer sentiment improvement</div>
+      <div class="metric-project">Prisma Cloud &middot; Palo Alto Networks</div>
+    </div>
+
+    <div class="metric-item fade">
+      <div class="metric-num">3<span>+</span></div>
+      <div class="metric-label">Platforms · iOS, Android &amp; Web</div>
+      <div class="metric-project">Oracle Live Experience &middot; Oracle</div>
+    </div>
+
+    <div class="metric-item fade">
+      <div class="metric-num">4</div>
+      <div class="metric-label">Enterprise personas · Redwood DS</div>
+      <div class="metric-project">Oracle Unity CDP &middot; Oracle</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SELECTED WORK
+═══════════════════════════════════════════ -->
 <section id="work">
   <div class="section-label">Selected Work</div>
   <h2 class="section-title fade">Enterprise UX that moves the needle</h2>
 
   <p class="work-intro fade">
-    I design enterprise security and SaaS products where complexity is unavoidable — and usability is non-negotiable.
-    My work spans research, interaction design, platform strategy, and design enablement across 15+ years.
+    15+ years embedded in Engineering, Product Management, and cross-functional teams
+    across enterprise security, cloud, and data platforms — owning the full arc from
+    research and interaction design to design systems and AI-integrated practice.
   </p>
 
-  <!-- OPENTEXT -->
-  <div class="work-company fade">
-    <div class="work-company-header">
-      <div class="work-company-name">OpenText</div>
-      <div class="work-company-meta">2024 – 2026</div>
+
+  <!-- ─── ROW 1 · NDR — text left, visual right ─── -->
+  <a href="ndr-dashboard.html" class="work-row fade" style="text-decoration:none;color:inherit;">
+
+    <div class="row-text">
+      <div class="row-co">OpenText &middot; 2024&ndash;2026</div>
+      <div class="row-impact">
+        <div class="row-metric">$300M</div>
+        <div class="row-metric-label">market opportunity<br>vs. ExtraHop</div>
+      </div>
+      <h3 class="row-title">NDR Anomalies &amp; Rules Dashboard</h3>
+      <p class="row-context">Security platform's competitive response to ExtraHop — designed from 20+ analyst and threat hunter interviews. Dual interface: 15-min triage vs. 24-hour investigation.</p>
+      <p class="row-desc">Automated MITRE ATT&amp;CK classification, dynamic risk scoring, and contextual filtering across two distinct analyst workflows. Responded to a $300M market threat with a research-led, two-persona design system.</p>
+      <div class="row-tags">
+        <span class="tag">Security UX</span>
+        <span class="tag">Dual-Interface Design</span>
+        <span class="tag">Principal Design</span>
+        <span class="tag">MITRE ATT&amp;CK</span>
+      </div>
+      <span class="row-cta">View full case study <span class="row-cta-arrow">&rarr;</span></span>
     </div>
-    <div class="work-grid">
 
-      <!-- NDR FEATURED -->
-      <a href="ndr-dashboard.html" class="work-card work-featured fade" style="text-decoration: none; color: inherit;">
-        <div>
-          <div class="work-co">OpenText · 2024–2026</div>
-          <div class="work-title">NDR Anomalies &amp; Rules Dashboard</div>
-          <p class="work-desc">
-            Designed a dual-interface anomaly detection platform — analyst dashboard for 15-minute triage, threat hunter workbench for 24-hour investigation.
-            Automated MITRE classification, risk scoring, and contextual filtering. Strategic response to $300M market opportunity vs. ExtraHop.
-          </p>
-          <div class="work-metrics">
-            <div class="wm"><div class="wm-n">12+</div><div class="wm-l">Analyst interviews</div></div>
-            <div class="wm"><div class="wm-n">8+</div><div class="wm-l">Hunter interviews</div></div>
-            <div class="wm"><div class="wm-n">5</div><div class="wm-l">Competitors analyzed</div></div>
-          </div>
-          <div class="work-tags">
-            <span class="tag">Security UX</span>
-            <span class="tag">Dual-Interface Design</span>
-            <span class="tag">Principal Design</span>
-          </div>
-          <div class="card-hint">View full case study</div>
+    <div class="row-visual">
+      <div class="row-visual-inner">
+        <div class="frame-chrome">
+          <div class="chrome-dot cd-r"></div>
+          <div class="chrome-dot cd-y"></div>
+          <div class="chrome-dot cd-g"></div>
         </div>
-        <div class="wf-right">
-          <div class="wf-visual">
-            <div class="wf-caption">Analyst Dashboard + Threat Hunter Workbench</div>
-          </div>
+        <div class="frame-screen">
+          <img src="projects/ndr/Anomolies_hifi/ndr_hifi_anomolies_screen1.png" alt="NDR Anomalies Dashboard hi-fi">
         </div>
-      </a>
-
-      <!-- ILM -->
-      <a href="ilm-policy-builder.html" class="work-card fade" style="text-decoration: none; color: inherit;">
-        <div class="work-co">OpenText · 2024–2026</div>
-        <div class="work-title">ILM Policy Builder</div>
-        <p class="work-desc">
-          Reimagined XML-based policy authoring into a visual canvas interface.
-          Validated live at OpenText World 2025, Nashville — 9 enterprise participants.
-        </p>
-        <div class="work-metrics">
-          <div class="wm"><div class="wm-n">83</div><div class="wm-l">SUS Score</div></div>
-          <div class="wm"><div class="wm-n">+63</div><div class="wm-l">NPS</div></div>
-          <div class="wm"><div class="wm-n">0</div><div class="wm-l">Critical issues</div></div>
-        </div>
-        <div class="work-tags">
-          <span class="tag">Interaction Design</span>
-          <span class="tag">Usability Testing</span>
-          <span class="tag">IAM / ILM</span>
-        </div>
-        <div class="card-hint">View case study</div>
-      </a>
-
+      </div>
     </div>
-  </div>
 
-  <!-- PALO ALTO NETWORKS -->
-  <div class="work-company fade">
-    <div class="work-company-header">
-      <div class="work-company-name">Palo Alto Networks</div>
-      <div class="work-company-meta">2021 – 2024</div>
+  </a>
+
+
+  <!-- ─── ROW 2 · PRISMA CLOUD — visual left, text right ─── -->
+  <a href="prisma-cloud-onboarding.html" class="work-row reverse fade" style="text-decoration:none;color:inherit;">
+
+    <div class="row-text">
+      <div class="row-co">Palo Alto Networks &middot; 2023&ndash;2024</div>
+      <div class="row-impact">
+        <div class="row-metric">150%</div>
+        <div class="row-metric-label">credit consumption<br>uplift in 6 weeks</div>
+      </div>
+      <h3 class="row-title">Prisma Cloud Onboarding</h3>
+      <p class="row-context">Unified multi-cloud onboarding across AWS, Azure, and GCP into a single 3-step experience — 57% fewer screens, 8&times; customer sentiment gain, measurable revenue impact.</p>
+      <p class="row-desc">A fragmented, per-cloud onboarding flow was costing both customer time and Palo Alto revenue. Contextual inquiry with enterprise security teams revealed the real friction. The redesign drove a 150% credit uplift within 6 weeks of launch.</p>
+      <div class="row-tags">
+        <span class="tag">Cloud Security</span>
+        <span class="tag">Workflow Redesign</span>
+        <span class="tag">Contextual Inquiry</span>
+      </div>
+      <span class="row-cta">View case study <span class="row-cta-arrow">&rarr;</span></span>
     </div>
-    <div class="work-grid">
 
-      <a href="prisma-cloud-onboarding.html" class="work-card fade" style="text-decoration: none; color: inherit;">
-        <div class="work-co">Palo Alto Networks · 2023–2024</div>
-        <div class="work-title">Prisma Cloud Onboarding</div>
-        <p class="work-desc">
-          Redesigned multi-cloud onboarding across AWS, Azure, and GCP into a unified 3-step experience. Reduced touch points by 57%, improved customer sentiment 8X, and drove 150% credit growth in 6 weeks.
-        </p>
-        <div class="work-metrics">
-          <div class="wm"><div class="wm-n">57%</div><div class="wm-l">Fewer screens</div></div>
-          <div class="wm"><div class="wm-n">150%</div><div class="wm-l">Credit uplift</div></div>
-          <div class="wm"><div class="wm-n">8×</div><div class="wm-l">Sentiment gain</div></div>
+    <div class="row-visual">
+      <div class="row-visual-inner">
+        <div class="frame-chrome">
+          <div class="chrome-dot cd-r"></div>
+          <div class="chrome-dot cd-y"></div>
+          <div class="chrome-dot cd-g"></div>
         </div>
-        <div class="work-tags">
-          <span class="tag">Cloud Security</span>
-          <span class="tag">Workflow Redesign</span>
-          <span class="tag">Contextual Inquiry</span>
+        <div class="frame-screen">
+          <img src="projects/Prisma_Cloud/Prisma_Onboarding.png" alt="Prisma Cloud unified onboarding interface">
         </div>
-        <div class="card-hint">View case study</div>
-      </a>
-
+      </div>
     </div>
-  </div>
 
-  <!-- ORACLE -->
-  <div class="work-company fade">
-    <div class="work-company-header">
-      <div class="work-company-name">Oracle</div>
-      <div class="work-company-meta">2019 – 2021</div>
+  </a>
+
+
+  <!-- ─── ROW 3 · ILM POLICY BUILDER — text left, visual right ─── -->
+  <a href="ilm-policy-builder.html" class="work-row fade" style="text-decoration:none;color:inherit;">
+
+    <div class="row-text">
+      <div class="row-co">OpenText &middot; 2024&ndash;2026</div>
+      <div class="row-impact">
+        <div class="row-metric">83</div>
+        <div class="row-metric-label">System Usability<br>Score &middot; +63 NPS</div>
+      </div>
+      <h3 class="row-title">ILM Policy Builder</h3>
+      <p class="row-context">Replaced XML-based policy authoring with a visual canvas interface — validated live at OpenText World 2025 with enterprise participants. Zero critical issues recorded.</p>
+      <p class="row-desc">Enterprise information lifecycle policies were authored in raw XML, a workflow accessible only to specialists. A visual canvas reimagined this as a drag-and-drop builder. Validated with 9 enterprise participants at OpenText World Nashville — delivering an 83 SUS score and +63 NPS.</p>
+      <div class="row-tags">
+        <span class="tag">Interaction Design</span>
+        <span class="tag">Usability Testing</span>
+        <span class="tag">IAM / ILM</span>
+      </div>
+      <span class="row-cta">View case study <span class="row-cta-arrow">&rarr;</span></span>
     </div>
-    <div class="work-grid">
 
-      <a href="oracle-live-experience.html" class="work-card fade" style="text-decoration: none; color: inherit;">
-        <div class="work-co">Oracle · 2019–2021</div>
-        <div class="work-title">Oracle Live Experience</div>
-        <p class="work-desc">
-          Led monthly sprint design for a real-time mobile engagement platform across iOS, Android, and Web —
-          coordinating 4 distributed global engineering teams for MediaMarkt and Garmin.
-        </p>
-        <div class="work-metrics">
-          <div class="wm"><div class="wm-n">4</div><div class="wm-l">Dev teams led</div></div>
-          <div class="wm"><div class="wm-n">2</div><div class="wm-l">Enterprise clients</div></div>
+    <div class="row-visual">
+      <div class="row-visual-inner">
+        <div class="frame-chrome">
+          <div class="chrome-dot cd-r"></div>
+          <div class="chrome-dot cd-y"></div>
+          <div class="chrome-dot cd-g"></div>
         </div>
-        <div class="work-tags">
-          <span class="tag">Mobile</span>
-          <span class="tag">Design Systems</span>
-          <span class="tag">Hybrid Designer-PM</span>
+        <div class="frame-screen">
+          <img src="projects/policyBuilder/Policybuilder.png" alt="ILM Policy Builder interface">
         </div>
-        <div class="card-hint">View case study</div>
-      </a>
-
-      <a href="oracle-unity-platform.html" class="work-card fade" style="text-decoration: none; color: inherit;">
-        <div class="work-co">Oracle · 2019–2021</div>
-        <div class="work-title">Oracle Unity Data Platform</div>
-        <p class="work-desc">
-          End-to-end UX for Oracle's enterprise customer data platform — 4 personas, transformation interfaces
-          with live preview, fully integrated into Oracle Redwood Design System.
-        </p>
-        <div class="work-metrics">
-          <div class="wm"><div class="wm-n">4</div><div class="wm-l">Personas mapped</div></div>
-          <div class="wm"><div class="wm-n">3</div><div class="wm-l">Workflow domains</div></div>
-        </div>
-        <div class="work-tags">
-          <span class="tag">Enterprise SaaS</span>
-          <span class="tag">Redwood DS</span>
-          <span class="tag">Persona Research</span>
-        </div>
-        <div class="card-hint">View case study</div>
-      </a>
-
+      </div>
     </div>
-  </div>
 
-  <!-- ── REFERENCES STRIP ── -->
+  </a>
+
+
+  <!-- ─── ROW 4 · ORACLE LIVE EXPERIENCE — visual left, text right ─── -->
+  <a href="oracle-live-experience.html" class="work-row reverse fade" style="text-decoration:none;color:inherit;">
+
+    <div class="row-text">
+      <div class="row-co">Oracle &middot; 2019&ndash;2021</div>
+      <div class="row-impact">
+        <div class="row-metric">4</div>
+        <div class="row-metric-label">global engineering<br>teams coordinated</div>
+      </div>
+      <h3 class="row-title">Oracle Live Experience</h3>
+      <p class="row-context">Monthly sprint design for a real-time mobile engagement platform across iOS, Android, and Web — coordinating 4 distributed global engineering teams for MediaMarkt and Garmin.</p>
+      <p class="row-desc">Acted as the single design point-of-contact across four distributed engineering teams. Built cross-platform interaction patterns and design system components for enterprise clients operating at scale.</p>
+      <div class="row-tags">
+        <span class="tag">Mobile UX</span>
+        <span class="tag">Design Systems</span>
+        <span class="tag">Hybrid Designer-PM</span>
+      </div>
+      <span class="row-cta">View case study <span class="row-cta-arrow">&rarr;</span></span>
+    </div>
+
+    <div class="row-visual">
+      <div class="row-visual-inner">
+        <div class="frame-chrome">
+          <div class="chrome-dot cd-r"></div>
+          <div class="chrome-dot cd-y"></div>
+          <div class="chrome-dot cd-g"></div>
+        </div>
+        <div class="frame-screen">
+          <img src="projects/oracle_live_experience/Live_experience_card.png" alt="Oracle Live Experience platform design">
+        </div>
+      </div>
+    </div>
+
+  </a>
+
+
+  <!-- ─── ROW 5 · ORACLE UNITY — text left, visual right ─── -->
+  <a href="oracle-unity-platform.html" class="work-row fade" style="text-decoration:none;color:inherit;">
+
+    <div class="row-text">
+      <div class="row-co">Oracle &middot; 2019&ndash;2021</div>
+      <div class="row-impact">
+        <div class="row-metric">4</div>
+        <div class="row-metric-label">enterprise personas<br>3 workflow domains</div>
+      </div>
+      <h3 class="row-title">Oracle Unity Data Platform</h3>
+      <p class="row-context">End-to-end UX for Oracle's enterprise CDP — transformation interfaces with live preview, fully integrated into Oracle Redwood Design System across 3 workflow domains.</p>
+      <p class="row-desc">Defined 4 distinct enterprise personas across data engineering, business analyst, and admin roles. Delivered a unified data platform UX within Oracle's Redwood Design System — balancing technical depth with enterprise-wide consistency.</p>
+      <div class="row-tags">
+        <span class="tag">Enterprise SaaS</span>
+        <span class="tag">Redwood DS</span>
+        <span class="tag">Persona Research</span>
+        <span class="tag">Data UX</span>
+      </div>
+      <span class="row-cta">View case study <span class="row-cta-arrow">&rarr;</span></span>
+    </div>
+
+    <div class="row-visual">
+      <div class="row-visual-inner">
+        <div class="frame-chrome">
+          <div class="chrome-dot cd-r"></div>
+          <div class="chrome-dot cd-y"></div>
+          <div class="chrome-dot cd-g"></div>
+        </div>
+        <div class="frame-screen">
+          <img src="projects/OracleUnityDP/Product.png" alt="Oracle Unity Customer Data Platform interface">
+        </div>
+      </div>
+    </div>
+
+  </a>
+
+
+  <!-- ─── REFERENCE STRIP ─── -->
   <div class="ref-strip fade">
-    <div class="ref-strip-item">
-      <div class="ref-strip-co">Novell / Micro Focus · 2010–2018</div>
-      <div class="ref-strip-title">ZENworks Service Desk &amp; App Store</div>
-      <div class="ref-strip-tags">
-        <span class="tag">Endpoint Mgmt</span><span class="tag">Contextual Inquiry</span><span class="tag">UEM</span>
+    <div class="ref-item">
+      <div class="ref-co">Novell / Micro Focus &middot; 2010&ndash;2018</div>
+      <div class="ref-title">ZENworks Service Desk &amp; App Store</div>
+      <div class="ref-tags">
+        <span class="tag">Endpoint Mgmt</span>
+        <span class="tag">Contextual Inquiry</span>
+        <span class="tag">UEM</span>
       </div>
     </div>
-    <div class="ref-strip-item">
-      <div class="ref-strip-co">Workshop · 2023</div>
-      <div class="ref-strip-title">Design Thinking Workshop</div>
-      <div class="ref-strip-tags">
-        <span class="tag">Design Thinking</span><span class="tag">Facilitation</span>
+    <div class="ref-item">
+      <div class="ref-co">Workshop &middot; 2023</div>
+      <div class="ref-title">Design Thinking Workshop</div>
+      <div class="ref-tags">
+        <span class="tag">Design Thinking</span>
+        <span class="tag">Facilitation</span>
       </div>
-      <a href="casestudies/design-thinking-workshop.pdf" class="ref-strip-dl" target="_blank">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <a href="casestudies/design-thinking-workshop.pdf" class="ref-dl" target="_blank">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
         Download PDF
       </a>
     </div>
@@ -1171,16 +1643,21 @@
 
 <hr class="rule">
 
-<!-- ABOUT -->
+
+<!-- ═══════════════════════════════════════════
+     ABOUT
+═══════════════════════════════════════════ -->
 <section id="about">
   <div class="section-label">About</div>
-  <h2 class="section-title fade">Interaction design<br><em style="font-style:italic; font-weight:400;">as a craft</em></h2>
+  <h2 class="section-title fade">Design direction,<br><em style="font-style:italic;font-weight:400;">not just design craft</em></h2>
+
   <div class="about-grid">
     <div class="about-text fade">
-      <p>I'm a Full-stack Principal Designer based in Bangalore — working across the complete design discipline from user research and interaction design through to design systems and AI-integrated team practice. 15+ years designing enterprise B2B products across security, cloud, and endpoint management.</p>
-      <p>I tend to take on the hardest problems: the ones where the domain is genuinely complex, where users are experts under pressure, and where getting the interaction wrong costs real money or real time. I've done on-site contextual inquiry with healthcare systems, government transportation departments, and Fortune 500 enterprises.</p>
-      <p>I also think seriously about AI in design practice — not as a gimmick, but as a genuine shift in how design teams work. I've facilitated workshops on Tree of Thoughts prompting and Figma Make adoption, helping teams move from skepticism to fluency.</p>
+      <p>I'm a full-stack Principal Designer with 15+ years embedded in Engineering, Product Management, and cross-functional teams across enterprise security, cloud, and data platforms. I translate complex systems into validated, scalable experiences — owning the full arc from user research and interaction design through to design systems and AI-integrated team practice.</p>
+      <p>I take on the hardest problems — where the domain is genuinely complex, users are experts under pressure, and getting the interaction wrong costs real money or real time. I've done on-site contextual inquiry with healthcare systems, government transportation agencies, and Fortune 500 enterprises across three continents.</p>
+      <p>I take AI in design practice seriously — not as a shortcut, but as a shift in how design teams think and work. I've facilitated Tree of Thoughts prompting workshops and Figma Make adoption programmes, moving teams from scepticism to fluency.</p>
     </div>
+
     <div class="about-aside fade">
       <div class="aside-block">
         <div class="aside-label">Skills</div>
@@ -1212,18 +1689,21 @@
 
 <hr class="rule">
 
-<!-- CAREER -->
-<section id="career" style="padding-bottom: 48px;">
+
+<!-- ═══════════════════════════════════════════
+     CAREER
+═══════════════════════════════════════════ -->
+<section id="career" style="padding-bottom:48px;">
   <div class="section-label">Career</div>
   <h2 class="section-title fade">25 years of craft</h2>
 
-  <!-- TIMELINE BAR -->
+  <!-- Timeline bar -->
   <div class="timeline-wrap fade">
     <div class="timeline-bar">
-      <div class="tl-seg" style="width:40%;" data-label="Graphic &amp; Visual Design" data-years="2000–2010">
+      <div class="tl-seg" style="width:40%;" data-label="Graphic &amp; Visual Design">
         <span class="tl-seg-label">Graphic &amp; Visual Design</span>
       </div>
-      <div class="tl-seg tl-ux" style="width:60%;" data-label="UX &amp; Product Design" data-years="2010–2026">
+      <div class="tl-seg tl-ux" style="width:60%;" data-label="UX &amp; Product Design">
         <span class="tl-seg-label">UX &amp; Product Design</span>
       </div>
     </div>
@@ -1233,17 +1713,16 @@
       <span class="tl-year tl-year-mid" style="left:54%">2018</span>
       <span class="tl-year tl-year-mid" style="left:62.5%">2021</span>
       <span class="tl-year tl-year-mid" style="left:75.5%">2024</span>
-      <span class="tl-year" style="right:0; left:auto; transform:none;">2026</span>
+      <span class="tl-year" style="right:0;left:auto;transform:none;">2026</span>
     </div>
     <div class="tl-companies">
-      <div class="tl-co" style="left:0%; width:24%;">GE Capital</div>
-      <div class="tl-co" style="left:24%; width:15%;">Progress</div>
-      <div class="tl-co" style="left:39%; width:1%;"></div>
-      <div class="tl-co tl-co-ux" style="left:40%; width:22%;">Novell / Micro Focus</div>
-      <div class="tl-co tl-co-ux" style="left:62%; width:5%;">IBM</div>
-      <div class="tl-co tl-co-ux" style="left:67%; width:9%;">Oracle</div>
-      <div class="tl-co tl-co-ux" style="left:76%; width:12%;">Palo Alto</div>
-      <div class="tl-co tl-co-ux" style="left:88%; width:12%;">OpenText</div>
+      <div class="tl-co" style="left:0%;width:24%;">GE Capital</div>
+      <div class="tl-co" style="left:24%;width:15%;">Progress</div>
+      <div class="tl-co tl-co-ux" style="left:40%;width:22%;">Novell / Micro Focus</div>
+      <div class="tl-co tl-co-ux" style="left:62%;width:5%;">IBM</div>
+      <div class="tl-co tl-co-ux" style="left:67%;width:9%;">Oracle</div>
+      <div class="tl-co tl-co-ux" style="left:76%;width:12%;">Palo Alto</div>
+      <div class="tl-co tl-co-ux" style="left:88%;width:12%;">OpenText</div>
     </div>
   </div>
 
@@ -1272,7 +1751,7 @@
       <div class="career-right">
         <ul class="career-bullets">
           <li>Redesigned Prisma Cloud multi-cloud onboarding — <strong>57% fewer screens, 60% fewer clicks</strong>. Validated with Informatica, Unacademy, Nvidia.</li>
-          <li>Drove <strong>150% credit uplift, 8X sentiment improvement</strong> within 6 weeks of launch. Grew agentless feature adoption by <strong>120%</strong>.</li>
+          <li>Drove <strong>150% credit uplift, 8× sentiment improvement</strong> within 6 weeks of launch. Grew agentless feature adoption by <strong>120%</strong>.</li>
         </ul>
       </div>
     </div>
@@ -1312,8 +1791,8 @@
       </div>
       <div class="career-right">
         <ul class="career-bullets">
-          <li>Led next-gen redesign of Micro Focus Service Desk — search-first portal with App Store for ZENworks bundle requests. Directed UX for FILR, iPrint, endpoint workflows.</li>
-          <li>On-site contextual inquiry with Trinity Health, CalTrans, City of Fresno (<strong>67,000+ devices</strong>) and internationally (Budapest, Amsterdam).</li>
+          <li>Led next-gen redesign of Micro Focus Service Desk — search-first portal with App Store for ZENworks bundle requests. Directed UX for FILR, iPrint, and endpoint workflows.</li>
+          <li>On-site contextual inquiry with Trinity Health, CalTrans, City of Fresno (<strong>67,000+ devices</strong>) and internationally — Budapest, Amsterdam.</li>
         </ul>
       </div>
     </div>
@@ -1326,9 +1805,9 @@
       </div>
       <div class="career-right">
         <ul class="career-bullets">
-          <li>Progressed from Associate Graphic Designer to Assistant Manager across GE Capital (2000–2006), Progress Software (2006–2009), and Deloitte (2009–2010) — building expertise in eLearning development, technical illustration, visual design for global clients, and team leadership.</li>
-          <li>Created interactive WBT/CBT eLearning content, Flash animations, and illustrations for global GE clients. Art directed collateral communications for Deloitte's Global Learning Insourcing division.</li>
-          <li>Won GE Capital Zero Defect Champion, Star of the Month, and Team of the Month awards.</li>
+          <li>Progressed from Associate Graphic Designer to Assistant Manager across GE Capital, Progress Software, and Deloitte — building expertise in eLearning, technical illustration, and visual design for global clients.</li>
+          <li>Created interactive WBT/CBT eLearning, Flash animations, and illustrations for global GE clients. Art directed communications for Deloitte's Global Learning Insourcing division.</li>
+          <li>GE Capital Zero Defect Champion, Star of the Month, and Team of the Month awards.</li>
         </ul>
       </div>
     </div>
@@ -1338,7 +1817,10 @@
 
 <hr class="rule">
 
-<!-- CONTACT -->
+
+<!-- ═══════════════════════════════════════════
+     CONTACT
+═══════════════════════════════════════════ -->
 <div id="contact">
   <div class="contact-inner">
     <div class="contact-left fade">
@@ -1350,11 +1832,11 @@
         <span class="contact-link-label">Email</span>
         virmanisandeep@gmail.com
       </a>
-      <a href="https://www.linkedin.com/in/virmanisandeep/" class="contact-link" target="_blank">
+      <a href="https://www.linkedin.com/in/virmanisandeep/" class="contact-link" target="_blank" rel="noopener">
         <span class="contact-link-label">LinkedIn</span>
         linkedin.com/in/virmanisandeep
       </a>
-      <a href="https://www.sandeepvirmani.com/" class="contact-link" target="_blank">
+      <a href="https://www.sandeepvirmani.com/" class="contact-link" target="_blank" rel="noopener">
         <span class="contact-link-label">Portfolio</span>
         sandeepvirmani.com
       </a>
@@ -1362,16 +1844,20 @@
         <span class="contact-link-label">Phone</span>
         +91 99000 68816
       </a>
-      <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 12px; color: rgba(255,255,255,0.5);">
-        © 2026 Sandeep Virmani · Bangalore, India
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.2);font-size:12px;color:rgba(255,255,255,0.45);">
+        &copy; 2026 Sandeep Virmani &middot; Bangalore, India
       </div>
     </div>
   </div>
 </div>
 
 
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════ -->
 <script>
 
+/* ── Fade-in on scroll ── */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
@@ -1380,20 +1866,24 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.12 });
+}, { threshold: 0.1 });
 document.querySelectorAll('.fade').forEach(el => observer.observe(el));
 
-const sections = document.querySelectorAll('section, #metrics, #contact');
+/* ── Active nav link on scroll ── */
+const sections = document.querySelectorAll('section, #metrics, #methodology, #contact');
 const navLinks = document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll', () => {
   let current = '';
   sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
-  navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--navy)' : ''; });
-});
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--navy)' : '';
+  });
+}, { passive: true });
 
+/* ── Mobile menu ── */
 function toggleMobileMenu() {
   const menu = document.getElementById('mobile-menu');
-  const btn = document.getElementById('hamburger');
+  const btn  = document.getElementById('hamburger');
   menu.classList.toggle('open');
   btn.classList.toggle('open');
 }
@@ -1401,14 +1891,14 @@ function closeMobileMenu() {
   document.getElementById('mobile-menu').classList.remove('open');
   document.getElementById('hamburger').classList.remove('open');
 }
-// Close mobile menu on outside click
 document.addEventListener('click', e => {
   const menu = document.getElementById('mobile-menu');
-  const btn = document.getElementById('hamburger');
+  const btn  = document.getElementById('hamburger');
   if (menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
     closeMobileMenu();
   }
 });
+
 </script>
 </body>
 </html>
