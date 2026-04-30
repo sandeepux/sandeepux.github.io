@@ -223,6 +223,187 @@
     line-height: 1.5;
   }
 
+  .metric-sublabel {
+    font-size: 11px;
+    color: var(--mid);
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  /* ── USABILITY SCORECARD ── */
+  .scorecard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .scorecard-item {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 28px 24px;
+    text-align: center;
+  }
+
+  .scorecard-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .scorecard-dimension {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 4px;
+  }
+
+  .scorecard-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .scorecard-badge {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    background: var(--pale);
+    color: var(--mid);
+  }
+
+  .participants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .participant-chip {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: var(--navy);
+    line-height: 1.4;
+  }
+
+  .findings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 32px;
+  }
+
+  .findings-col h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--rule);
+  }
+
+  .findings-col.successes h4 { border-color: #28a745; }
+  .findings-col.problems h4 { border-color: #dc3545; }
+
+  .findings-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .findings-list li {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .findings-col.successes .findings-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #28a745;
+    font-weight: 700;
+  }
+
+  .findings-col.problems .findings-list li::before {
+    content: '!';
+    position: absolute;
+    left: 0;
+    color: #dc3545;
+    font-weight: 700;
+  }
+
+  .quote-block {
+    padding: 40px 48px;
+    background: var(--pale);
+    border-radius: 8px;
+    border-left: 4px solid var(--mid);
+    margin-bottom: 32px;
+  }
+
+  .quote-block blockquote {
+    font-size: 18px;
+    font-style: italic;
+    color: var(--navy);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .quote-block cite {
+    font-size: 13px;
+    color: var(--muted);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .quote-block-secondary {
+    padding: 28px 36px;
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    border-left: 3px solid var(--light);
+  }
+
+  .quote-block-secondary blockquote {
+    font-size: 15px;
+    font-style: italic;
+    color: #333;
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+
+  .quote-block-secondary cite {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: normal;
+  }
+
+  @media (max-width: 900px) {
+    .scorecard-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .scorecard-grid { grid-template-columns: 1fr; }
+    .findings-grid { grid-template-columns: 1fr; }
+    .quote-block { padding: 28px 24px; }
+    .quote-block-secondary { padding: 20px 20px; }
+  }
+
   .project-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -428,16 +609,24 @@
   </div>
   <div class="project-metrics">
     <div class="metric-card">
-      <div class="metric-value">5</div>
-      <div class="metric-label">Enterprise customers researched</div>
+      <div class="metric-value">83</div>
+      <div class="metric-label">SUS Score — System Usability Scale</div>
+      <div class="metric-sublabel">"Good" rating · 95% CI: 76–91</div>
     </div>
     <div class="metric-card">
-      <div class="metric-value">15+</div>
-      <div class="metric-label">In-depth contextual interviews</div>
+      <div class="metric-value">+63</div>
+      <div class="metric-label">Net Promoter Score</div>
+      <div class="metric-sublabel">9.14 / 10 mean likelihood to recommend</div>
     </div>
     <div class="metric-card">
-      <div class="metric-value">50+</div>
-      <div class="metric-label">UX issues & improvement suggestions documented</div>
+      <div class="metric-value">0</div>
+      <div class="metric-label">Critical usability issues recorded</div>
+      <div class="metric-sublabel">4 major · 3 minor identified and addressed</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">9</div>
+      <div class="metric-label">Enterprise participants across 8 organisations</div>
+      <div class="metric-sublabel">OTW2025 Innovation Lab · Nashville</div>
     </div>
   </div>
 </section>
@@ -472,12 +661,90 @@
       <div class="content-block">
         <h3>Outcome</h3>
         <ul class="content-list">
-          <li>Documented 50+ actionable UX improvements with customer validation</li>
-          <li>Roadmap prioritization informed by real user needs across enterprise segment</li>
-          <li>Stronger customer relationships through collaborative research and validation process</li>
-          <li>UX research methodology established for future enterprise product development</li>
+          <li>SUS score of 83 — in the "Good" range — validated by 9 enterprise customers and partners at OTW2025 Innovation Lab</li>
+          <li>NPS of +63 with zero detractors across all participants</li>
+          <li>100% task success rate on core rule creation workflows (Tasks 4, 6, and 7)</li>
+          <li>No critical usability issues recorded; all 4 major and 3 minor issues documented with actionable design improvements</li>
+          <li>Design roadmap directly shaped by real enterprise participant feedback from TriVir, BAE Systems, Siemens Energy, CNA Insurance, and four additional organisations</li>
         </ul>
       </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header">
+    <div class="section-label">OTW2025 Innovation Lab · Nashville · November 17–20</div>
+    <h2 class="section-title">Usability Test Results</h2>
+  </div>
+
+  <!-- Scorecard -->
+  <div class="scorecard-grid">
+    <div class="scorecard-item">
+      <div class="scorecard-dimension">Overall Score</div>
+      <div class="scorecard-num">74</div>
+      <div class="scorecard-desc">Composite of satisfaction, efficiency, and effectiveness</div>
+    </div>
+    <div class="scorecard-item">
+      <div class="scorecard-dimension">Satisfaction · SUS</div>
+      <div class="scorecard-num">83</div>
+      <div class="scorecard-desc">System Usability Scale — 10-item standardised questionnaire</div>
+      <span class="scorecard-badge">Good · 95% CI: 76–91</span>
+    </div>
+    <div class="scorecard-item">
+      <div class="scorecard-dimension">Effectiveness</div>
+      <div class="scorecard-num">55</div>
+      <div class="scorecard-desc">Task success rate across 9-task scenario</div>
+      <span class="scorecard-badge">64% overall task success</span>
+    </div>
+  </div>
+
+  <!-- Participant Organisations -->
+  <h3 style="font-family:'Playfair Display',serif; font-size:18px; font-weight:600; color:var(--navy); margin-bottom:16px;">Participant Organisations</h3>
+  <p style="font-size:14px; color:var(--muted); margin-bottom:16px;">9 participants from 8 enterprise organisations spanning financial services, defence, energy, insurance, and higher education.</p>
+  <div class="participants-grid">
+    <div class="participant-chip">TriVir</div>
+    <div class="participant-chip">CNA Insurance</div>
+    <div class="participant-chip">BAE Systems</div>
+    <div class="participant-chip">Siemens Energy</div>
+    <div class="participant-chip">Arval BNP Paribas Group</div>
+    <div class="participant-chip">Black Sea Trade &amp; Development Bank</div>
+    <div class="participant-chip">University of Nevada Las Vegas</div>
+    <div class="participant-chip">+ 1 additional organisation</div>
+  </div>
+
+  <!-- Top Successes & Problems -->
+  <div class="findings-grid" style="margin-top:48px;">
+    <div class="findings-col successes">
+      <h4>Top Successes</h4>
+      <ul class="findings-list">
+        <li>Strong positive first impression of Canvas View — users immediately understood the visual structure</li>
+        <li>Clear learning progression across the 9-task session — confidence grew measurably by end</li>
+        <li>Pseudo Code View enthusiastically received — described as intuitive by multiple participants</li>
+        <li>100% task success on core workflows: Create new rule (Task 4), Add action (Task 6), Create second rule (Task 7)</li>
+        <li>All participants left feeling positive about the direction and their ability to influence the product</li>
+      </ul>
+    </div>
+    <div class="findings-col problems">
+      <h4>Issues Identified &amp; Addressed</h4>
+      <ul class="findings-list">
+        <li>Canvas View missing drag-and-drop reordering (major — prioritised for next iteration)</li>
+        <li>Argument Builder discoverability — entry point not immediately visible to new users</li>
+        <li>Errors tab not noticed during task completion — visual affordance to be strengthened</li>
+        <li>Schema Browser icon not sufficiently prominent in the interface</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Participant Quotes -->
+  <div style="margin-top:48px;">
+    <div class="quote-block">
+      <blockquote>"I'm really excited for this to go live. This blows the socks off IDM."</blockquote>
+      <cite>— Partner, TriVir · OTW2025 Innovation Lab</cite>
+    </div>
+    <div class="quote-block-secondary">
+      <blockquote>"Oh, snap. Oh, wow. I was not expecting that — that's great... That's pretty slick."</blockquote>
+      <cite>— Enterprise participant reacting to Pseudo Code View · OTW2025 Innovation Lab</cite>
     </div>
   </div>
 </section>
@@ -522,13 +789,34 @@
 <section>
   <div class="section-header">
     <div class="section-label">Validation & Impact</div>
-    <h2 class="section-title">Stakeholder Feedback</h2>
+    <h2 class="section-title">Research Leadership & Feedback</h2>
   </div>
+
+  <!-- NPS callout -->
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; margin-bottom:40px;">
+    <div style="background:var(--pale); border-radius:8px; padding:28px 24px; text-align:center;">
+      <div style="font-family:'Playfair Display',serif; font-size:40px; font-weight:700; color:var(--navy); line-height:1; margin-bottom:8px;">+63</div>
+      <div style="font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--mid); margin-bottom:4px;">Net Promoter Score</div>
+      <div style="font-size:13px; color:var(--muted);">63% Promoters · 0% Detractors</div>
+    </div>
+    <div style="background:var(--pale); border-radius:8px; padding:28px 24px; text-align:center;">
+      <div style="font-family:'Playfair Display',serif; font-size:40px; font-weight:700; color:var(--navy); line-height:1; margin-bottom:8px;">9.14</div>
+      <div style="font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--mid); margin-bottom:4px;">Mean Recommendation</div>
+      <div style="font-size:13px; color:var(--muted);">Out of 10 · across all 9 participants</div>
+    </div>
+    <div style="background:var(--pale); border-radius:8px; padding:28px 24px; text-align:center;">
+      <div style="font-family:'Playfair Display',serif; font-size:40px; font-weight:700; color:var(--navy); line-height:1; margin-bottom:8px;">100%</div>
+      <div style="font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--mid); margin-bottom:4px;">Core Task Success</div>
+      <div style="font-size:13px; color:var(--muted);">Tasks 4, 6 &amp; 7 — rule creation workflows</div>
+    </div>
+  </div>
+
+  <!-- Shane quote -->
   <div style="padding: 48px; background: var(--pale); border-radius: 8px; border-left: 4px solid var(--mid);">
     <p style="font-size: 16px; color: #222; line-height: 1.8; margin-bottom: 24px;">
       "It was a pleasure to work with Sandeep in preparing the Identity Lifecycle Manager Policy Builder usability test for this year's Innovation Lab at OTW2025. From the beginning of our preparations, Sandeep prepared a highly detailed document, including the goals to be accomplished and the tasks that we wanted to address in the Lab. This document was instrumental in preparing the test script we used. He also worked diligently to ensure that the test environment was ready and met the needs of the test. Finally, he managed constant communications among all stakeholders on the team to ensure that everyone was on the same page regarding the goals of the test and even helped recruit participants to "test the test" prior to the event. As a result of Sandeep's contributions, the test and preparations ran very smoothly. We were able to collect feedback from 9 customers and partners during the Lab. All of these participants left feeling very happy to impact product designs through their feedback."
     </p>
-    <p style="font-size: 14px; color: var(--muted); font-weight: 500;">— Shane, Product Leadership Team</p>
+    <p style="font-size: 14px; color: var(--muted); font-weight: 500;">— Shane Melton, Product Leadership Team · OTW2025 Innovation Lab Report</p>
   </div>
 </section>
 
