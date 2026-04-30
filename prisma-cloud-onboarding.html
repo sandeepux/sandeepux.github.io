@@ -697,17 +697,75 @@
   </div>
   <div style="padding: 48px; background: var(--pale); border-radius: 8px; text-align: center;">
     <p style="font-size: 15px; color: var(--muted); margin-bottom: 20px;">Complete case study PDF with detailed research findings, design iterations, and competitive analysis available upon request.</p>
-    <a href="casestudies/prisma-cloud-onboarding.pdf" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--navy); text-decoration: none; padding: 12px 24px; border: 1px solid var(--mid); border-radius: 4px; transition: all 0.2s;">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-        <polyline points="7 10 12 15 17 10"/>
-        <line x1="12" y1="15" x2="12" y2="3"/>
-      </svg>
-      Download Full Case Study PDF
-    </a>
+    <button onclick="pgPromptDownload()" class="cta-button primary">↓ Download PDF</button>
     <p style="font-size: 13px; color: var(--mid); margin-top: 16px; font-style: italic;">Research artifacts, design iterations, and stakeholder feedback included.</p>
   </div>
 </section>
+
+
+<!-- ============================================================
+     PDF DOWNLOAD GATE — change password on the one line below
+     ============================================================ -->
+<style>
+#pdf-modal-bg{display:none;position:fixed;inset:0;z-index:9999;background:rgba(20,30,45,0.55);backdrop-filter:blur(4px);align-items:center;justify-content:center}
+#pdf-modal-bg.open{display:flex}
+#pdf-modal{background:#faf8f5;border-radius:14px;padding:40px 36px;max-width:380px;width:90%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,0.18);font-family:'Source Serif 4',Georgia,serif}
+#pdf-modal h3{font-family:'Playfair Display',Georgia,serif;font-size:1.4rem;color:#1e2d42;margin:0 0 8px}
+#pdf-modal p{color:#777;font-size:.9rem;margin:0 0 24px;line-height:1.6}
+#pdf-pw-input{width:100%;padding:13px 16px;font-size:1rem;font-family:inherit;border:1.5px solid #d0ccc6;border-radius:8px;background:#fff;color:#1e2d42;outline:none;box-sizing:border-box;text-align:center;letter-spacing:.1em;transition:border-color .2s}
+#pdf-pw-input:focus{border-color:#1e2d42}
+#pdf-pw-input.shake{animation:pdf-shake .4s ease;border-color:#c0392b}
+#pdf-pw-btn{margin-top:12px;width:100%;padding:13px;background:#1e2d42;color:#fff;font-family:inherit;font-size:.92rem;letter-spacing:.05em;border:none;border-radius:8px;cursor:pointer;transition:background .2s}
+#pdf-pw-btn:hover{background:#2a3f5f}
+#pdf-cancel{display:block;margin-top:12px;font-size:.85rem;color:#999;cursor:pointer;background:none;border:none;font-family:inherit;text-decoration:underline}
+#pdf-pw-error{margin-top:10px;font-size:.82rem;color:#c0392b;min-height:18px}
+@keyframes pdf-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+</style>
+<div id="pdf-modal-bg">
+  <div id="pdf-modal">
+    <div style="font-size:1.8rem;margin-bottom:14px">📄</div>
+    <h3>Download Case Study</h3>
+    <p>Enter the password to download the full PDF with wireframes and research findings.</p>
+    <input id="pdf-pw-input" type="password" placeholder="Password" autocomplete="off"/>
+    <button id="pdf-pw-btn">Download PDF</button>
+    <div id="pdf-pw-error"></div>
+    <button id="pdf-cancel">Cancel</button>
+  </div>
+</div>
+<script>
+(function () {
+  /* ── CHANGE YOUR PASSWORD HERE ── */
+  const PASSWORD = "sandeep2026";
+  /* ────────────────────────────── */
+  const PDF_URL   = "casestudies/prisma-cloud-onboarding.pdf";
+  const modalBg   = document.getElementById("pdf-modal-bg");
+  const input     = document.getElementById("pdf-pw-input");
+  const btn       = document.getElementById("pdf-pw-btn");
+  const errorMsg  = document.getElementById("pdf-pw-error");
+  const cancelBtn = document.getElementById("pdf-cancel");
+  window.pgPromptDownload = function () {
+    modalBg.classList.add("open");
+    input.value = ""; errorMsg.textContent = "";
+    setTimeout(() => input.focus(), 80);
+  };
+  function attempt() {
+    if (input.value === PASSWORD) {
+      modalBg.classList.remove("open");
+      const a = document.createElement("a");
+      a.href = PDF_URL; a.download = "";
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    } else {
+      errorMsg.textContent = "Incorrect password — try again.";
+      input.classList.remove("shake"); void input.offsetWidth;
+      input.classList.add("shake"); input.value = ""; input.focus();
+    }
+  }
+  btn.addEventListener("click", attempt);
+  input.addEventListener("keydown", e => { if (e.key === "Enter") attempt(); });
+  cancelBtn.addEventListener("click", () => modalBg.classList.remove("open"));
+  modalBg.addEventListener("click", e => { if (e.target === modalBg) modalBg.classList.remove("open"); });
+})();
+</script>
 
 </body>
 </html>
