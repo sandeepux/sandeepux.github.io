@@ -783,31 +783,32 @@
     </div>
   </div>
 
-  <!-- Competitor analysis -->
-  <div class="img-2col">
-    <figure class="sketch-fig">
-      <img src="projects/ndr/Competitors_analysis/MS_Azure_01.png" alt="Microsoft Defender XDR — competitive analysis screen 1" loading="lazy">
-      <figcaption>Microsoft Defender XDR — complex topology-first layout creates high cognitive load during alert triage</figcaption>
-    </figure>
-    <figure class="sketch-fig">
-      <img src="projects/ndr/Competitors_analysis/MS_Azure_02.png" alt="Microsoft Defender XDR — competitive analysis screen 2" loading="lazy">
-      <figcaption>Alert investigation workflow — context buried behind multiple clicks, no analyst-friendly rule builder</figcaption>
+  <!-- Competitor analysis — centred, contained, labelled as context -->
+  <div style="margin-top: 40px;">
+    <p style="font-size: 12px; font-weight: 600; color: var(--light); text-transform: uppercase; letter-spacing: 1.5px; text-align: center; margin-bottom: 16px;">Competitive Context</p>
+    <figure class="sketch-fig sketch-fig--contained">
+      <div class="img-wrap" style="max-width: 760px;">
+        <img src="projects/ndr/Competitors_analysis/MS_Azure_01.png" alt="Microsoft Defender XDR — competitive analysis screen 1" loading="lazy">
+      </div>
+      <figcaption style="text-align: center; margin-top: 12px;">Microsoft Defender XDR — complex topology-first layout creates high cognitive load during alert triage</figcaption>
     </figure>
   </div>
 
-  <!-- Journey Map + insight callout — inside wrapper for aligned left edge -->
-  <div>
-    <figure class="sketch-fig sketch-fig--contained" style="margin-top: 40px;">
+  <!-- Journey Map -->
+  <div style="margin-top: 48px;">
+    <p style="font-size: 12px; font-weight: 600; color: var(--light); text-transform: uppercase; letter-spacing: 1.5px; text-align: center; margin-bottom: 16px;">User Journey Map</p>
+    <figure class="sketch-fig sketch-fig--contained">
       <div class="img-wrap" style="max-width: 900px;">
         <img src="projects/ndr/Journey_map/NDR_Journeymap.png" alt="NDR user journey map — from alert detection to threat resolution" loading="lazy">
       </div>
       <figcaption style="text-align: center; margin-top: 12px;">Journey map — tracing the full alert lifecycle from detection through triage, escalation, and investigation for both personas</figcaption>
     </figure>
+  </div>
 
-    <div class="insight-callout" style="margin-top: 32px;">
-      <span class="insight-icon">→</span>
-      <p>The core tension: <strong>SOC analysts needed speed</strong> (15-minute triage windows), while threat hunters needed depth (24-hour investigation cycles). A single interface could serve neither well. This insight drove the entire dual-interface strategy.</p>
-    </div>
+  <!-- Section synthesis -->
+  <div class="insight-callout" style="margin-top: 40px;">
+    <span class="insight-icon">→</span>
+    <p>The core tension: <strong>SOC analysts needed speed</strong> (15-minute triage windows), while threat hunters needed depth (24-hour investigation cycles). A single interface could serve neither well. This insight drove the entire dual-interface strategy.</p>
   </div>
 </section>
 
@@ -860,16 +861,21 @@
     </div>
   </div>
 
-  <div class="img-2col">
-    <figure class="sketch-fig">
-      <img src="projects/ndr/Rules_lowfi/NDR_Lofi_Rules_Screen01.png" alt="Rules Builder Lo-Fi — rule list overview" loading="lazy">
-      <figcaption>Rule list overview — scannable table with status, severity, and last-triggered context</figcaption>
-    </figure>
-    <figure class="sketch-fig">
+  <!-- Screen01 remains commented out — appears incomplete -->
+  <!-- <figure class="sketch-fig">
+    <img src="projects/ndr/Rules_lowfi/NDR_Lofi_Rules_Screen01.png" alt="Rules Builder Lo-Fi — rule list overview" loading="lazy">
+    <figcaption>Rule list overview — scannable table with status, severity, and last-triggered context</figcaption>
+  </figure> -->
+
+  <!-- COMMENTED OUT: Screen02 — condition builder (hero, top image)
+  <figure class="sketch-fig sketch-fig--contained" style="margin-bottom: 24px;">
+    <div class="img-wrap" style="max-width: 860px;">
       <img src="projects/ndr/Rules_lowfi/NDR_Lofi_Rules_Screen02.png" alt="Rules Builder Lo-Fi — condition builder" loading="lazy">
-      <figcaption>Condition builder — visual if/then logic without requiring ML syntax knowledge</figcaption>
-    </figure>
-  </div>
+    </div>
+    <figcaption style="text-align: center; margin-top: 12px;">Condition builder — visual if/then logic without requiring ML syntax knowledge</figcaption>
+  </figure>
+  -->
+
   <div class="img-2col">
     <figure class="sketch-fig">
       <img src="projects/ndr/Rules_lowfi/NDR_Lofi_Rules_Screen03.png" alt="Rules Builder Lo-Fi — threshold configuration" loading="lazy">
@@ -877,7 +883,7 @@
     </figure>
     <figure class="sketch-fig">
       <img src="projects/ndr/Rules_lowfi/NDR_Lofi_Rules_Screen04.png" alt="Rules Builder Lo-Fi — rule comparison view" loading="lazy">
-      <figcaption>Side-by-side comparison — addressing Elena's pain point of no safe way to iterate rules</figcaption>
+      <figcaption>Side-by-side comparison — safe iteration without affecting live rules</figcaption>
     </figure>
   </div>
 
@@ -895,16 +901,17 @@
     <p class="section-intro">The hi-fi anomalies dashboard was designed around one constraint: every piece of information an analyst needs to make a triage decision must be visible in the alert row — no clicking, no expanding, no hunting.</p>
   </div>
 
-  <div class="img-2col">
-    <figure class="sketch-fig">
-      <img src="projects/ndr/Anomolies_hifi/ndr_hifi_anomolies_screen1.png" alt="Anomalies Dashboard — main alert list" loading="lazy">
-      <figcaption>Alert list — severity-ranked with inline MITRE classification, risk score, and affected assets</figcaption>
-    </figure>
-    <figure class="sketch-fig">
-      <img src="projects/ndr/Anomolies_hifi/ndr_hifi_anomolies_screen2.png" alt="Anomalies Dashboard — alert detail panel" loading="lazy">
-      <figcaption>Alert detail — contextual summary and one-click escalation to SIEM/TDR/SOAR</figcaption>
-    </figure>
-  </div>
+  <!-- COMMENTED OUT: Screen01 — alert detail (Screen02) shows the solution more clearly
+  <figure class="sketch-fig">
+    <img src="projects/ndr/Anomolies_hifi/ndr_hifi_anomolies_screen1.png" alt="Anomalies Dashboard — main alert list" loading="lazy">
+    <figcaption>Alert list — severity-ranked with inline MITRE classification, risk score, and affected assets</figcaption>
+  </figure>
+  -->
+  <figure class="sketch-fig">
+    <img src="projects/ndr/Anomolies_hifi/ndr_hifi_anomolies_screen2.png" alt="Anomalies Dashboard — alert detail panel" loading="lazy">
+    <figcaption>Alert detail — contextual summary and one-click escalation to SIEM/TDR/SOAR</figcaption>
+  </figure>
+  <!-- COMMENTED OUT: Screens 03 & 04 — supporting screens, story told by Screen02
   <div class="img-2col">
     <figure class="sketch-fig">
       <img src="projects/ndr/Anomolies_hifi/ndr_hifi_anomolies_screen3.png" alt="Anomalies Dashboard — filter and threshold controls" loading="lazy">
@@ -915,6 +922,7 @@
       <figcaption>Anomaly graph — multi-variable spike visualization showing correlated patterns in a single view</figcaption>
     </figure>
   </div>
+  -->
 
   <div class="insight-callout">
     <span class="insight-icon">→</span>
@@ -928,16 +936,17 @@
     <p class="section-intro">When Elena investigates an anomaly, she needs correlation tools, historical context, and topology exploration. A completely different interaction model — depth over speed, breadth over brevity.</p>
   </div>
 
-  <div class="img-2col">
-    <figure class="sketch-fig">
-      <img src="projects/ndr/Anomolies_hifi/ndr_hifi_anomolies_screen5.png" alt="Hunter Workbench — timeline correlation" loading="lazy">
-      <figcaption>Timeline correlation — layering multiple anomaly signals over time to surface behavioral patterns</figcaption>
-    </figure>
-    <figure class="sketch-fig">
-      <img src="projects/ndr/Anomolies_hifi/ndr_hifi_anomolies_screen6.png" alt="Hunter Workbench — network topology" loading="lazy">
-      <figcaption>Network topology — lateral movement paths and asset relationships rendered as an investigation graph</figcaption>
-    </figure>
-  </div>
+  <!-- COMMENTED OUT: Screen05 — topology (Screen06) is the most visually distinctive hunter screen
+  <figure class="sketch-fig">
+    <img src="projects/ndr/Anomolies_hifi/ndr_hifi_anomolies_screen5.png" alt="Hunter Workbench — timeline correlation" loading="lazy">
+    <figcaption>Timeline correlation — layering multiple anomaly signals over time to surface behavioral patterns</figcaption>
+  </figure>
+  -->
+  <figure class="sketch-fig">
+    <img src="projects/ndr/Anomolies_hifi/ndr_hifi_anomolies_screen6.png" alt="Hunter Workbench — network topology" loading="lazy">
+    <figcaption>Network topology — lateral movement paths and asset relationships rendered as an investigation graph</figcaption>
+  </figure>
+  <!-- COMMENTED OUT: Screens 07 & 08 — story told by topology view (Screen06)
   <div class="img-2col">
     <figure class="sketch-fig">
       <img src="projects/ndr/Anomolies_hifi/ndr_hifi_anomolies_screen7.png" alt="Hunter Workbench — forensic drill-down" loading="lazy">
@@ -948,12 +957,16 @@
       <figcaption>Rule authoring from investigation — hunters can convert investigation findings directly into new detection rules</figcaption>
     </figure>
   </div>
+  -->
 
   <!-- Prototype CTA -->
   <div class="prototype-cta">
     <div class="prototype-cta-text">
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(58,106,154,0.08); border: 1px solid rgba(58,106,154,0.2); border-radius: 20px; padding: 5px 14px; margin-bottom: 14px;">
+        <span style="font-size: 13px; color: var(--mid); font-weight: 600; letter-spacing: 0.3px;">✦ Built with Figma Make AI</span>
+      </div>
       <h3>Experience the design live</h3>
-      <p>The full platform is interactive and clickable — built with Figma Make. Test alert triage workflows, build custom rules, and explore the topology investigation interface. No login required.</p>
+      <p>This prototype was one of my first explorations using Figma Make's AI prompting interface — describing interactions in natural language and watching them come to life instantly. It cut iteration time dramatically and sharpened how I think about prompting AI for design. Test alert triage workflows, build custom rules, and explore the topology investigation interface. No login required.</p>
     </div>
     <a href="https://ndr-anomolies-rules.figma.site/" target="_blank" rel="noopener noreferrer" class="prototype-btn">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
