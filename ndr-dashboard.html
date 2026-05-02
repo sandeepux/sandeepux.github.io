@@ -739,12 +739,7 @@
 
   <div class="insight-callout">
     <span class="insight-icon">→</span>
-    <p>The competitive angle: ExtraHop and Vertica AI used <strong>single-variable anomaly detection</strong> — one signal at a time. OpenText's Intersect Models could correlate <strong>multiple variables simultaneously</strong>: login time + location + data access + privilege level. That was the differentiator. The design challenge was making it feel simple, not complex.</p>
-  </div>
-
-  <div class="insight-callout" style="margin-top: 16px;">
-    <span class="insight-icon">→</span>
-    <p>One number shaped every design decision: <strong>15 minutes.</strong> That's the median triage window a SOC analyst has before an unresolved alert becomes a backlog problem. Information density had to serve speed — not comprehensiveness.</p>
+    <p>The competitive angle: ExtraHop and Vertica AI used <strong>single-variable anomaly detection</strong> — one signal at a time. OpenText's Intersect Models could correlate <strong>multiple variables simultaneously</strong>: login time + location + data access + privilege level. That was the differentiator. The design challenge was making it feel simple, not complex — and doing it within the median analyst triage window of <strong>15 minutes</strong>.</p>
   </div>
 </section>
 
@@ -897,7 +892,7 @@
 <section>
   <div class="section-header">
     <div class="section-label">Design &amp; Iteration</div>
-    <h2 class="section-title">Analyst dashboard — built around the 15-minute window</h2>
+    <h2 class="section-title">Analyst dashboard — severity first, context always</h2>
     <p class="section-intro">The hi-fi anomalies dashboard was designed around one constraint: every piece of information an analyst needs to make a triage decision must be visible in the alert row — no clicking, no expanding, no hunting.</p>
   </div>
 
@@ -999,7 +994,7 @@
 <section>
   <div class="section-header">
     <div class="section-label">Decisions &amp; Impact</div>
-    <h2 class="section-title">Three decisions I would defend in any boardroom</h2>
+    <h2 class="section-title">Three decisions. Measured outcomes.</h2>
   </div>
 
   <div class="nps-row">
@@ -1027,19 +1022,19 @@
 
   <div class="outcomes-grid" style="margin-top: 32px;">
     <div class="outcome-card">
-      <h4>Product Decisions</h4>
+      <h4>Decision 1 — Classify in the row, not the detail panel</h4>
       <ul class="outcome-list">
-        <li><strong>Automated MITRE classification</strong> — surfaced in the alert row, not behind a click. Required an ML pipeline contract change; a design requirement that reshaped engineering architecture.</li>
-        <li><strong>Risk scores as the primary sort axis</strong> — most severe anomalies surface first. Analysts no longer scan a flat list; they start at the top and work down.</li>
-        <li><strong>Visual rules builder</strong> — filter by user, IP, or asset without ML expertise. Tuning for your environment became self-service for the first time.</li>
+        <li><strong>MITRE ATT&amp;CK classification surfaced in the alert row.</strong> Required an ML pipeline contract change — a design requirement that reshaped the engineering data contract.</li>
+        <li><strong>Risk scores as the primary sort axis.</strong> Most severe anomalies surface first. Analysts start at the top and work down — no manual triage of a flat list.</li>
+        <li><strong>One-click escalation to SIEM, TDR, or SOAR</strong> with full context attached. Context doesn't get lost in the handoff.</li>
       </ul>
     </div>
     <div class="outcome-card">
-      <h4>Strategic Impact</h4>
+      <h4>Decision 2 &amp; 3 — Dual interface + visual rules</h4>
       <ul class="outcome-list">
-        <li>Network Detection and Response + User &amp; Entity Behavior Analytics (UEBA) positioning: <strong>multi-variable behavioral detection</strong> vs. ExtraHop and Vertica's single-variable heuristics — a technical advantage no competitor could easily replicate.</li>
-        <li>15-minute triage constraint written into all subsequent OpenText security UX briefs — the standard now applied across ZENworks, ILM, and future products.</li>
-        <li>Go-to-market: win on <strong>integration readiness and analyst speed</strong>, not feature count. A positioning shift that differentiated the entire security portfolio.</li>
+        <li><strong>Decision 2: Two interfaces, one data model.</strong> Analyst dashboard for speed; hunter workbench for depth. Built on a shared data layer so context flows between them without duplication.</li>
+        <li><strong>Decision 3: Visual rules builder.</strong> Filter and tune by user, IP, or asset without ML expertise — making threshold configuration self-service for the first time.</li>
+        <li><strong>Portfolio standard:</strong> triage-first UX principles carried forward across ZENworks, ILM, and future OpenText security products.</li>
       </ul>
     </div>
   </div>
