@@ -413,13 +413,20 @@
   </div>
 </section>
 
+<!-- ── PLATFORM SCALE CONTEXT ── -->
+<section style="padding: 32px 0; background: var(--pale);">
+  <p style="text-align: center; max-width: 700px; margin: 0 auto; font-size: 15px; color: var(--navy); line-height: 1.75;">
+    Prisma Cloud monitors <strong>4 billion cloud resources</strong> and analyses <strong>1 trillion events daily</strong> — all of which depend on cloud accounts being successfully connected. Onboarding isn't setup. It's the activation gate for the entire platform.
+  </p>
+</section>
+
 <!-- ── 2. DISCOVERY & RESEARCH (tinted) ── -->
 <section class="section-tinted">
   <div>
     <div class="section-header">
       <div class="section-label">Discovery &amp; Research</div>
-      <h2 class="section-title">Four personas. One root cause: too many steps.</h2>
-      <p class="section-intro">12 research interviews across Cloud Security Engineers, IT Operations, Super Admins, and System Administrators. Every session surfaced the same truth — onboarding wasn't just complex, it was broken in four distinct ways.</p>
+      <h2 class="section-title">Ten personas. Four owned onboarding. One root cause.</h2>
+      <p class="section-intro">Prisma Cloud's full persona system spans 10 distinct user types — from CISO to SoC Analyst to Developer. Onboarding directly affected four of them. 12 usability sessions and research interviews later, the same four failure modes surfaced every time.</p>
     </div>
 
     <div class="problem-grid">
@@ -437,13 +444,13 @@
       </div>
       <div class="problem-card">
         <h4>Error remediation left users stranded</h4>
-        <p>When configuration failed — and it often did — there was no clear recovery path. Error messages required domain expertise just to parse, let alone fix.</p>
+        <p>When configuration failed — customers had to reverse-engineer the cause themselves. "Permission failed" could mean IAM Role. "Authentication failed" could mean Enterprise App misconfiguration. The UI gave no categorisation, no recovery path, no next step.</p>
       </div>
     </div>
 
     <div class="quote-block">
-      <blockquote>"Users delay onboarding when the value is unclear. Show what they can accomplish in 3 steps — and the cognitive friction disappears."</blockquote>
-      <cite>— Core psychology insight, validated across all 4 personas · Research synthesis, 2023</cite>
+      <blockquote>"Need to have all options you want to onboard on the first go — ECR, Kubernetes, Repo, Config, Cloudtrail, VPC, DNS... The platform should be one tool."</blockquote>
+      <cite>— Enterprise customer, Cloud Account Usability Test · Q4 2022–2023</cite>
     </div>
   </div>
 </section>
@@ -452,32 +459,81 @@
 <section>
   <div class="section-header">
     <div class="section-label">Define</div>
-    <h2 class="section-title">Four personas. One design principle.</h2>
-    <p class="section-intro">Each persona had different triggers and success metrics — but all shared the same underlying frustration: too much to figure out, too little guidance upfront.</p>
+    <h2 class="section-title">The persona who owned onboarding was the wrong target.</h2>
+    <p class="section-intro">Research mapped 10 personas across Prisma Cloud. Four owned the onboarding moment — each with a different relationship to complexity, security expertise, and what "done" looked like.</p>
   </div>
 
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-    <div style="padding: 24px 28px; border: 1px solid var(--rule); border-radius: 10px; background: #fff;">
-      <p style="font-size: 11px; font-weight: 600; color: var(--mid); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 10px;">Cloud Security Engineer</p>
-      <p style="font-size: 14px; color: #333; line-height: 1.7; margin: 0;">Needs control with clarity. Motivated by speed to deployment and validation. Wants confidence the system is working — not hand-holding through every step.</p>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+
+    <!-- Ignasio -->
+    <div style="padding: 28px; border: 1px solid var(--rule); border-radius: 12px; background: #fff; display: flex; gap: 20px; align-items: flex-start;">
+      <div style="flex-shrink: 0;">
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="28" cy="28" r="28" fill="#e8f0f8"/>
+          <circle cx="28" cy="22" r="9" fill="#7a9ec4"/>
+          <path d="M10 46c0-9.941 8.059-18 18-18s18 8.059 18 18" fill="#3a6a9a"/>
+        </svg>
+      </div>
+      <div>
+        <p style="font-size: 11px; font-weight: 700; color: var(--mid); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px;">Ignasio · IT Ops</p>
+        <p style="font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 8px;">Onboarding-only. No security background.</p>
+        <p style="font-size: 13.5px; color: #444; line-height: 1.7; margin: 0;">Brought in purely to connect cloud accounts and invite team members. Hands-off after that. The wizard was designed for engineers — but Ignasio was the one running it.</p>
+      </div>
     </div>
-    <div style="padding: 24px 28px; border: 1px solid var(--rule); border-radius: 10px; background: #fff;">
-      <p style="font-size: 11px; font-weight: 600; color: var(--mid); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 10px;">Cloud Security IT Operations</p>
-      <p style="font-size: 14px; color: #333; line-height: 1.7; margin: 0;">Manages multi-cloud governance across teams. Driven by operational efficiency and compliance. Can't afford to context-switch between four separate onboarding flows.</p>
+
+    <!-- Vanessa -->
+    <div style="padding: 28px; border: 1px solid var(--rule); border-radius: 12px; background: #fff; display: flex; gap: 20px; align-items: flex-start;">
+      <div style="flex-shrink: 0;">
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="28" cy="28" r="28" fill="#eef4ed"/>
+          <circle cx="28" cy="22" r="9" fill="#6aab8a"/>
+          <path d="M10 46c0-9.941 8.059-18 18-18s18 8.059 18 18" fill="#2d7a55"/>
+        </svg>
+      </div>
+      <div>
+        <p style="font-size: 11px; font-weight: 700; color: #2d7a55; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px;">Vanessa · Cloud Security Practitioner</p>
+        <p style="font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 8px;">Onboarding is the start of her full journey.</p>
+        <p style="font-size: 13.5px; color: #444; line-height: 1.7; margin: 0;">Needs Code-to-Cloud coverage — policy controls, team alerts, compliance reports. Onboarding is her entry point. A broken first step derails everything that follows.</p>
+      </div>
     </div>
-    <div style="padding: 24px 28px; border: 1px solid var(--rule); border-radius: 10px; background: #fff;">
-      <p style="font-size: 11px; font-weight: 600; color: var(--mid); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 10px;">Super Admin</p>
-      <p style="font-size: 14px; color: #333; line-height: 1.7; margin: 0;">Central platform owner across all modules. Needs visibility and permissions in one place — frustrated by controls scattered across separate provider flows.</p>
+
+    <!-- Ricardo -->
+    <div style="padding: 28px; border: 1px solid var(--rule); border-radius: 12px; background: #fff; display: flex; gap: 20px; align-items: flex-start;">
+      <div style="flex-shrink: 0;">
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="28" cy="28" r="28" fill="#fef3e8"/>
+          <circle cx="28" cy="22" r="9" fill="#e8a264"/>
+          <path d="M10 46c0-9.941 8.059-18 18-18s18 8.059 18 18" fill="#c4621a"/>
+        </svg>
+      </div>
+      <div>
+        <p style="font-size: 11px; font-weight: 700; color: #c4621a; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px;">Ricardo · DevSecOps Leader</p>
+        <p style="font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 8px;">"Don't show me onboarding stuff."</p>
+        <p style="font-size: 13.5px; color: #444; line-height: 1.7; margin: 0;">Focused on alerts, vulnerabilities, and runtime protection for his application. Doesn't manage onboarding — but his security coverage depends entirely on accounts being connected correctly upstream.</p>
+      </div>
     </div>
-    <div style="padding: 24px 28px; border: 1px solid var(--rule); border-radius: 10px; background: #fff;">
-      <p style="font-size: 11px; font-weight: 600; color: var(--mid); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 10px;">System Administrator</p>
-      <p style="font-size: 14px; color: #333; line-height: 1.7; margin: 0;">Hands-on executor. Requires clear step-by-step guidance and unambiguous error messaging. Stops the moment a step is unclear — and doesn't always know who to call.</p>
+
+    <!-- Celeste -->
+    <div style="padding: 28px; border: 1px solid var(--rule); border-radius: 12px; background: #fff; display: flex; gap: 20px; align-items: flex-start;">
+      <div style="flex-shrink: 0;">
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="28" cy="28" r="28" fill="#f3eef8"/>
+          <circle cx="28" cy="22" r="9" fill="#9b7ec4"/>
+          <path d="M10 46c0-9.941 8.059-18 18-18s18 8.059 18 18" fill="#6a3a9a"/>
+        </svg>
+      </div>
+      <div>
+        <p style="font-size: 11px; font-weight: 700; color: #6a3a9a; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px;">Celeste · CISO</p>
+        <p style="font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 8px;">Her dashboards only exist after onboarding works.</p>
+        <p style="font-size: 13.5px; color: #444; line-height: 1.7; margin: 0;">Needs inventory broken down by application, owner, and risk. All of that data comes from connected cloud accounts. Onboarding failure is invisible to her — until the dashboards are empty.</p>
+      </div>
     </div>
+
   </div>
 
-  <div class="insight-callout" style="margin-top: 24px; border-left-color: var(--mid); background: var(--pale);">
+  <div class="insight-callout" style="margin-top: 28px; border-left-color: var(--mid); background: var(--pale);">
     <span class="insight-icon">→</span>
-    <p><strong>Design Principle — Unification reduces cognitive load.</strong> When users build one mental model instead of four — "Activate my cloud, configure security, review" — they become confident faster. This principle shaped every decision and influenced how future onboarding is built at Palo Alto Networks.</p>
+    <p><strong>Root cause — wrong user, right task.</strong> The wizard assumed security expertise. Ignasio had none. Vanessa needed speed. Ricardo needed it invisible. Celeste needed it done. One interaction model had to serve all four — without bending to any one of them.</p>
   </div>
 </section>
 
@@ -490,6 +546,11 @@
       <p class="section-intro">The breakthrough didn't come from the first sketch — it came from mapping every provider's failure mode side by side. Three phases of thinking, each narrowing toward a single unified answer.</p>
     </div>
 
+    <div class="insight-callout" style="margin-bottom: 32px; border-left-color: var(--mid); background: var(--pale);">
+      <span class="insight-icon">→</span>
+      <p><strong>Design goal — plug and secure.</strong> Connect a cloud account and immediately start seeing security value — no consulting support, no follow-up calls, no abandoned setup flows. That was the standard we held every decision against.</p>
+    </div>
+
     <div class="phase-list">
       <div class="phase-item">
         <div class="phase-num">01</div>
@@ -498,20 +559,70 @@
           <p>Mapped the full first-time user journey: CSP Marketplace → Confirmation Email → Dashboard → Platform. Users lacked immediate gratification. Security Foundations, Advisories, and Cloud Accounts were all disconnected entry points with no coherent thread.</p>
         </div>
       </div>
+
+      <!-- Journey Map image -->
+      <div style="margin: 8px 0 32px 64px;">
+        <p style="font-size: 10px; font-weight: 700; color: var(--mid); text-transform: uppercase; letter-spacing: 1.4px; margin-bottom: 12px;">As-Is Journey Map · First-Time User</p>
+        <img src="projects/Prisma_Cloud/ProductJourney/JourneyMap.svg"
+             alt="User journey map showing emotional low points at Connect Accounts and Expand Modules stages"
+             style="width: 100%; max-width: 640px; border: 1px solid var(--rule); border-radius: 10px; display: block;"/>
+        <p style="font-size: 11.5px; color: var(--mid); margin-top: 10px; line-height: 1.6; max-width: 640px;">Emotion dropped sharply at two points: connecting accounts, and expanding into security modules. Users who couldn't reach security value abandoned the platform entirely.</p>
+      </div>
+
       <div class="phase-item">
         <div class="phase-num">02</div>
         <div class="phase-content">
-          <h4>Pain point mapping — where each cloud broke down</h4>
-          <p>AWS: 8–10 steps. Azure: 6–8 steps. GCP: 8–10 steps. Each with different terminology, different error patterns, different mental models. Four personas, twelve interview rounds, one clear finding: visibility of options was the single biggest friction point across all providers.</p>
+          <h4>Two broken moments — land and expand</h4>
+          <p>The wizard was the first failure: AWS 8–10 steps, Azure 6–8, GCP 8–10, each with its own mental model. But there was a second failure hiding behind it — once users connected an account, there was no guided path to activate security modules. CSPM, CIEM, and runtime protection were buried across disconnected sections with no thread between them.</p>
         </div>
       </div>
+
+      <!-- Before wizard wireframe -->
+      <div style="margin: 8px 0 20px 64px;">
+        <p style="font-size: 10px; font-weight: 700; color: var(--mid); text-transform: uppercase; letter-spacing: 1.4px; margin-bottom: 12px;">Problem 1 — Broken Land · AWS Configure Member Accounts · Step 3 of 7</p>
+        <img src="projects/Prisma_Cloud/ProductJourney/wireframe-onboarding-before.svg"
+             alt="Wireframe of existing Prisma Cloud AWS onboarding wizard showing 13 manual configuration steps across 7 screens"
+             style="width: 100%; max-width: 550px; border: 1px solid var(--rule); border-radius: 10px; display: block;"/>
+        <p style="font-size: 11.5px; color: var(--mid); margin-top: 10px; line-height: 1.6; max-width: 550px;">One step, of seven, requiring 13 manual actions inside AWS CloudFormation. The person tasked with running this had no AWS security background.</p>
+      </div>
+
+      <!-- Land & Expand broken state -->
+      <div style="margin: 8px 0 32px 64px;">
+        <p style="font-size: 10px; font-weight: 700; color: var(--mid); text-transform: uppercase; letter-spacing: 1.4px; margin-bottom: 12px;">Problem 2 — Broken Expand · Post-Onboarding Dashboard</p>
+        <img src="projects/Prisma_Cloud/ProductJourney/Before_LandExpand.svg"
+             alt="Wireframe showing disconnected post-onboarding dashboard with no guided expansion path to security modules"
+             style="width: 100%; max-width: 680px; border: 1px solid var(--rule); border-radius: 10px; display: block;"/>
+        <p style="font-size: 11.5px; color: var(--mid); margin-top: 10px; line-height: 1.6; max-width: 680px;">After connecting, users landed in a dashboard with four disconnected sections — no module activation status, no guided path, no indication of what to do next to reach security value.</p>
+      </div>
+
+      <!-- North Star vision -->
+      <div style="margin: 8px 0 32px 64px;">
+        <div style="border-left: 3px solid var(--mid); padding: 16px 20px; background: var(--pale); border-radius: 0 8px 8px 0; margin-bottom: 20px;">
+          <p style="font-size: 10px; font-weight: 700; color: var(--mid); text-transform: uppercase; letter-spacing: 1.4px; margin-bottom: 8px;">North Star — To Be Scenario</p>
+          <p style="font-size: 14px; color: var(--navy); line-height: 1.7; margin: 0;">The vision was to make onboarding <em>and</em> capability selection the same moment — not two separate journeys. Connect your account, choose what to protect, review and stitch. One guided flow, no abandoned setup, no hidden sections to discover later.</p>
+        </div>
+        <img src="projects/Prisma_Cloud/ProductJourney/ToBe_NorthStar.svg"
+             alt="North star flow diagram showing unified onboarding into guided capability selection: Organisation or Account, Collect Permissions, Workload Discovery, Agentless Scan, Data Security, IAM Security, Review and Stitch"
+             style="width: 100%; max-width: 640px; border: 1px solid var(--rule); border-radius: 10px; display: block;"/>
+        <p style="font-size: 11.5px; color: var(--mid); margin-top: 10px; line-height: 1.6; max-width: 640px;">Ideated in 2022 — this flow became the north star that shaped every design and stakeholder conversation that followed. Onboarding wasn't the gate before security value. It <em>was</em> the security value.</p>
+      </div>
+
       <div class="phase-item">
         <div class="phase-num">03</div>
         <div class="phase-content">
-          <h4>Design breakthrough — the unified modal</h4>
-          <p>A single modal, accessible from any page. Cards for security modules. Three steps: Get Started → Configure Details → Review Status — identical across AWS, Azure, and GCP. Required API rewrites and stakeholder alignment across five product owners. Built collaboratively with Engineering Head and UI Managers to ensure the vision survived implementation.</p>
+          <h4>Design breakthrough — unified modal + side panel with tabs</h4>
+          <p>Two fixes shipped together. The unified 3-step modal collapsed wizard complexity: Get Started → Configure Details → Review Status, identical across AWS, Azure, and GCP. The side panel with tabs solved expansion — a contextual panel surfacing CSPM, CIEM, and runtime module activation immediately after account connection, without navigating away. Both required API rewrites and alignment across five product owners.</p>
         </div>
       </div>
+    </div>
+
+    <!-- After — unified modal -->
+    <div style="margin: 8px 0 36px 64px;">
+      <p style="font-size: 10px; font-weight: 700; color: var(--mid); text-transform: uppercase; letter-spacing: 1.4px; margin-bottom: 12px;">After — Unified Modal · AWS · Get Started · Step 1 of 3</p>
+      <img src="projects/Prisma_Cloud/ProductJourney/After_UnifiedModal.svg"
+           alt="Wireframe of redesigned unified Add Cloud Account modal — 3 steps, scope selection, and all security capabilities visible and selectable in one screen"
+           style="width: 100%; max-width: 700px; border: 1px solid var(--rule); border-radius: 10px; display: block;"/>
+      <p style="font-size: 11.5px; color: var(--mid); margin-top: 10px; line-height: 1.6; max-width: 700px;">3 steps instead of 7. Scope, permissions, and capability selection unified in one screen. Foundational modules shown with status — Advanced capabilities available to opt into. The same modal works identically for Azure and GCP.</p>
     </div>
 
     <div class="quote-hero">
@@ -573,7 +684,7 @@
       <div class="nps-cell">
         <div class="nps-val">150%</div>
         <div class="nps-lbl">Credit Consumption</div>
-        <div class="nps-sub">Growth within 6 weeks of release</div>
+        <div class="nps-sub">CSPM, CIEM &amp; runtime module activation within 6 weeks</div>
       </div>
       <div class="nps-cell">
         <div class="nps-val">3</div>

@@ -1,0 +1,182 @@
+<svg viewBox="0 0 760 730" xmlns="http://www.w3.org/2000/svg" font-family="'Inter','Helvetica Neue',Arial,sans-serif">
+  <defs>
+    <clipPath id="mc"><rect x="0" y="0" width="760" height="730" rx="8"/></clipPath>
+  </defs>
+  <rect x="0" y="0" width="760" height="730" rx="8" fill="#f7fafd" stroke="#b0c8dc" stroke-width="1.2"/>
+
+  <!-- HEADER -->
+  <rect x="0" y="0" width="760" height="44" rx="8" fill="#1e3252" clip-path="url(#mc)"/>
+  <rect x="0" y="30" width="760" height="14" fill="#1e3252"/>
+  <text x="20" y="27" font-size="13" font-weight="600" fill="#ffffff">Add Cloud Account</text>
+  <text x="746" y="27" font-size="16" fill="#7a9ec4">&#215;</text>
+
+  <!-- SIDEBAR -->
+  <rect x="0" y="44" width="152" height="686" fill="#dce8f5" clip-path="url(#mc)"/>
+  <line x1="152" y1="44" x2="152" y2="730" stroke="#b0c8dc" stroke-width="0.8"/>
+  <rect x="0" y="54" width="152" height="34" fill="#2d5a8a"/>
+  <text x="16" y="76" font-size="11.5" font-weight="700" fill="#ffffff">Get Started</text>
+  <text x="16" y="112" font-size="11" fill="#7a9ec4">Configure Details</text>
+  <text x="16" y="140" font-size="11" fill="#7a9ec4">Review Status</text>
+
+  <!-- AWS logo + title -->
+  <rect x="168" y="56" width="28" height="22" rx="3" fill="#dce8f5" stroke="#b0c8dc" stroke-width="0.8"/>
+  <text x="182" y="71" font-size="8.5" fill="#2d5a8a" text-anchor="middle" font-weight="700">aws</text>
+  <text x="204" y="74" font-size="17" font-weight="600" fill="#1e3252">Get Started</text>
+
+  <!-- SCOPE -->
+  <text x="168" y="98" font-size="12.5" font-weight="600" fill="#1e3252">Scope</text>
+
+  <!-- Organisation card (selected) -->
+  <rect x="168" y="106" width="278" height="82" rx="6" fill="#dce8f5" stroke="#2d5a8a" stroke-width="1.5"/>
+  <circle cx="188" cy="138" r="7" fill="#2d5a8a"/>
+  <circle cx="188" cy="138" r="3" fill="#ffffff"/>
+  <text x="202" y="134" font-size="11.5" font-weight="700" fill="#1e3252">Organisation</text>
+  <rect x="352" y="120" width="84" height="18" rx="9" fill="#ffffff" stroke="#b0c8dc" stroke-width="0.8"/>
+  <text x="394" y="132" font-size="9" fill="#2d5a8a" text-anchor="middle">Recommended</text>
+  <text x="202" y="151" font-size="10" fill="#2d5a8a">Secure your AWS Organisation</text>
+  <text x="202" y="164" font-size="10" fill="#2d5a8a">including its member accounts</text>
+
+  <!-- Account card (unselected) -->
+  <rect x="458" y="106" width="278" height="82" rx="6" fill="#ffffff" stroke="#b0c8dc" stroke-width="1"/>
+  <circle cx="478" cy="138" r="7" fill="#ffffff" stroke="#b0c8dc" stroke-width="1.5"/>
+  <text x="492" y="134" font-size="11.5" font-weight="600" fill="#1a2d3e">Account</text>
+  <text x="492" y="151" font-size="10" fill="#7a9ec4">Secure your specific</text>
+  <text x="492" y="164" font-size="10" fill="#7a9ec4">AWS account.</text>
+
+  <!-- CAPABILITIES heading -->
+  <text x="168" y="210" font-size="12.5" font-weight="600" fill="#1e3252">Security Capabilities and Permissions</text>
+  <text x="168" y="228" font-size="11" font-weight="600" fill="#1e3252">Foundational</text>
+  <text x="246" y="228" font-size="10" fill="#7a9ec4">(Recommended)</text>
+
+  <!-- FOUNDATIONAL BOX: y=236 h=180 bottom=416 -->
+  <rect x="168" y="236" width="568" height="180" rx="6" fill="#ffffff" stroke="#b0c8dc" stroke-width="1"/>
+
+  <!-- F-Row 1: Misconfigurations CSPM  (y_top=244, h=50, sep=294) -->
+  <!-- Type icon: upward triangle (expand/CSPM) -->
+  <circle cx="190" cy="260" r="8" fill="#dce8f5" stroke="#b0c8dc" stroke-width="0.8"/>
+  <polygon points="190,255 186,265 194,265" fill="#2d5a8a"/>
+  <!-- Title -->
+  <text x="206" y="264" font-size="11" font-weight="600" fill="#1a2d3e">Misconfigurations (CSPM)</text>
+  <!-- Info icon after title ("Misconfigurations (CSPM)" ≈ 148px wide) -->
+  <circle cx="364" cy="260" r="6" fill="none" stroke="#b0c8dc" stroke-width="1"/><text x="364" y="263" font-size="8" fill="#7a9ec4" text-anchor="middle" font-style="italic">i</text>
+  <!-- Description -->
+  <text x="206" y="278" font-size="10" fill="#7a9ec4">Detect misconfigurations, and check compliance.</text>
+  <!-- Badge -->
+  <rect x="668" y="250" width="56" height="20" rx="10" fill="#f7fafd" stroke="#b0c8dc" stroke-width="0.8"/>
+  <text x="696" y="263" font-size="9.5" fill="#1a2d3e" text-anchor="middle">Default</text>
+  <line x1="169" y1="294" x2="735" y2="294" stroke="#dce8f5" stroke-width="0.8"/>
+
+  <!-- F-Row 2: Identity Security  (y_top=294, h=50, sep=344) -->
+  <!-- Type icon: diamond (identity/permissions) -->
+  <circle cx="190" cy="310" r="8" fill="#dce8f5" stroke="#b0c8dc" stroke-width="0.8"/>
+  <polygon points="190,304 195,310 190,316 185,310" fill="#2d5a8a"/>
+  <!-- Title -->
+  <text x="206" y="314" font-size="11" font-weight="600" fill="#1a2d3e">Identity Security</text>
+  <!-- Info icon after title ("Identity Security" ≈ 96px) -->
+  <circle cx="312" cy="310" r="6" fill="none" stroke="#b0c8dc" stroke-width="1"/><text x="312" y="313" font-size="8" fill="#7a9ec4" text-anchor="middle" font-style="italic">i</text>
+  <!-- Description -->
+  <text x="206" y="328" font-size="10" fill="#7a9ec4">Calculate net effective permissions for identities.</text>
+  <!-- Subscribed badge -->
+  <rect x="652" y="302" width="72" height="20" rx="10" fill="#1e3252"/>
+  <text x="688" y="315" font-size="9.5" fill="#dce8f5" text-anchor="middle">Subscribed</text>
+  <line x1="169" y1="344" x2="735" y2="344" stroke="#dce8f5" stroke-width="0.8"/>
+
+  <!-- F-Row 3: Agentless Workload Scanning  (y_top=344, h=64, no sep) -->
+  <!-- Checkbox (checked) -->
+  <rect x="182" y="353" width="14" height="14" rx="2" fill="#2d5a8a"/>
+  <polyline points="185,360 188,363 196,356" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Type icon: concentric circles (workload/scan) -->
+  <circle cx="212" cy="360" r="8" fill="#dce8f5" stroke="#b0c8dc" stroke-width="0.8"/>
+  <circle cx="212" cy="360" r="4" fill="none" stroke="#2d5a8a" stroke-width="1.5"/>
+  <circle cx="212" cy="360" r="1.5" fill="#2d5a8a"/>
+  <!-- Title -->
+  <text x="228" y="364" font-size="11" font-weight="600" fill="#1a2d3e">Agentless Workload Scanning</text>
+  <!-- Info icon after title ("Agentless Workload Scanning" ≈ 150px) -->
+  <circle cx="388" cy="360" r="6" fill="none" stroke="#b0c8dc" stroke-width="1"/><text x="388" y="363" font-size="8" fill="#7a9ec4" text-anchor="middle" font-style="italic">i</text>
+  <!-- Description (2 lines) -->
+  <text x="228" y="378" font-size="10" fill="#7a9ec4">Scan hosts &amp; containers for vulnerabilities &amp; compliance risks</text>
+  <text x="228" y="391" font-size="10" fill="#7a9ec4">without deploying agents.</text>
+  <!-- Badge -->
+  <rect x="554" y="350" width="170" height="20" rx="10" fill="#f7fafd" stroke="#2d5a8a" stroke-width="0.8"/>
+  <text x="639" y="363" font-size="9" fill="#2d5a8a" text-anchor="middle">Requires additional permissions</text>
+
+  <!-- ADVANCED sub-heading -->
+  <text x="168" y="432" font-size="11" font-weight="600" fill="#1e3252">Advanced</text>
+  <text x="222" y="432" font-size="10" fill="#7a9ec4">(Additional Capabilities)</text>
+
+  <!-- ADVANCED BOX: y=440 h=244 bottom=684 -->
+  <rect x="168" y="440" width="568" height="244" rx="6" fill="#ffffff" stroke="#b0c8dc" stroke-width="1"/>
+
+  <!-- A-Row 4: Threat Detection  (y_top=448, h=50, sep=498) -->
+  <!-- Type icon: lightning / signal (threat) -->
+  <circle cx="190" cy="464" r="8" fill="#dce8f5" stroke="#b0c8dc" stroke-width="0.8"/>
+  <polygon points="192,456 187,464 190,464 188,472 193,464 190,464" fill="#2d5a8a"/>
+  <!-- Title -->
+  <text x="206" y="468" font-size="11" font-weight="600" fill="#1a2d3e">Threat Detection</text>
+  <!-- Info icon after title ("Threat Detection" ≈ 90px) -->
+  <circle cx="306" cy="464" r="6" fill="none" stroke="#b0c8dc" stroke-width="1"/><text x="306" y="467" font-size="8" fill="#7a9ec4" text-anchor="middle" font-style="italic">i</text>
+  <!-- Description -->
+  <text x="206" y="482" font-size="10" fill="#7a9ec4">Detect network and user threats.</text>
+  <!-- Badge -->
+  <rect x="668" y="456" width="56" height="20" rx="10" fill="#f7fafd" stroke="#b0c8dc" stroke-width="0.8"/>
+  <text x="696" y="469" font-size="9.5" fill="#1a2d3e" text-anchor="middle">Default</text>
+  <line x1="169" y1="498" x2="735" y2="498" stroke="#dce8f5" stroke-width="0.8"/>
+
+  <!-- A-Row 5: Serverless Function Scanning  (y_top=498, h=64, sep=562) -->
+  <!-- Checkbox (unchecked) -->
+  <rect x="182" y="507" width="14" height="14" rx="2" fill="#ffffff" stroke="#b0c8dc" stroke-width="1.2"/>
+  <!-- Type icon: three vertical dots (serverless/functions) -->
+  <circle cx="212" cy="514" r="8" fill="#dce8f5" stroke="#b0c8dc" stroke-width="0.8"/>
+  <circle cx="212" cy="508" r="1.8" fill="#2d5a8a"/>
+  <circle cx="212" cy="514" r="1.8" fill="#2d5a8a"/>
+  <circle cx="212" cy="520" r="1.8" fill="#2d5a8a"/>
+  <!-- Title -->
+  <text x="228" y="518" font-size="11" font-weight="600" fill="#1a2d3e">Serverless Function Scanning</text>
+  <!-- Info icon after title ("Serverless Function Scanning" ≈ 152px) -->
+  <circle cx="390" cy="514" r="6" fill="none" stroke="#b0c8dc" stroke-width="1"/><text x="390" y="517" font-size="8" fill="#7a9ec4" text-anchor="middle" font-style="italic">i</text>
+  <!-- Description (2 lines) -->
+  <text x="228" y="532" font-size="10" fill="#7a9ec4">Scan serverless functions for vulnerabilities &amp; compliance risks</text>
+  <text x="228" y="545" font-size="10" fill="#7a9ec4">without deploying agents.</text>
+  <line x1="169" y1="562" x2="735" y2="562" stroke="#dce8f5" stroke-width="0.8"/>
+
+  <!-- A-Row 6: Agent based Workload Protection  (y_top=562, h=64, sep=626) -->
+  <!-- Checkbox (unchecked) -->
+  <rect x="182" y="571" width="14" height="14" rx="2" fill="#ffffff" stroke="#b0c8dc" stroke-width="1.2"/>
+  <!-- Type icon: diamond (agent/protection) -->
+  <circle cx="212" cy="578" r="8" fill="#dce8f5" stroke="#b0c8dc" stroke-width="0.8"/>
+  <polygon points="212,572 217,578 212,584 207,578" fill="#2d5a8a"/>
+  <!-- Title -->
+  <text x="228" y="582" font-size="11" font-weight="600" fill="#1a2d3e">Agent based Workload Protection</text>
+  <!-- Info icon after title ("Agent based Workload Protection" ≈ 168px) -->
+  <circle cx="406" cy="578" r="6" fill="none" stroke="#b0c8dc" stroke-width="1"/><text x="406" y="581" font-size="8" fill="#7a9ec4" text-anchor="middle" font-style="italic">i</text>
+  <!-- Description (2 lines) -->
+  <text x="228" y="596" font-size="10" fill="#7a9ec4">Enables permissions for Host &amp; Serverless Defender deployments,</text>
+  <text x="228" y="609" font-size="10" fill="#7a9ec4">registry scans, and K8S audit.</text>
+  <line x1="169" y1="626" x2="735" y2="626" stroke="#dce8f5" stroke-width="0.8"/>
+
+  <!-- A-Row 7: Data Security  (y_top=626, h=50, box-end=684) -->
+  <!-- Checkbox (unchecked) -->
+  <rect x="182" y="635" width="14" height="14" rx="2" fill="#ffffff" stroke="#b0c8dc" stroke-width="1.2"/>
+  <!-- Type icon: stacked squares (data layers) -->
+  <circle cx="212" cy="642" r="8" fill="#dce8f5" stroke="#b0c8dc" stroke-width="0.8"/>
+  <rect x="208" y="638" width="8" height="4" rx="1" fill="#2d5a8a"/>
+  <rect x="208" y="643" width="8" height="4" rx="1" fill="#2d5a8a" opacity="0.6"/>
+  <!-- Title -->
+  <text x="228" y="646" font-size="11" font-weight="600" fill="#1a2d3e">Data Security</text>
+  <!-- Info icon after title ("Data Security" ≈ 72px) -->
+  <circle cx="310" cy="642" r="6" fill="none" stroke="#b0c8dc" stroke-width="1"/><text x="310" y="645" font-size="8" fill="#7a9ec4" text-anchor="middle" font-style="italic">i</text>
+  <!-- Description -->
+  <text x="228" y="660" font-size="10" fill="#7a9ec4">Detect sensitive data, publicly exposed assets and malware.</text>
+  <!-- Not Subscribed badge -->
+  <rect x="634" y="634" width="90" height="20" rx="10" fill="#f7fafd" stroke="#b0c8dc" stroke-width="0.8"/>
+  <text x="679" y="647" font-size="9" fill="#7a9ec4" text-anchor="middle">Not Subscribed</text>
+
+  <!-- FOOTER (box bottom=684, line=696) -->
+  <line x1="0" y1="696" x2="760" y2="696" stroke="#b0c8dc" stroke-width="0.8"/>
+  <text x="20" y="714" font-size="10.5" fill="#7a9ec4">For product documentation please click</text>
+  <text x="230" y="714" font-size="10.5" fill="#2d5a8a" font-weight="600">Here</text>
+  <rect x="600" y="702" width="70" height="26" rx="4" fill="#ffffff" stroke="#b0c8dc" stroke-width="1"/>
+  <text x="635" y="718" font-size="11" fill="#1a2d3e" text-anchor="middle">Previous</text>
+  <rect x="678" y="702" width="62" height="26" rx="4" fill="#1e3252"/>
+  <text x="709" y="718" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">Next</text>
+</svg>

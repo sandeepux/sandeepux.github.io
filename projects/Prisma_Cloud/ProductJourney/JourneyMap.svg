@@ -1,0 +1,59 @@
+<svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" font-family="'Inter','Helvetica Neue',Arial,sans-serif">
+  <rect x="0" y="0" width="600" height="320" rx="8" fill="#f7fafd" stroke="#b0c8dc" stroke-width="1.2"/>
+  <rect x="0" y="0" width="600" height="40" rx="8" fill="#1e3252"/>
+  <rect x="0" y="26" width="600" height="14" fill="#1e3252"/>
+  <text x="22" y="25" font-size="12.5" font-weight="600" fill="#ffffff">As-Is Journey Map &#183; First-Time User</text>
+  <!-- stage labels row -->
+  <text x="20" y="58" font-size="9" font-weight="700" fill="#7a9ec4" letter-spacing="1">STAGES</text>
+  <rect x="20" y="64" width="76" height="36" rx="4" fill="#dce8f5" stroke="#2d5a8a" stroke-width="1"/>
+  <text x="58" y="80" font-size="9.5" fill="#1e3252" text-anchor="middle" font-weight="600">CSP</text>
+  <text x="58" y="93" font-size="9.5" fill="#1e3252" text-anchor="middle">Marketplace</text>
+  <rect x="112" y="64" width="76" height="36" rx="4" fill="#dce8f5" stroke="#2d5a8a" stroke-width="1"/>
+  <text x="150" y="80" font-size="9.5" fill="#1e3252" text-anchor="middle" font-weight="600">Email</text>
+  <text x="150" y="93" font-size="9.5" fill="#1e3252" text-anchor="middle">Confirmation</text>
+  <rect x="204" y="64" width="76" height="36" rx="4" fill="#dce8f5" stroke="#2d5a8a" stroke-width="1"/>
+  <text x="242" y="80" font-size="9.5" fill="#1e3252" text-anchor="middle" font-weight="600">First</text>
+  <text x="242" y="93" font-size="9.5" fill="#1e3252" text-anchor="middle">Login</text>
+  <rect x="296" y="64" width="76" height="36" rx="4" fill="#1e3252" stroke="#1e3252" stroke-width="1"/>
+  <text x="334" y="80" font-size="9.5" fill="#dce8f5" text-anchor="middle" font-weight="600">Connect</text>
+  <text x="334" y="93" font-size="9.5" fill="#dce8f5" text-anchor="middle">Accounts</text>
+  <rect x="388" y="64" width="76" height="36" rx="4" fill="#1e3252" stroke="#1e3252" stroke-width="1"/>
+  <text x="426" y="80" font-size="9.5" fill="#dce8f5" text-anchor="middle" font-weight="600">Expand</text>
+  <text x="426" y="93" font-size="9.5" fill="#dce8f5" text-anchor="middle">Modules</text>
+  <rect x="480" y="64" width="100" height="36" rx="4" fill="#dce8f5" stroke="#7a9ec4" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="530" y="80" font-size="9.5" fill="#7a9ec4" text-anchor="middle" font-weight="600">Security</text>
+  <text x="530" y="93" font-size="9.5" fill="#7a9ec4" text-anchor="middle">Value (?)</text>
+  <!-- connectors -->
+  <line x1="96" y1="82" x2="112" y2="82" stroke="#2d5a8a" stroke-width="1"/>
+  <line x1="188" y1="82" x2="204" y2="82" stroke="#2d5a8a" stroke-width="1"/>
+  <line x1="280" y1="82" x2="296" y2="82" stroke="#2d5a8a" stroke-width="1"/>
+  <line x1="372" y1="82" x2="388" y2="82" stroke="#1e3252" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="464" y1="82" x2="480" y2="82" stroke="#7a9ec4" stroke-width="1" stroke-dasharray="4,2"/>
+  <!-- emotion section -->
+  <text x="20" y="136" font-size="9" font-weight="700" fill="#7a9ec4" letter-spacing="1">EMOTION</text>
+  <polyline points="58,152 150,148 242,166 334,186 426,210 530,170" fill="none" stroke="#2d5a8a" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="58" cy="152" r="4" fill="#2d5a8a"/>
+  <circle cx="150" cy="148" r="4" fill="#2d5a8a"/>
+  <circle cx="242" cy="166" r="4" fill="#2d5a8a"/>
+  <circle cx="334" cy="186" r="5" fill="#1e3252"/>
+  <circle cx="426" cy="210" r="6" fill="#1e3252"/>
+  <circle cx="530" cy="170" r="4" fill="#7a9ec4"/>
+  <text x="58" y="170" font-size="9" fill="#2d5a8a" text-anchor="middle">curious</text>
+  <text x="150" y="166" font-size="9" fill="#2d5a8a" text-anchor="middle">hopeful</text>
+  <text x="242" y="184" font-size="9" fill="#2d5a8a" text-anchor="middle">confused</text>
+  <text x="334" y="204" font-size="9" fill="#1e3252" text-anchor="middle" font-weight="600">frustrated</text>
+  <text x="426" y="228" font-size="9" fill="#1e3252" text-anchor="middle" font-weight="600">abandoned</text>
+  <text x="530" y="186" font-size="9" fill="#7a9ec4" text-anchor="middle">if reached</text>
+  <!-- pain points -->
+  <text x="20" y="250" font-size="9" font-weight="700" fill="#7a9ec4" letter-spacing="1">PAIN POINTS</text>
+  <line x1="242" y1="258" x2="242" y2="265" stroke="#b0c8dc" stroke-width="0.8"/>
+  <text x="242" y="276" font-size="9" fill="#7a9ec4" text-anchor="middle">No guided</text>
+  <text x="242" y="288" font-size="9" fill="#7a9ec4" text-anchor="middle">start point</text>
+  <line x1="334" y1="258" x2="334" y2="265" stroke="#2d5a8a" stroke-width="0.8"/>
+  <text x="334" y="276" font-size="9" fill="#1e3252" text-anchor="middle" font-weight="600">8&#8211;10 steps</text>
+  <text x="334" y="288" font-size="9" fill="#1e3252" text-anchor="middle" font-weight="600">per provider</text>
+  <line x1="426" y1="258" x2="426" y2="265" stroke="#2d5a8a" stroke-width="0.8"/>
+  <text x="426" y="276" font-size="9" fill="#1e3252" text-anchor="middle" font-weight="600">No expansion</text>
+  <text x="426" y="288" font-size="9" fill="#1e3252" text-anchor="middle" font-weight="600">path after setup</text>
+  <text x="20" y="310" font-size="9" fill="#7a9ec4" font-style="italic">Mapped across 12 usability sessions &#183; Q4 2022 &#8211; Q2 2023</text>
+</svg>
