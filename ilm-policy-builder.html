@@ -1,1617 +1,3145 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ILM Policy Builder — Sandeep Virmani</title>
+
 <link rel="icon" type="image/png" href="images/Favicon.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet">
+
 <style>
+
   :root {
+
     --navy: #1e2d42;
+
     --slate: #2a3f5f;
+
     --mid: #3a6a9a;
+
     --light: #7a9ec4;
+
     --pale: #e8f0f8;
+
     --cream: #faf9f7;
+
     --ink: #111111;
+
     --muted: #444;
+
     --rule: #e0e0e0;
+
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
   html { scroll-behavior: smooth; }
 
   body {
+
     font-family: 'Source Serif 4', Georgia, serif;
+
     font-weight: 400;
+
     color: var(--ink);
+
     background: #fff;
+
     line-height: 1.75;
+
     -webkit-font-smoothing: antialiased;
+
   }
 
-  /* ── NAV ── */
+  /* ─────────────────────────────────────────────
+
+     NAV
+
+  ───────────────────────────────────────────── */
+
   nav {
+
     position: fixed;
+
     top: 0; left: 0; right: 0;
-    z-index: 100;
+
+    z-index: 1000;
+
     padding: 0 48px;
+
     height: 64px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
+
     background: rgba(255,255,255,0.92);
+
     backdrop-filter: blur(8px);
+
     border-bottom: 1px solid var(--rule);
+
   }
 
   .nav-name {
+
     font-family: 'Playfair Display', serif;
+
     font-size: 17px;
+
     font-weight: 600;
+
     color: var(--navy);
+
     letter-spacing: -0.2px;
-    text-decoration: none;
-  }
 
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a {
-    font-family: 'Source Serif 4', serif;
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--muted);
     text-decoration: none;
-    letter-spacing: 0.3px;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--navy); }
 
-/* ── HAMBURGER + MOBILE MENU ── */
-  .nav-hamburger {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 6px;
-    flex-direction: column;
-    gap: 5px;
   }
-  .nav-hamburger span {
-    display: block;
-    width: 22px;
-    height: 1.5px;
-    background: var(--navy);
-    transition: transform 0.25s, opacity 0.25s;
-  }
-  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-  .mobile-menu {
-    display: none;
-    position: fixed;
-    top: 64px; left: 0; right: 0;
-    background: #fff;
-    border-bottom: 2px solid var(--navy);
-    z-index: 99;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-  }
-  .mobile-menu.open { display: block; }
-  .mobile-menu a {
-    display: block;
-    padding: 16px 24px;
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    color: var(--navy);
-    text-decoration: none;
-    border-bottom: 1px solid var(--rule);
-    transition: background 0.15s, padding-left 0.15s;
-  }
-  .mobile-menu a:last-child { border-bottom: none; }
-  .mobile-menu a:hover { background: var(--pale); padding-left: 32px; }
-  @media (max-width: 768px) { .nav-hamburger { display: flex; } }
 
   .back-link {
+
     font-size: 13px;
+
     color: var(--muted);
+
     text-decoration: none;
+
     display: inline-flex;
+
     align-items: center;
+
     gap: 6px;
+
     transition: color 0.2s;
+
   }
+
   .back-link:hover { color: var(--navy); }
 
-  /* ── MAIN CONTENT ── */
+  /* ─────────────────────────────────────────────
+
+     SCROLL PROGRESS BAR
+
+  ───────────────────────────────────────────── */
+
+  #scroll-progress-wrap {
+
+    position: fixed;
+
+    top: 64px;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 4px;
+
+    background: rgba(224,224,224,0.6);
+
+    z-index: 1100;
+
+  }
+
+  #scroll-progress-bar {
+
+    height: 100%;
+
+    width: 0%;
+
+    background: var(--navy);
+
+    transition: width 0.1s linear;
+
+  }
+
+  /* ─────────────────────────────────────────────
+
+     MOBILE JUMP BAR
+
+  ───────────────────────────────────────────── */
+
+  .mobile-jumpbar {
+
+    display: none;
+
+    position: sticky;
+
+    top: 68px;
+
+    z-index: 900;
+
+    background: rgba(255,255,255,0.92);
+
+    backdrop-filter: blur(8px);
+
+    border-bottom: 1px solid var(--rule);
+
+    padding: 10px 12px;
+
+    overflow-x: auto;
+
+    white-space: nowrap;
+
+  }
+
+  .mobile-jumpbar a {
+
+    display: inline-block;
+
+    padding: 10px 14px;
+
+    margin-right: 8px;
+
+    border-radius: 999px;
+
+    background: var(--pale);
+
+    color: var(--navy);
+
+    font-size: 12px;
+
+    text-decoration: none;
+
+    border: 1px solid rgba(30,45,66,0.12);
+
+    transition: background 0.2s;
+
+  }
+
+  .mobile-jumpbar a:hover {
+
+    background: rgba(232,240,248,0.75);
+
+  }
+
+  .mobile-jumpbar a.active {
+
+    background: var(--navy);
+
+    color: #fff;
+
+    border-color: var(--navy);
+
+  }
+
+  @media (max-width: 980px) {
+
+    .mobile-jumpbar { display: block; }
+
+  }
+
+  /* ─────────────────────────────────────────────
+
+     HERO
+
+  ───────────────────────────────────────────── */
+
   .project-header {
+
     min-height: 60vh;
+
     display: flex;
+
     flex-direction: column;
+
     justify-content: center;
-    padding: 120px 48px 80px;
+
+    padding: 120px 0 80px;
+
     background: linear-gradient(135deg, var(--pale) 0%, rgba(232,240,248,0.5) 100%);
+
     max-width: 100%;
+
+    border-bottom: 1px solid var(--rule);
+
   }
 
   .project-header-inner {
+
     max-width: 1100px;
+
     margin: 0 auto;
+
     width: 100%;
+
+    padding: 0 48px;
+
   }
 
   .project-co {
+
     font-size: 10px;
+
     letter-spacing: 2px;
+
     text-transform: uppercase;
+
     color: var(--mid);
+
     margin-bottom: 16px;
+
   }
 
   .project-title {
+
     font-family: 'Playfair Display', serif;
+
     font-size: clamp(36px, 6vw, 56px);
+
     font-weight: 700;
+
     color: var(--navy);
+
     line-height: 1.1;
+
     margin-bottom: 24px;
+
     letter-spacing: -0.5px;
+
   }
 
   .project-summary {
+
     font-size: 18px;
+
     color: #222;
+
     line-height: 1.8;
+
     max-width: 800px;
+
     margin-bottom: 0;
+
   }
 
-  /* ── PROJECT CONTENT ── */
-  section {
-    max-width: 1100px;
+  /* ─────────────────────────────────────────────
+
+     PAGE WRAPPER (TOC + MAIN)
+
+  ───────────────────────────────────────────── */
+
+  .page-wrap {
+
+    max-width: 1300px;
+
     margin: 0 auto;
-    padding: 80px 48px;
+
+    padding: 80px 0 80px;
+
+    display: grid;
+
+    grid-template-columns: 220px 1fr;
+
+    gap: 48px;
+
+    align-items: start;
+
   }
 
-  .section-header {
-    margin-bottom: 48px;
+  @media (max-width: 980px) {
+
+    .page-wrap {
+
+      grid-template-columns: 1fr;
+
+      padding: 40px 0 80px;
+
+      gap: 0;
+
+    }
+
   }
 
-  .section-label {
+  /* ─────────────────────────────────────────────
+
+     LEFT TOC
+
+  ───────────────────────────────────────────── */
+
+  .toc {
+
+    position: sticky;
+
+    top: 96px;
+
+    border-left: 2px solid var(--rule);
+
+    padding-left: 14px;
+
+    z-index: 5;
+
+  }
+
+  .toc-title {
+
     font-size: 10px;
+
     letter-spacing: 2px;
+
     text-transform: uppercase;
+
     color: var(--mid);
-    margin-bottom: 12px;
+
+    margin-bottom: 14px;
+
   }
 
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    font-weight: 600;
-    color: var(--navy);
-    line-height: 1.2;
-    letter-spacing: -0.3px;
-  }
+  .toc ul {
 
-  .project-metrics {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 32px;
-    margin-bottom: 48px;
-    padding: 48px;
-    background: var(--pale);
-    border-radius: 8px;
-  }
-
-  .metric-card {
-    text-align: left;
-  }
-
-  .metric-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px;
-    font-weight: 700;
-    color: var(--navy);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .metric-label {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.5;
-  }
-
-  .metric-sublabel {
-    font-size: 11px;
-    color: var(--mid);
-    margin-top: 4px;
-    font-style: italic;
-  }
-
-  /* ── USABILITY SCORECARD ── */
-  .scorecard-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-bottom: 48px;
-  }
-
-  .scorecard-item {
-    background: #fff;
-    border: 1px solid var(--rule);
-    border-radius: 8px;
-    padding: 28px 24px;
-    text-align: center;
-  }
-
-  .scorecard-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px;
-    font-weight: 700;
-    color: var(--navy);
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-
-  .scorecard-dimension {
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: 4px;
-  }
-
-  .scorecard-desc {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.5;
-  }
-
-  .scorecard-badge {
-    display: inline-block;
-    margin-top: 8px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 500;
-    background: var(--pale);
-    color: var(--mid);
-  }
-
-  .participants-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 12px;
-    margin-top: 24px;
-  }
-
-  .participant-chip {
-    background: #fff;
-    border: 1px solid var(--rule);
-    border-radius: 6px;
-    padding: 10px 16px;
-    font-size: 13px;
-    color: var(--navy);
-    line-height: 1.4;
-  }
-
-  .findings-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    margin-top: 32px;
-  }
-
-  .findings-col h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid var(--rule);
-  }
-
-  .findings-col.successes h4 { border-color: #28a745; }
-  .findings-col.problems h4 { border-color: #dc3545; }
-
-  .findings-list {
     list-style: none;
+
     display: flex;
+
     flex-direction: column;
+
     gap: 10px;
+
   }
 
-  .findings-list li {
-    font-size: 14px;
-    color: #333;
-    line-height: 1.6;
-    padding-left: 20px;
-    position: relative;
-  }
+  .toc a {
 
-  .findings-col.successes .findings-list li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: #28a745;
-    font-weight: 700;
-  }
-
-  .findings-col.problems .findings-list li::before {
-    content: '!';
-    position: absolute;
-    left: 0;
-    color: #dc3545;
-    font-weight: 700;
-  }
-
-  .quote-block {
-    padding: 40px 48px;
-    background: var(--pale);
-    border-radius: 8px;
-    border-left: 4px solid var(--mid);
-    margin-bottom: 32px;
-  }
-
-  .quote-block blockquote {
-    font-size: 18px;
-    font-style: italic;
-    color: var(--navy);
-    line-height: 1.7;
-    margin-bottom: 16px;
-  }
-
-  .quote-block cite {
     font-size: 13px;
+
     color: var(--muted);
-    font-style: normal;
-    font-weight: 500;
+
+    text-decoration: none;
+
+    transition: color 0.2s;
+
+    line-height: 1.4;
+
   }
 
-  .quote-block-secondary {
-    padding: 28px 36px;
-    background: #fff;
-    border: 1px solid var(--rule);
-    border-radius: 8px;
-    border-left: 3px solid var(--light);
+  .toc a:hover { color: var(--navy); }
+
+  .toc a.active {
+
+    color: var(--navy);
+
+    font-weight: 600;
+
   }
 
-  .quote-block-secondary blockquote {
-    font-size: 15px;
-    font-style: italic;
-    color: #333;
-    line-height: 1.7;
-    margin-bottom: 10px;
+  .toc a.active::before {
+
+    content: "•";
+
+    color: var(--mid);
+
+    margin-right: 8px;
+
   }
 
-  .quote-block-secondary cite {
-    font-size: 12px;
-    color: var(--muted);
-    font-style: normal;
+  @media (max-width: 980px) {
+
+    .toc { display: none; }
+
+  }
+
+  /* ─────────────────────────────────────────────
+
+     MAIN CONTENT WRAPPER
+
+  ───────────────────────────────────────────── */
+
+  main {
+
+    width: 100%;
+
+  }
+
+  /* Inner padding system for ALL sections */
+
+  .section-inner {
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 0 48px;
+
   }
 
   @media (max-width: 900px) {
-    .scorecard-grid { grid-template-columns: 1fr 1fr; }
+
+    .section-inner { padding: 0 24px; }
+
   }
 
   @media (max-width: 768px) {
-    .scorecard-grid { grid-template-columns: 1fr; }
-    .findings-grid { grid-template-columns: 1fr; }
-    .quote-block { padding: 28px 24px; }
-    .quote-block-secondary { padding: 20px 20px; }
+
+    .section-inner { padding: 0 16px; }
+
   }
 
-  .project-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
+  section {
+
+    padding: 80px 0;
+
+    border-bottom: 1px solid var(--rule);
+
+  }
+
+  section:last-child {
+
+    border-bottom: none;
+
+  }
+
+  .section-header {
+
     margin-bottom: 48px;
+
   }
 
-  .content-left, .content-right {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
+  .section-label {
 
-  .content-block h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 12px;
-  }
+    font-size: 10px;
 
-  .content-block p {
-    font-size: 16px;
-    color: #222;
-    line-height: 1.8;
-  }
+    letter-spacing: 2px;
 
-  .content-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+    text-transform: uppercase;
 
-  .content-list li {
-    font-size: 15px;
-    color: #222;
-    line-height: 1.7;
-    padding-left: 20px;
-    position: relative;
-  }
-
-  .content-list li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
     color: var(--mid);
+
+    margin-bottom: 12px;
+
   }
 
-  /* ── CTA SECTION ── */
-  .project-cta {
-    background: var(--navy);
-    padding: 64px 48px;
+  .section-title {
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: 32px;
+
+    font-weight: 600;
+
+    color: var(--navy);
+
+    line-height: 1.2;
+
+    letter-spacing: -0.3px;
+
+  }
+
+  .section-intro {
+
+    font-size: 17px;
+
+    color: #333;
+
+    line-height: 1.8;
+
+    max-width: 760px;
+
+    margin-top: 12px;
+
+  }
+
+  /* ─────────────────────────────────────────────
+
+     IMPACT STRIP
+
+  ───────────────────────────────────────────── */
+
+  section.impact-strip {
+
+    padding: 0;
+
+    max-width: 100%;
+
+    border-bottom: 1px solid var(--rule);
+
+  }
+
+  .impact-grid {
+
+    padding: 48px 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 0;
+
+  }
+
+  .impact-item {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
     text-align: center;
+
+  }
+
+  .impact-val {
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: 48px;
+
+    font-weight: 700;
+
+    color: var(--navy);
+
+    line-height: 1;
+
+  }
+
+  .impact-lbl {
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    color: var(--mid);
+
+    margin-top: 6px;
+
+  }
+
+  .impact-sub {
+
+    font-size: 12px;
+
+    color: var(--muted);
+
+    font-style: italic;
+
+  }
+
+  .impact-divider {
+
+    width: 1px;
+
+    height: 60px;
+
+    background: var(--rule);
+
+    flex-shrink: 0;
+
+    margin: 0 8px;
+
+  }
+
+  /* ─────────────────────────────────────────────
+
+     IMAGE GRIDS
+
+  ───────────────────────────────────────────── */
+
+  .img-2col {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 24px;
+
+    margin-bottom: 24px;
+
+  }
+
+  .img-3col {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 24px;
+
+  }
+
+  .sketch-fig {
+
+    margin: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+  }
+
+  .sketch-fig img {
+
+    width: 100%;
+
+    height: auto;
+
+    border-radius: 8px;
+
+    border: 1px solid var(--rule);
+
+    display: block;
+
+  }
+
+  .sketch-fig figcaption {
+
+    font-size: 12px;
+
+    color: var(--muted);
+
+    letter-spacing: 0.3px;
+
+    line-height: 1.5;
+
+    padding-left: 2px;
+
+  }
+
+  .sketch-fig--full {
+
+    margin-top: 16px;
+
+  }
+
+  figure.sketch-fig--contained {
+
+    display: block;
+
+  }
+
+  .sketch-fig--contained .img-wrap {
+
+    display: block;
+
+    margin-left: auto;
+
+    margin-right: auto;
+
+  }
+
+  .sketch-fig--contained .img-wrap img {
+
+    width: 100%;
+
+    height: auto;
+
+    display: block;
+
+  }
+
+  .sketch-fig--contained figcaption {
+
+    margin-top: 10px;
+
+  }
+
+  /* ─────────────────────────────────────────────
+
+     SECTION TINTED
+
+  ───────────────────────────────────────────── */
+
+  .section-tinted {
+
+    background: var(--cream);
+
+    max-width: 100% !important;
+
+  }
+
+  /* ─────────────────────────────────────────────
+
+     INSIGHT CALLOUT
+
+  ───────────────────────────────────────────── */
+
+  .insight-callout {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 16px;
+
+    padding: 28px 32px;
+
+    background: #fff;
+
+    border-radius: 8px;
+
+    border-left: 3px solid var(--navy);
+
+    margin-top: 32px;
+
+  }
+
+  .insight-icon {
+
+    font-size: 20px;
+
+    color: var(--navy);
+
+    flex-shrink: 0;
+
+    margin-top: 2px;
+
+  }
+
+  .insight-callout p {
+
+    font-size: 16px;
+
+    color: #222;
+
+    line-height: 1.7;
+
+    margin: 0;
+
+  }
+
+  /* ─────────────────────────────────────────────
+
+     PERSONA CARD
+
+  ───────────────────────────────────────────── */
+
+  .persona-card {
+
+    display: grid;
+
+    grid-template-columns: 220px 1fr;
+
+    gap: 0;
+
+    border: 1px solid var(--rule);
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    margin-top: 40px;
+
+    background: #fff;
+
+  }
+
+  .persona-card-left {
+
+    background: var(--navy);
+
+    padding: 36px 28px 32px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+
+    gap: 16px;
+
+  }
+
+  .persona-avatar {
+
+    width: 140px;
+
+    height: 140px;
+
+    display: block;
+
+    margin: 0 auto;
+
+    object-fit: contain;
+
+  }
+
+  .persona-name {
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    color: #fff;
+
+    line-height: 1.3;
+
+  }
+
+  .persona-role {
+
+    font-size: 13px;
+
+    color: rgba(255,255,255,0.82);
+
+    letter-spacing: 0.2px;
+
+    line-height: 1.6;
+
+  }
+
+  .persona-focus {
+
+    font-size: 13px;
+
+    color: rgba(255,255,255,0.72);
+
+    line-height: 1.65;
+
+    font-style: italic;
+
+    border-top: 1px solid rgba(255,255,255,0.15);
+
+    padding-top: 14px;
+
+    margin-top: 4px;
+
+  }
+
+  .persona-card-right {
+
+    padding: 32px 36px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0;
+
+  }
+
+  .persona-row {
+
+    display: flex;
+
+    gap: 16px;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid var(--rule);
+
+    align-items: flex-start;
+
+  }
+
+  .persona-row:last-child { border-bottom: none; }
+
+  .persona-tag {
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    letter-spacing: 1.2px;
+
+    text-transform: uppercase;
+
+    padding: 3px 9px;
+
+    border-radius: 20px;
+
+    white-space: nowrap;
+
+    flex-shrink: 0;
+
+    margin-top: 2px;
+
+  }
+
+  .persona-tag--grey { background: #f0f0f0; color: #666; }
+
+  .persona-tag--blue { background: #e8f0f8; color: var(--mid); }
+
+  .persona-tag--red { background: #fdecea; color: #c0392b; }
+
+  .persona-row-text {
+
+    font-size: 14px;
+
+    color: #333;
+
+    line-height: 1.6;
+
+  }
+
+  .persona-row-text strong {
+
+    display: block;
+
+    font-size: 13px;
+
+    margin-bottom: 2px;
+
+  }
+
+  .persona-row-text strong.blue { color: var(--mid); }
+
+  .persona-row-text strong.red  { color: #c0392b; }
+
+  /* ─────────────────────────────────────────────
+
+     PROBLEM GRID
+
+  ───────────────────────────────────────────── */
+
+  .problem-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+
+    margin-top: 40px;
+
+  }
+
+  .problem-card {
+
+    background: #fff;
+
+    border: 1px solid #e8eaed;
+
+    border-left: 4px solid var(--mid);
+
+    border-radius: 8px;
+
+    padding: 28px 28px 28px 24px;
+
+  }
+
+  .problem-card h4 {
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    color: var(--navy);
+
+    margin: 0 0 10px 0;
+
+    line-height: 1.35;
+
+  }
+
+  .problem-card p {
+
+    font-size: 14px;
+
+    color: #4a4f5c;
+
+    line-height: 1.65;
+
+    margin: 0;
+
+  }
+
+  /* ─────────────────────────────────────────────
+
+     NORTH STAR SECTION
+
+  ───────────────────────────────────────────── */
+
+  .northstar-section {
+
+    background: var(--navy);
+
+    max-width: 100% !important;
+
+    position: relative;
+
+    z-index: 1;
+
+  }
+
+  .northstar-header {
+
+    margin-bottom: 48px;
+
+  }
+
+  .gif-stage {
+
+    position: relative;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+
+  }
+
+  .gif-glow {
+
+    position: absolute;
+
+    inset: -2px;
+
+    background: linear-gradient(135deg, rgba(122,158,196,0.4), rgba(58,106,154,0.2));
+
+    border-radius: 14px;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+  }
+
+  .northstar-gif {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    border-radius: 10px;
+
+    position: relative;
+
+    z-index: 1;
+
+  }
+
+  .gif-badge {
+
+    position: absolute;
+
+    bottom: 16px;
+
+    right: 20px;
+
+    background: rgba(255,255,255,0.12);
+
+    backdrop-filter: blur(8px);
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    color: rgba(255,255,255,0.9);
+
+    font-size: 11px;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+
+    padding: 6px 14px;
+
+    border-radius: 20px;
+
+    z-index: 2;
+
+  }
+
+  /* ─────────────────────────────────────────────
+
+     RESEARCH LEADERSHIP REDESIGN
+
+  ───────────────────────────────────────────── */
+
+  .research-stats-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-top: 28px;
+
+  }
+
+  .research-stat-card {
+
+    background: #fff;
+
+    border: 1px solid var(--rule);
+
+    border-radius: 12px;
+
+    padding: 22px 18px;
+
+    text-align: left;
+
+  }
+
+  .research-stat-value {
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: 40px;
+
+    font-weight: 700;
+
+    color: var(--navy);
+
+    line-height: 1;
+
+    margin-bottom: 10px;
+
+  }
+
+  .research-stat-label {
+
+    font-size: 11px;
+
+    letter-spacing: 1.6px;
+
+    text-transform: uppercase;
+
+    color: var(--mid);
+
+    margin-bottom: 6px;
+
+  }
+
+  .research-stat-sub {
+
+    font-size: 13px;
+
+    color: var(--muted);
+
+    line-height: 1.5;
+
+  }
+
+  .research-setup {
+
+    margin-top: 26px;
+
+    background: var(--pale);
+
+    border-radius: 12px;
+
+    padding: 22px 22px;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 14px 18px;
+
+    border: 1px solid rgba(30,45,66,0.12);
+
+  }
+
+  .setup-item {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+  }
+
+  .setup-label {
+
+    font-size: 10px;
+
+    letter-spacing: 1.6px;
+
+    text-transform: uppercase;
+
+    color: var(--mid);
+
+  }
+
+  .setup-value {
+
+    font-size: 14px;
+
+    color: #222;
+
+    line-height: 1.6;
+
+  }
+
+  .research-insights-grid {
+
+    margin-top: 34px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 28px;
+
+  }
+
+  .insight-col {
+
+    background: #fff;
+
+    border: 1px solid var(--rule);
+
+    border-radius: 12px;
+
+    padding: 24px 24px;
+
+  }
+
+  .insight-title {
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    color: var(--navy);
+
+    margin-bottom: 16px;
+
+  }
+
+  .insight-list {
+
+    list-style: none;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin: 0;
+
+    padding: 0;
+
+  }
+
+  .insight-list li {
+
+    font-size: 14px;
+
+    color: #333;
+
+    line-height: 1.65;
+
+    padding-left: 22px;
+
+    position: relative;
+
+  }
+
+  .insight-list.success li::before {
+
+    content: "✓";
+
+    position: absolute;
+
+    left: 0;
+
+    color: #28a745;
+
+    font-weight: 700;
+
+  }
+
+  .insight-list.improve li::before {
+
+    content: "→";
+
+    position: absolute;
+
+    left: 0;
+
+    color: var(--mid);
+
+    font-weight: 700;
+
+  }
+
+  @media (max-width: 900px) {
+
+    .research-stats-grid {
+
+      grid-template-columns: repeat(2, 1fr);
+
+    }
+
+    .research-insights-grid {
+
+      grid-template-columns: 1fr;
+
+    }
+
+    .research-setup {
+
+      grid-template-columns: 1fr;
+
+    }
+
+  }
+
+  /* ─────────────────────────────────────────────
+
+     QUOTES
+
+  ───────────────────────────────────────────── */
+
+  .quote-hero {
+
+    padding: 40px 48px;
+
+    background: var(--navy);
+
+    border-radius: 10px;
+
+    margin-bottom: 16px;
+
+  }
+
+  .quote-hero blockquote {
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: 24px;
+
+    font-style: italic;
+
+    color: #fff;
+
+    line-height: 1.5;
+
+    margin-bottom: 16px;
+
+  }
+
+  .quote-hero cite {
+
+    font-size: 13px;
+
+    color: rgba(255,255,255,0.65);
+
+    font-style: normal;
+
+  }
+
+  .quote-secondary {
+
+    padding: 28px 36px;
+
+    background: #fff;
+
+    border: 1px solid var(--rule);
+
+    border-radius: 8px;
+
+    border-left: 3px solid var(--light);
+
+  }
+
+  .quote-secondary blockquote {
+
+    font-size: 16px;
+
+    font-style: italic;
+
+    color: #333;
+
+    line-height: 1.7;
+
+    margin-bottom: 10px;
+
+  }
+
+  .quote-secondary cite {
+
+    font-size: 12px;
+
+    color: var(--muted);
+
+    font-style: normal;
+
+  }
+
+  .shane-quote {
+
+    padding: 36px 44px;
+
+    background: var(--pale);
+
+    border-radius: 8px;
+
+    border-left: 4px solid var(--mid);
+
+  }
+
+  .shane-quote p {
+
+    font-size: 15px;
+
+    color: #222;
+
+    line-height: 1.85;
+
+    font-style: italic;
+
+    margin-bottom: 16px;
+
+  }
+
+  .shane-quote cite {
+
+    font-size: 13px;
+
+    color: var(--muted);
+
+    font-weight: 500;
+
+    font-style: normal;
+
+  }
+
+  .participants-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+
+    gap: 12px;
+
+    margin-top: 24px;
+
+  }
+
+  .participant-chip {
+
+    background: #fff;
+
+    border: 1px solid var(--rule);
+
+    border-radius: 6px;
+
+    padding: 10px 16px;
+
+    font-size: 13px;
+
+    color: var(--navy);
+
+    line-height: 1.4;
+
+  }
+
+  /* ─────────────────────────────────────────────
+
+     CTA + FOOTER NAV
+
+  ───────────────────────────────────────────── */
+
+  .project-cta {
+
+    background: var(--navy);
+
+    padding: 64px 48px;
+
+    text-align: center;
+
   }
 
   .project-cta-inner {
+
     max-width: 800px;
+
     margin: 0 auto;
+
   }
 
   .cta-title {
+
     font-family: 'Playfair Display', serif;
+
     font-size: 32px;
+
     font-weight: 600;
+
     color: #fff;
+
     margin-bottom: 20px;
+
   }
 
   .cta-text {
+
     font-size: 16px;
+
     color: rgba(255,255,255,0.8);
+
     margin-bottom: 32px;
+
     line-height: 1.7;
+
   }
 
   .cta-buttons {
+
     display: flex;
+
     gap: 16px;
+
     justify-content: center;
+
     flex-wrap: wrap;
+
   }
 
   .cta-button {
+
     display: inline-flex;
+
     align-items: center;
+
     gap: 8px;
+
     padding: 12px 28px;
+
     border: 1px solid rgba(255,255,255,0.4);
+
     background: transparent;
+
     color: #fff;
+
     text-decoration: none;
+
     border-radius: 4px;
+
     transition: all 0.2s;
+
     font-size: 13px;
+
     font-weight: 500;
+
     letter-spacing: 0.5px;
+
+    cursor: pointer;
+
   }
 
   .cta-button:hover {
+
     border-color: #fff;
+
     background: rgba(255,255,255,0.1);
+
   }
 
   .cta-button.primary {
+
     background: #fff;
+
     color: var(--navy);
+
     border-color: #fff;
+
   }
 
   .cta-button.primary:hover {
+
     background: rgba(255,255,255,0.9);
+
   }
 
-  /* ── FOOTER NAV ── */
   .project-footer-nav {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
+
     max-width: 1100px;
+
     margin: 0 auto;
+
     padding: 48px;
+
     border-top: 1px solid var(--rule);
+
   }
 
   .footer-nav-link {
+
     display: flex;
+
     flex-direction: column;
+
     gap: 4px;
+
     text-decoration: none;
+
     color: var(--navy);
+
     transition: color 0.2s;
+
   }
 
   .footer-nav-link:hover { color: var(--mid); }
 
   .footer-nav-label {
+
     font-size: 10px;
+
     letter-spacing: 1px;
+
     text-transform: uppercase;
+
     color: var(--muted);
+
   }
 
   .footer-nav-title {
+
     font-size: 15px;
+
     font-weight: 500;
+
   }
 
-  /* ── RESPONSIVE ── */
+  /* ─────────────────────────────────────────────
+
+     RESPONSIVE FIXES
+
+  ───────────────────────────────────────────── */
+
   @media (max-width: 900px) {
+
     nav { padding: 0 24px; }
-    .project-header { padding: 100px 24px 60px; }
-    section { padding: 60px 24px; }
-    .project-content { grid-template-columns: 1fr; gap: 40px; }
-    .project-cta { padding: 48px 24px; }
-    .project-footer-nav { flex-direction: column; gap: 24px; text-align: center; padding: 32px 24px; }
-    .project-metrics { grid-template-columns: 1fr 1fr; }
-  }
 
-  @media (max-width: 768px) {
-    nav { padding: 0 16px; }
-    nav .nav-links { display: none; }
-    .project-title { font-size: clamp(28px, 5vw, 36px); }
-    .project-header { padding: 80px 16px 48px; }
-    section { padding: 48px 16px; }
-    .section-title { font-size: 24px; }
-    .project-metrics { grid-template-columns: 1fr; padding: 32px 16px; }
-    .project-cta { padding: 32px 16px; }
-    .cta-buttons { flex-direction: column; }
-    .cta-button { width: 100%; justify-content: center; }
-  }
+    .project-header-inner { padding: 0 24px; }
 
-  /* ── VISUAL NARRATIVE STYLES ── */
-  .section-intro {
-    font-size: 17px;
-    color: #333;
-    line-height: 1.8;
-    max-width: 760px;
-    margin-top: 12px;
-  }
+    .project-footer-nav {
 
-  /* Impact strip */
-  section.impact-strip {
-    padding: 0;
-    max-width: 100%;
-    border-bottom: 1px solid var(--rule);
-  }
-  .impact-grid {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 48px;
-    display: flex;
-    align-items: center;
-    gap: 0;
-  }
-  .impact-item {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    text-align: center;
-  }
-  .impact-val {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px;
-    font-weight: 700;
-    color: var(--navy);
-    line-height: 1;
-  }
-  .impact-lbl {
-    font-size: 12px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-top: 6px;
-  }
-  .impact-sub {
-    font-size: 12px;
-    color: var(--muted);
-    font-style: italic;
-  }
-  .impact-divider {
-    width: 1px;
-    height: 60px;
-    background: var(--rule);
-    flex-shrink: 0;
-    margin: 0 8px;
-  }
+      flex-direction: column;
 
-  /* Section tint */
-  .section-tinted {
-    background: var(--cream);
-    max-width: 100% !important;
-    padding: 80px 0 !important;
-  }
-  .section-tinted > * {
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 48px;
-    padding-right: 48px;
-  }
-  .section-tinted > .img-2col,
-  .section-tinted > .img-3col,
-  .section-tinted > figure {
-    padding-left: 48px;
-    padding-right: 48px;
-  }
+      gap: 24px;
 
-  /* Image grids — book rhythm: consistent 2-up, never 3-col */
-  .img-2col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-bottom: 24px;
-  }
-  /* 3-image groups */
-  .img-3col {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
+      text-align: center;
 
-  /* Figures */
-  .sketch-fig {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .sketch-fig img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    border: 1px solid var(--rule);
-    display: block;
-  }
-  .sketch-fig figcaption {
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 0.3px;
-    line-height: 1.5;
-    padding-left: 2px;
-  }
-  .sketch-fig--full {
-    margin-top: 16px;
-  }
+      padding: 32px 24px;
 
-  /* Insight callout */
-  .insight-callout {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 28px 32px;
-    background: #fff;
-    border-radius: 8px;
-    border-left: 3px solid var(--navy);
-    margin-top: 32px;
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .insight-icon {
-    font-size: 20px;
-    color: var(--navy);
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .insight-callout p {
-    font-size: 16px;
-    color: #222;
-    line-height: 1.7;
-    margin: 0;
-  }
+    }
 
-  /* Hero quote */
-  .quote-hero {
-    padding: 40px 48px;
-    background: var(--navy);
-    border-radius: 10px;
-    margin-bottom: 16px;
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .quote-hero blockquote {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-style: italic;
-    color: #fff;
-    line-height: 1.5;
-    margin-bottom: 16px;
-  }
-  .quote-hero cite {
-    font-size: 13px;
-    color: rgba(255,255,255,0.65);
-    font-style: normal;
-  }
-  .quote-secondary {
-    padding: 28px 36px;
-    background: #fff;
-    border: 1px solid var(--rule);
-    border-radius: 8px;
-    border-left: 3px solid var(--light);
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .quote-secondary blockquote {
-    font-size: 16px;
-    font-style: italic;
-    color: #333;
-    line-height: 1.7;
-    margin-bottom: 10px;
-  }
-  .quote-secondary cite {
-    font-size: 12px;
-    color: var(--muted);
-    font-style: normal;
-  }
+    .impact-grid { flex-wrap: wrap; padding: 32px 0; }
 
-  /* NPS row */
-  .nps-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-bottom: 40px;
-  }
-  .nps-cell {
-    background: var(--pale);
-    border-radius: 8px;
-    padding: 28px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    text-align: center;
-  }
-  .nps-val {
-    font-family: 'Playfair Display', serif;
-    font-size: 42px;
-    font-weight: 700;
-    color: var(--navy);
-    line-height: 1;
-  }
-  .nps-lbl {
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-top: 8px;
-  }
-  .nps-sub {
-    font-size: 12px;
-    color: var(--muted);
-  }
-
-  /* Shane quote */
-  .shane-quote {
-    padding: 36px 44px;
-    background: var(--pale);
-    border-radius: 8px;
-    border-left: 4px solid var(--mid);
-  }
-  .shane-quote p {
-    font-size: 15px;
-    color: #222;
-    line-height: 1.85;
-    font-style: italic;
-    margin-bottom: 16px;
-  }
-  .shane-quote cite {
-    font-size: 13px;
-    color: var(--muted);
-    font-weight: 500;
-    font-style: normal;
-  }
-
-  /* Contained (centred, smaller) figure */
-  figure.sketch-fig--contained {
-    display: block;   /* override sketch-fig flex so margin:auto works normally */
-  }
-  .sketch-fig--contained .img-wrap {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    /* max-width set inline per image */
-  }
-  .sketch-fig--contained .img-wrap img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  .sketch-fig--contained figcaption {
-    margin-top: 10px;
-  }
-
-  /* ── NORTH STAR SECTION ── */
-  .northstar-section {
-    background: var(--navy);
-    max-width: 100% !important;
-    padding: 80px 0 !important;
-  }
-  .northstar-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 48px;
-  }
-  .northstar-header {
-    margin-bottom: 48px;
-  }
-  .northstar-header .section-intro {
-    color: rgba(255,255,255,0.72);
-  }
-  .gif-stage {
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 32px 80px rgba(0,0,0,0.5);
-  }
-  .gif-glow {
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(135deg, rgba(122,158,196,0.4), rgba(58,106,154,0.2));
-    border-radius: 14px;
-    z-index: 0;
-    pointer-events: none;
-  }
-  .northstar-gif {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    position: relative;
-    z-index: 1;
-  }
-  .gif-badge {
-    position: absolute;
-    bottom: 16px;
-    right: 20px;
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.2);
-    color: rgba(255,255,255,0.9);
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 6px 14px;
-    border-radius: 20px;
-    z-index: 2;
-  }
-
-  /* Responsive */
-  @media (max-width: 900px) {
-    .img-3col { grid-template-columns: 1fr; }
-    .impact-grid { flex-wrap: wrap; padding: 32px 24px; }
     .impact-item { min-width: 40%; }
+
     .impact-divider { display: none; }
-    .nps-row { grid-template-columns: 1fr; }
-    .section-tinted > * { padding-left: 24px; padding-right: 24px; }
-    .section-tinted > .img-2col,
-    .section-tinted > .img-3col,
-    .section-tinted > figure { padding-left: 24px; padding-right: 24px; }
-  }
-  @media (max-width: 640px) {
-    .img-2col, .img-3col { grid-template-columns: 1fr; }
-    .impact-grid { flex-direction: column; gap: 24px; }
-    .quote-hero { padding: 28px 24px; }
-    .quote-hero blockquote { font-size: 18px; }
-    .shane-quote { padding: 24px 20px; }
-  }
 
-  /* ── DEFINE / PERSONA CARD ── */
-  .persona-card {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 0;
-    border: 1px solid var(--rule);
-    border-radius: 12px;
-    overflow: hidden;
-    margin-top: 40px;
-    background: #fff;
-  }
-  .persona-card-left {
-    background: var(--navy);
-    padding: 36px 28px 32px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 16px;
-  }
-  .persona-avatar-wrap {
-    display: contents;
-  }
-  .persona-avatar {
-    width: 140px;
-    height: 140px;
-    display: block;
-    margin: 0 auto;
-    object-fit: contain;
-  }
-  .persona-card-left-text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
-  .persona-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: #fff;
-    line-height: 1.3;
-  }
-  .persona-role {
-    font-size: 13px;
-    color: rgba(255,255,255,0.82);
-    letter-spacing: 0.2px;
-    line-height: 1.6;
-  }
-  .persona-focus {
-    font-size: 13px;
-    color: rgba(255,255,255,0.72);
-    line-height: 1.65;
-    font-style: italic;
-    border-top: 1px solid rgba(255,255,255,0.15);
-    padding-top: 14px;
-    margin-top: 4px;
-  }
-  .persona-card-right {
-    padding: 32px 36px;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  .persona-row {
-    display: flex;
-    gap: 16px;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--rule);
-    align-items: flex-start;
-  }
-  .persona-row:last-child { border-bottom: none; }
-  .persona-tag {
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    padding: 3px 9px;
-    border-radius: 20px;
-    white-space: nowrap;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .persona-tag--grey {
-    background: #f0f0f0;
-    color: #666;
-  }
-  .persona-tag--blue {
-    background: #e8f0f8;
-    color: var(--mid);
-  }
-  .persona-tag--red {
-    background: #fdecea;
-    color: #c0392b;
-  }
-  .persona-row-text {
-    font-size: 14px;
-    color: #333;
-    line-height: 1.6;
-  }
-  .persona-row-text strong {
-    display: block;
-    font-size: 13px;
-    margin-bottom: 2px;
-  }
-  .persona-row-text strong.blue { color: var(--mid); }
-  .persona-row-text strong.red  { color: #c0392b; }
-  @media (max-width: 768px) {
-    .persona-card { grid-template-columns: 1fr; }
-    .persona-avatar { height: 220px; }
-  }
+    .img-3col { grid-template-columns: 1fr; }
 
-  /* ── PROBLEM CARDS GRID ── */
-  .problem-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 40px;
-  }
-  .problem-card {
-    background: #fff;
-    border: 1px solid #e8eaed;
-    border-left: 4px solid var(--mid);
-    border-radius: 8px;
-    padding: 28px 28px 28px 24px;
-  }
-  .problem-card h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--navy);
-    margin: 0 0 10px 0;
-    line-height: 1.35;
-  }
-  .problem-card p {
-    font-size: 14px;
-    color: #4a4f5c;
-    line-height: 1.65;
-    margin: 0;
-  }
-  @media (max-width: 768px) {
     .problem-grid { grid-template-columns: 1fr; }
+
+    .quote-hero { padding: 28px 24px; }
+
+  }
+
+  @media (max-width: 768px) {
+
+    nav { padding: 0 16px; }
+
+    .project-header-inner { padding: 0 16px; }
+
+    .project-title { font-size: clamp(28px, 5vw, 36px); }
+
+    .project-cta { padding: 32px 16px; }
+
+    .cta-buttons { flex-direction: column; }
+
+    .cta-button { width: 100%; justify-content: center; }
+
+    .persona-card { grid-template-columns: 1fr; }
+
+    .persona-avatar { height: 220px; }
+
+    .quote-hero blockquote { font-size: 18px; }
+
+    .shane-quote { padding: 24px 20px; }
+
+    .img-2col { grid-template-columns: 1fr; }
+
+  }
+
+  /* ─────────────────────────────────────────────
+
+     PDF MODAL
+
+  ───────────────────────────────────────────── */
+
+  #pdf-modal-bg {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    background: rgba(20,30,45,0.55);
+
+    backdrop-filter: blur(4px);
+
+    align-items: center;
+
+    justify-content: center;
+
+  }
+
+  #pdf-modal-bg.open { display: flex; }
+
+  #pdf-modal {
+
+    background: #faf8f5;
+
+    border-radius: 14px;
+
+    padding: 40px 36px;
+
+    max-width: 380px;
+
+    width: 90%;
+
+    text-align: center;
+
+    box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+
+    font-family: 'Source Serif 4', Georgia, serif;
+
+  }
+
+  #pdf-modal h3 {
+
+    font-family: 'Playfair Display', Georgia, serif;
+
+    font-size: 1.4rem;
+
+    color: #1e2d42;
+
+    margin: 0 0 8px;
+
+  }
+
+  #pdf-modal p {
+
+    color: #777;
+
+    font-size: 0.9rem;
+
+    margin: 0 0 24px;
+
+    line-height: 1.6;
+
+  }
+
+  #pdf-pw-input {
+
+    width: 100%;
+
+    padding: 13px 16px;
+
+    font-size: 1rem;
+
+    font-family: inherit;
+
+    border: 1.5px solid #d0ccc6;
+
+    border-radius: 8px;
+
+    background: #fff;
+
+    color: #1e2d42;
+
+    outline: none;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    letter-spacing: 0.1em;
+
+    transition: border-color 0.2s;
+
+  }
+
+  #pdf-pw-input:focus { border-color: #1e2d42; }
+
+  #pdf-pw-input.shake {
+
+    animation: pdf-shake 0.4s ease;
+
+    border-color: #c0392b;
+
+  }
+
+  #pdf-pw-btn {
+
+    margin-top: 12px;
+
+    width: 100%;
+
+    padding: 13px;
+
+    background: #1e2d42;
+
+    color: #fff;
+
+    font-family: inherit;
+
+    font-size: 0.92rem;
+
+    letter-spacing: 0.05em;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition: background 0.2s;
+
+  }
+
+  #pdf-pw-btn:hover { background: #2a3f5f; }
+
+  #pdf-cancel {
+
+    display: block;
+
+    margin-top: 12px;
+
+    font-size: 0.85rem;
+
+    color: #999;
+
+    cursor: pointer;
+
+    background: none;
+
+    border: none;
+
+    font-family: inherit;
+
+    text-decoration: underline;
+
+  }
+
+  #pdf-pw-error {
+
+    margin-top: 10px;
+
+    font-size: 0.82rem;
+
+    color: #c0392b;
+
+    min-height: 18px;
+
+  }
+
+  @keyframes pdf-shake {
+
+    0%,100% { transform: translateX(0); }
+
+    20% { transform: translateX(-8px); }
+
+    40% { transform: translateX(8px); }
+
+    60% { transform: translateX(-5px); }
+
+    80% { transform: translateX(5px); }
+
   }
 
 </style>
+
 </head>
+
 <body>
 
 <nav>
+
   <a href="index.html" class="nav-name">Sandeep Virmani</a>
+
   <a href="index.html#work" class="back-link">← Back to Work</a>
+
 </nav>
 
-<\!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobile-menu">
-  <a href="index.html#work" onclick="closeMobileMenu()">Work</a>
-  <a href="index.html#about" onclick="closeMobileMenu()">About</a>
-  <a href="index.html#career" onclick="closeMobileMenu()">Career</a>
-  <a href="index.html#contact" onclick="closeMobileMenu()">Contact</a>
+<!-- SCROLL PROGRESS BAR -->
+
+<div id="scroll-progress-wrap">
+
+  <div id="scroll-progress-bar"></div>
+
 </div>
+
+<!-- MOBILE / TABLET JUMP BAR -->
+
+<div class="mobile-jumpbar">
+
+  <a href="#impact">Impact</a>
+
+  <a href="#starting-point">Starting Point</a>
+
+  <a href="#research">Research</a>
+
+  <a href="#define">Define</a>
+
+  <a href="#ideation">Ideation</a>
+
+  <a href="#lofi">Lo-Fi Design</a>
+
+  <a href="#flows">Design Flows</a>
+
+  <a href="#northstar">North Star</a>
+
+  <a href="#validation">Validation</a>
+
+  <a href="#research-leadership">Research Proof</a>
+
+  <a href="#download">Download</a>
+
+</div>
+
+<!-- HERO -->
 
 <div class="project-header">
+
   <div class="project-header-inner">
+
     <div class="project-co">OpenText · 2024–2026</div>
+
     <h1 class="project-title">Identity Lifecycle Management —<br>Policy Editor &amp; Builder</h1>
+
     <p class="project-summary">
+
       Policy administrators were navigating XDS structures and raw XML to manage identity rules — a fragmented, modal-heavy system that blocked self-service and demanded consulting support for everyday tasks. I led research and design to move from that complexity to a single pane of glass policy editor canvas, validated with enterprise customers at OpenText World 2025.
+
     </p>
+
     <p style="font-size: 14px; color: #5a7fa8; margin-top: 20px; line-height: 1.7; max-width: 760px;">
+
       <strong>Role:</strong> Principal Product Designer — research, usability testing, design direction, and cross-functional influence across Engineering, Product, and Go-to-Market.
+
     </p>
+
   </div>
+
 </div>
 
+<div class="page-wrap">
 
-<!-- ── 1. IMPACT STRIP ── -->
-<section class="impact-strip">
-  <div class="impact-grid">
-    <div class="impact-item">
-      <span class="impact-val">83</span>
-      <span class="impact-lbl">SUS Score</span>
-      <span class="impact-sub">"Good" · 95% CI: 76–91</span>
-    </div>
-    <div class="impact-divider"></div>
-    <div class="impact-item">
-      <span class="impact-val">+63</span>
-      <span class="impact-lbl">Net Promoter Score</span>
-      <span class="impact-sub">9.14 / 10 · 0 detractors</span>
-    </div>
-    <div class="impact-divider"></div>
-    <div class="impact-item">
-      <span class="impact-val">0</span>
-      <span class="impact-lbl">Critical Issues</span>
-      <span class="impact-sub">100% success on core tasks</span>
-    </div>
-    <div class="impact-divider"></div>
-    <div class="impact-item">
-      <span class="impact-val">9</span>
-      <span class="impact-lbl">Enterprise Participants</span>
-      <span class="impact-sub">8 orgs · OTW2025 Nashville</span>
-    </div>
-  </div>
-</section>
+  <!-- DESKTOP TOC -->
 
-<!-- ── 2. THE PROBLEM ── -->
-<section>
-  <div class="section-header">
-    <div class="section-label">Starting Point</div>
-    <h2 class="section-title">What we inherited</h2>
-    <p class="section-intro">Administrators were navigating XDS structures and raw XML to manage policies — a fragmented, modal-heavy interface that demanded deep technical expertise and blocked self-service. Every change meant consulting support.</p>
-  </div>
-  <div class="img-2col">
-    <figure class="sketch-fig">
-      <img src="projects/policyBuilder/sketches/01-problem-modals.jpg" alt="Existing nested modal interface" loading="lazy">
-      <figcaption>Nested modals — users lost context on every action</figcaption>
-    </figure>
-    <figure class="sketch-fig">
-      <img src="projects/policyBuilder/sketches/02-problem-xml.jpg" alt="Raw XML editing interface" loading="lazy">
-      <figcaption>Raw XML editing — requiring expert knowledge just to navigate</figcaption>
-    </figure>
-  </div>
-</section>
+  <aside class="toc">
 
-<!-- ── 3. UNDERSTANDING THE USER ── -->
-<section class="section-tinted">
-  <div style="max-width:1100px; margin:0 auto; padding:0 48px;">
-    <div class="section-header">
-      <div class="section-label">Research</div>
-      <h2 class="section-title">Mapping the real journey</h2>
-      <p class="section-intro">Before sketching anything, I mapped the full lifecycle of a policy administrator — where they got stuck, where they gave up, and where the system forced them to call for help.</p>
-    </div>
-    <figure class="sketch-fig sketch-fig--contained">
-      <div class="img-wrap" style="max-width:680px;">
-        <img src="projects/policyBuilder/sketches/03-journey-explore.jpg" alt="Policy administrator journey map" loading="lazy" style="filter:grayscale(100%) contrast(1.1);">
-      </div>
-      <figcaption style="text-align:center;">Journey map — pain concentrated around XML editing and multi-modal navigation</figcaption>
-    </figure>
-    <div class="insight-callout">
-      <span class="insight-icon">→</span>
-      <p>The core tension: <strong>power users needed XML access</strong>, but the interface forced everyone through it — regardless of skill level.</p>
-    </div>
-  </div>
-</section>
+    <div class="toc-title">Jump to Section</div>
 
-<!-- ── 3b. DEFINE ── -->
-<section>
-  <div class="section-header">
-    <div class="section-label">Define</div>
-    <h2 class="section-title">Who we designed for</h2>
-    <p class="section-intro">Research surfaced a clear primary user — the Application Administrator managing Active Directory Driver policies within NetIQ Identity Manager. Not a casual user: someone who lives in this system daily and feels every rough edge.</p>
-  </div>
+    <ul>
 
-  <div class="persona-card">
-    <!-- LEFT: Identity -->
-    <div class="persona-card-left">
-      <div class="persona-avatar-wrap">
-        <img src="projects/policyBuilder/sketches/Astrid_circle.png" alt="Astrid Fischer" class="persona-avatar">
-      </div>
-      <div class="persona-card-left-text">
-        <div class="persona-name">Astrid Fischer</div>
-        <div class="persona-role">Application Administrator<br>IT Operations · Identity Management</div>
-        <div class="persona-focus">Integrating Active Directory Driver Policies to enable external application communication and data synchronization</div>
-      </div>
-    </div>
+      <li><a href="#impact">Impact</a></li>
 
-    <!-- RIGHT: Quick-scan rows -->
-    <div class="persona-card-right">
+      <li><a href="#starting-point">Starting Point</a></li>
 
-      <div class="persona-row">
-        <span class="persona-tag persona-tag--grey">Background</span>
-        <div class="persona-row-text">Experienced administrator managing and integrating AD Driver policies within NetIQ Identity Manager — relies on the system daily for seamless external app communication.</div>
-      </div>
+      <li><a href="#research">Research</a></li>
 
-      <div class="persona-row">
-        <span class="persona-tag persona-tag--grey">Goal</span>
-        <div class="persona-row-text">Ensure reliable, real-time data synchronization between external applications and the Identity Vault with minimal errors and downtime.</div>
-      </div>
+      <li><a href="#define">Define</a></li>
 
-      <div class="persona-row">
-        <span class="persona-tag persona-tag--blue">Responsibility</span>
-        <div class="persona-row-text">
-          <strong class="blue">Integrate AD Driver Policies into Identity Manager</strong>
-          Edit and manage existing policies to maintain accurate communication channels between Identity Manager and external systems.
+      <li><a href="#ideation">Ideation</a></li>
+
+      <li><a href="#lofi">Lo-Fi Design</a></li>
+
+      <li><a href="#flows">Design Flows</a></li>
+
+      <li><a href="#northstar">North Star</a></li>
+
+      <li><a href="#validation">Validation</a></li>
+
+      <li><a href="#research-leadership">Research Proof</a></li>
+
+      <li><a href="#download">Download</a></li>
+
+      <li><a href="#cta">Contact</a></li>
+
+    </ul>
+
+  </aside>
+
+  <!-- MAIN -->
+
+  <main>
+
+    <!-- IMPACT STRIP -->
+
+    <section class="impact-strip" id="impact">
+
+      <div class="section-inner">
+
+        <div class="impact-grid">
+
+          <div class="impact-item">
+
+            <span class="impact-val">83</span>
+
+            <span class="impact-lbl">SUS Score</span>
+
+            <span class="impact-sub">"Good" · 95% CI: 76–91</span>
+
+          </div>
+
+          <div class="impact-divider"></div>
+
+          <div class="impact-item">
+
+            <span class="impact-val">+63</span>
+
+            <span class="impact-lbl">Net Promoter Score</span>
+
+            <span class="impact-sub">9.14 / 10 · 0 detractors</span>
+
+          </div>
+
+          <div class="impact-divider"></div>
+
+          <div class="impact-item">
+
+            <span class="impact-val">0</span>
+
+            <span class="impact-lbl">Critical Issues</span>
+
+            <span class="impact-sub">100% success on core tasks</span>
+
+          </div>
+
+          <div class="impact-divider"></div>
+
+          <div class="impact-item">
+
+            <span class="impact-val">9</span>
+
+            <span class="impact-lbl">Enterprise Participants</span>
+
+            <span class="impact-sub">8 orgs · OTW2025 Nashville</span>
+
+          </div>
+
         </div>
+
       </div>
 
-      <div class="persona-row">
-        <span class="persona-tag persona-tag--red">Challenge</span>
-        <div class="persona-row-text">
-          <strong class="red">XML editor blocks direct edits</strong>
-          Every rule change relies on consulting support — users cannot self-serve, and errors risk breaking data synchronization.
+    </section>
+
+    <!-- STARTING POINT -->
+
+    <section id="starting-point">
+
+      <div class="section-inner">
+
+        <div class="section-header">
+
+          <div class="section-label">Starting Point</div>
+
+          <h2 class="section-title">What we inherited</h2>
+
+          <p class="section-intro">
+
+            Administrators were navigating XDS structures and raw XML to manage policies — a fragmented, modal-heavy interface that demanded deep technical expertise and blocked self-service. Every change meant consulting support.
+
+          </p>
+
         </div>
-      </div>
 
-      <div class="persona-row">
-        <span class="persona-tag persona-tag--red">Challenge</span>
-        <div class="persona-row-text">
-          <strong class="red">Multiple modals fragment the workflow</strong>
-          Condition sets span layered modals — users lose context mid-task, making policy navigation slow and error-prone.
+        <div class="img-2col">
+
+          <figure class="sketch-fig">
+
+            <img src="projects/policyBuilder/sketches/01-problem-modals.jpg" alt="Existing nested modal interface" loading="lazy">
+
+            <figcaption>Nested modals — users lost context on every action</figcaption>
+
+          </figure>
+
+          <figure class="sketch-fig">
+
+            <img src="projects/policyBuilder/sketches/02-problem-xml.jpg" alt="Raw XML editing interface" loading="lazy">
+
+            <figcaption>Raw XML editing — requiring expert knowledge just to navigate</figcaption>
+
+          </figure>
+
         </div>
+
       </div>
 
-    </div>
-  </div>
+    </section>
 
-  <!-- Problem cards -->
-  <div class="problem-grid">
-    <div class="problem-card">
-      <h4>XML editor blocks self-service</h4>
-      <p>Editing rules and conditions via the XML editor is cumbersome and relies heavily on consulting support — users cannot make direct edits without external help.</p>
-    </div>
-    <div class="problem-card">
-      <h4>Deep expertise required for every change</h4>
-      <p>Managing existing policies demands technical depth. Errors disrupt synchronisation and cause data inconsistencies — the cost of a wrong edit is high.</p>
-    </div>
-    <div class="problem-card">
-      <h4>Multiple modals fragment the workflow</h4>
-      <p>Condition sets span multiple layered modals, adding navigation complexity. Users lose context mid-task and struggle to manage policies end-to-end.</p>
-    </div>
-    <div class="problem-card">
-      <h4>No safe way to compare or iterate</h4>
-      <p>There is no GUI-based view for side-by-side comparison. Rules cannot be easily edited, compared, or updated without creating technical dependencies.</p>
-    </div>
-  </div>
+    <!-- RESEARCH -->
 
-</section>
+    <section id="research" class="section-tinted">
 
-<!-- ── 4. EARLY THINKING ── -->
-<section>
-  <div class="section-header">
-    <div class="section-label">Ideation</div>
-    <h2 class="section-title">First sketches — thinking out loud</h2>
-    <p class="section-intro">I sketched before touching pixels. These are raw — intentionally. Fast, throwaway thinking to explore the structure of a visual policy canvas before committing to any direction.</p>
-  </div>
-  <div class="img-3col">
-    <figure class="sketch-fig">
-      <img src="projects/policyBuilder/sketches/04-sketch-01.jpg" alt="Early canvas concept sketch" loading="lazy">
-      <figcaption>Canvas layout — first concept</figcaption>
-    </figure>
-    <figure class="sketch-fig">
-      <img src="projects/policyBuilder/sketches/05-sketch-02.jpg" alt="Rule structure exploration" loading="lazy">
-      <figcaption>Rule structure exploration</figcaption>
-    </figure>
-    <figure class="sketch-fig">
-      <img src="projects/policyBuilder/sketches/06-sketch-03.jpg" alt="Multi-view toggle concepts" loading="lazy">
-      <figcaption>Multi-view toggle concepts — third direction that led to the final solution</figcaption>
-    </figure>
-  </div>
-</section>
+      <div class="section-inner">
 
-<!-- ── 5. TAKING SHAPE ── -->
-<section>
-  <div class="section-header">
-    <div class="section-label">Lo-Fi Design</div>
-    <h2 class="section-title">Taking shape — the single pane of glass</h2>
-    <p class="section-intro">One unified workspace to replace five fragmented screens. The Canvas View emerged as the single pane — rules, conditions, and actions in one place.</p>
-  </div>
-  <div class="img-2col" style="margin-bottom: 16px;">
-    <figure class="sketch-fig">
-      <img src="projects/policyBuilder/sketches/10-lofi-01.jpg" alt="Lo-fi — canvas view panel" loading="lazy">
-      <figcaption>Canvas View — rules panel, lo-fi</figcaption>
-    </figure>
-    <figure class="sketch-fig">
-      <img src="projects/policyBuilder/sketches/11-lofi-02.jpg" alt="Lo-fi — condition builder" loading="lazy">
-      <figcaption>Condition builder — lo-fi</figcaption>
-    </figure>
-  </div>
-  <figure class="sketch-fig sketch-fig--full">
-    <img src="projects/policyBuilder/sketches/12-lofi-full.jpg" alt="Full canvas view — lo-fi complete layout" loading="lazy">
-    <figcaption>Full canvas view — the complete unified workspace at lo-fi</figcaption>
-  </figure>
-</section>
+        <div class="section-header">
 
-<!-- ── 6. WORKING THROUGH FLOWS ── -->
-<section class="section-tinted">
-  <div class="section-header">
-    <div class="section-label">Design Flows</div>
-    <h2 class="section-title">Whiteboard to structure</h2>
-    <p class="section-intro">From sketch to flow — defining how a user moves through rule creation without ever touching XML unless they choose to.</p>
-  </div>
-  <div class="img-3col">
-    <figure class="sketch-fig">
-      <img src="projects/policyBuilder/sketches/07-flow-01.jpg" alt="Whiteboard flow — policy canvas" loading="lazy">
-      <figcaption>Canvas flow — node-to-node rule structure</figcaption>
-    </figure>
-    <figure class="sketch-fig">
-      <img src="projects/policyBuilder/sketches/08-flow-02.jpg" alt="Whiteboard flow — condition builder" loading="lazy">
-      <figcaption>Condition builder flow</figcaption>
-    </figure>
-    <figure class="sketch-fig">
-      <img src="projects/policyBuilder/sketches/09-flow-03.jpg" alt="Whiteboard flow — multi-view" loading="lazy">
-      <figcaption>Multi-view toggle — Canvas, XML Tree, and Source</figcaption>
-    </figure>
-  </div>
-</section>
+          <div class="section-label">Research</div>
 
-<!-- ── 7. NORTH STAR ── -->
-<section class="northstar-section">
-  <div class="northstar-inner">
-    <div class="northstar-header">
-      <div class="section-label" style="color: rgba(255,255,255,0.5);">North Star Vision · First Draft</div>
-      <h2 class="section-title" style="color: #fff;">One canvas. Every function. Nothing lost.</h2>
-      <p class="section-intro" style="color: rgba(255,255,255,0.75);">The idea was simple and radical: the user never leaves the canvas. Select a node — it highlights. Add conditions, build actions, edit rules — all in place, without a single modal interrupting flow. The policy structure stays visible at all times, so administrators always know where they are and what they're changing. A single pane of glass to build and edit policies end-to-end.</p>
-    </div>
-    <div class="gif-stage">
-      <div class="gif-glow"></div>
-      <img src="projects/policyBuilder/sketches/northstar-canvas-view.gif"
-           alt="Canvas View — first draft prototype in action"
-           class="northstar-gif"
-           style="filter: grayscale(100%) contrast(1.05);">
-      <div class="gif-badge">✦ First Draft · Canvas View</div>
-    </div>
-    <figure class="sketch-fig sketch-fig--contained" style="margin-top: 48px;">
-      <div class="img-wrap" style="max-width: 900px;">
-        <img src="projects/policyBuilder/sketches/14-pseudocode.jpg" alt="Pseudo-code reference — canvas logic structure" loading="lazy" style="filter: grayscale(100%) contrast(1.05);">
+          <h2 class="section-title">Mapping the real journey</h2>
+
+          <p class="section-intro">
+
+            Before sketching anything, I mapped the full lifecycle of a policy administrator — where they got stuck, where they gave up, and where the system forced them to call for help.
+
+          </p>
+
+        </div>
+
+        <figure class="sketch-fig sketch-fig--contained">
+
+          <div class="img-wrap" style="max-width:680px;">
+
+            <img src="projects/policyBuilder/sketches/03-journey-explore.jpg" alt="Policy administrator journey map" loading="lazy" style="filter:grayscale(100%) contrast(1.1);">
+
+          </div>
+
+          <figcaption style="text-align:center;">Journey map — pain concentrated around XML editing and multi-modal navigation</figcaption>
+
+        </figure>
+
+        <div class="insight-callout">
+
+          <span class="insight-icon">→</span>
+
+          <p>The core tension: <strong>power users needed XML access</strong>, but the interface forced everyone through it — regardless of skill level.</p>
+
+        </div>
+
       </div>
-      <figcaption style="text-align:center; color: rgba(255,255,255,0.65);">Reference screen — pseudo-code structure underpinning the canvas logic</figcaption>
-    </figure>
-  </div>
-</section>
 
-<!-- ── 8. VALIDATED ── -->
-<section class="section-tinted">
-  <div style="max-width:1100px; margin:0 auto; padding:0 48px;">
-    <div class="section-header">
-      <div class="section-label">Validation</div>
-      <h2 class="section-title">The happy path — confirmed</h2>
-      <p class="section-intro">Tested with 9 enterprise participants at OTW2025 Innovation Lab in Nashville. The redesigned flow mapped cleanly to how administrators actually think about policy management.</p>
-    </div>
-    <figure class="sketch-fig sketch-fig--contained" style="margin-bottom: 48px;">
-      <div class="img-wrap" style="max-width:800px;">
-        <img src="projects/policyBuilder/sketches/13-happypath.jpg" alt="Validated happy path journey map" loading="lazy" style="filter:grayscale(100%) contrast(1.05);">
+    </section>
+
+    <!-- DEFINE -->
+
+    <section id="define">
+
+      <div class="section-inner">
+
+        <div class="section-header">
+
+          <div class="section-label">Define</div>
+
+          <h2 class="section-title">Who we designed for</h2>
+
+          <p class="section-intro">
+
+            Research surfaced a clear primary user — the Application Administrator managing Active Directory Driver policies within NetIQ Identity Manager.
+
+            Not a casual user: someone who lives in this system daily and feels every rough edge.
+
+          </p>
+
+        </div>
+
+        <div class="persona-card">
+
+          <div class="persona-card-left">
+
+            <img src="projects/policyBuilder/sketches/Astrid_circle.png" alt="Astrid Fischer" class="persona-avatar">
+
+            <div>
+
+              <div class="persona-name">Astrid Fischer</div>
+
+              <div class="persona-role">Application Administrator<br>IT Operations · Identity Management</div>
+
+              <div class="persona-focus">Integrating Active Directory Driver Policies to enable external application communication and data synchronization</div>
+
+            </div>
+
+          </div>
+
+          <div class="persona-card-right">
+
+            <div class="persona-row">
+
+              <span class="persona-tag persona-tag--grey">Background</span>
+
+              <div class="persona-row-text">
+
+                Experienced administrator managing and integrating AD Driver policies within NetIQ Identity Manager — relies on the system daily for seamless external app communication.
+
+              </div>
+
+            </div>
+
+            <div class="persona-row">
+
+              <span class="persona-tag persona-tag--grey">Goal</span>
+
+              <div class="persona-row-text">
+
+                Ensure reliable, real-time data synchronization between external applications and the Identity Vault with minimal errors and downtime.
+
+              </div>
+
+            </div>
+
+            <div class="persona-row">
+
+              <span class="persona-tag persona-tag--blue">Responsibility</span>
+
+              <div class="persona-row-text">
+
+                <strong class="blue">Integrate AD Driver Policies into Identity Manager</strong>
+
+                Edit and manage existing policies to maintain accurate communication channels between Identity Manager and external systems.
+
+              </div>
+
+            </div>
+
+            <div class="persona-row">
+
+              <span class="persona-tag persona-tag--red">Challenge</span>
+
+              <div class="persona-row-text">
+
+                <strong class="red">XML editor blocks direct edits</strong>
+
+                Every rule change relies on consulting support — users cannot self-serve, and errors risk breaking data synchronization.
+
+              </div>
+
+            </div>
+
+            <div class="persona-row">
+
+              <span class="persona-tag persona-tag--red">Challenge</span>
+
+              <div class="persona-row-text">
+
+                <strong class="red">Multiple modals fragment the workflow</strong>
+
+                Condition sets span layered modals — users lose context mid-task, making policy navigation slow and error-prone.
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="problem-grid">
+
+          <div class="problem-card">
+
+            <h4>XML editor blocks self-service</h4>
+
+            <p>Editing rules and conditions via the XML editor is cumbersome and relies heavily on consulting support — users cannot make direct edits without external help.</p>
+
+          </div>
+
+          <div class="problem-card">
+
+            <h4>Deep expertise required for every change</h4>
+
+            <p>Managing existing policies demands technical depth. Errors disrupt synchronisation and cause data inconsistencies — the cost of a wrong edit is high.</p>
+
+          </div>
+
+          <div class="problem-card">
+
+            <h4>Multiple modals fragment the workflow</h4>
+
+            <p>Condition sets span multiple layered modals, adding navigation complexity. Users lose context mid-task and struggle to manage policies end-to-end.</p>
+
+          </div>
+
+          <div class="problem-card">
+
+            <h4>No safe way to compare or iterate</h4>
+
+            <p>There is no GUI-based view for side-by-side comparison. Rules cannot be easily edited, compared, or updated without creating technical dependencies.</p>
+
+          </div>
+
+        </div>
+
       </div>
-      <figcaption style="text-align:center;">Happy path — validated flow across rule creation, condition building, and action management</figcaption>
-    </figure>
-  </div>
-</section>
 
-<!-- ── 8. RESEARCH PROOF ── -->
-<section>
-  <div class="section-header">
-    <div class="section-label">OTW2025 Innovation Lab · Nashville</div>
-    <h2 class="section-title">Research leadership</h2>
-  </div>
-  <div class="nps-row">
-    <div class="nps-cell">
-      <span class="nps-val">+63</span>
-      <span class="nps-lbl">Net Promoter Score</span>
-      <span class="nps-sub">63% Promoters · 0% Detractors</span>
-    </div>
-    <div class="nps-cell">
-      <span class="nps-val">9.14</span>
-      <span class="nps-lbl">Mean Recommendation</span>
-      <span class="nps-sub">Out of 10 across all participants</span>
-    </div>
-    <div class="nps-cell">
-      <span class="nps-val">100%</span>
-      <span class="nps-lbl">Core Task Success</span>
-      <span class="nps-sub">Tasks 4, 6 &amp; 7 — rule creation</span>
-    </div>
-  </div>
-  <div class="quote-hero" style="margin-top: 48px;">
-    <blockquote>"I'm really excited for this to go live. This blows the socks off IDM."</blockquote>
-    <cite>— Partner, TriVir · OTW2025 Innovation Lab</cite>
-  </div>
-  <div class="quote-secondary">
-    <blockquote>"Oh, snap. Oh, wow. I was not expecting that — that's great... That's pretty slick."</blockquote>
-    <cite>— Enterprise participant reacting to Pseudo Code View</cite>
-  </div>
-  <div class="shane-quote" style="margin-top: 32px;">
-    <p>"It was a pleasure to work with Sandeep in preparing the Identity Lifecycle Manager Policy Builder usability test for this year's Innovation Lab at OTW2025... As a result of Sandeep's contributions, the test and preparations ran very smoothly. We were able to collect feedback from 9 customers and partners during the Lab. All of these participants left feeling very happy to impact product designs through their feedback."</p>
-    <cite>— Shane Melton, Product Leadership Team · OTW2025 Innovation Lab Report</cite>
-  </div>
-  <div class="participants-grid" style="margin-top: 32px;">
-    <div class="participant-chip">TriVir</div>
-    <div class="participant-chip">CNA Insurance</div>
-    <div class="participant-chip">BAE Systems</div>
-    <div class="participant-chip">Siemens Energy</div>
-    <div class="participant-chip">Arval BNP Paribas</div>
-    <div class="participant-chip">Black Sea Trade &amp; Dev. Bank</div>
-    <div class="participant-chip">University of Nevada LV</div>
-    <div class="participant-chip">+ 1 organisation</div>
-  </div>
-</section>
+    </section>
 
-<!-- ── 9. DOWNLOAD ── -->
-<section>
-  <div style="padding: 48px; background: var(--pale); border-radius: 12px; text-align: center;">
-    <p style="font-size: 14px; color: var(--muted); margin-bottom: 8px; letter-spacing: 1px; text-transform: uppercase;">Full Case Study</p>
-    <h2 style="font-family:'Playfair Display',serif; font-size: 24px; color: var(--navy); margin-bottom: 12px;">Wireframes, research findings &amp; design process</h2>
-    <p style="font-size: 15px; color: var(--muted); margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.7;">The complete PDF includes all iterations, usability test methodology, participant data, and the full design rationale.</p>
-    <button onclick="pgPromptDownload()" class="cta-button primary">↓ Download PDF</button>
-  </div>
-</section>
+    <!-- IDEATION -->
 
+    <section id="ideation">
 
+      <div class="section-inner">
 
-<div class="project-cta">
+        <div class="section-header">
+
+          <div class="section-label">Ideation</div>
+
+          <h2 class="section-title">First sketches — thinking out loud</h2>
+
+          <p class="section-intro">
+
+            I sketched before touching pixels. These are raw — intentionally. Fast, throwaway thinking to explore the structure of a visual policy canvas before committing to any direction.
+
+          </p>
+
+        </div>
+
+        <div class="img-3col">
+
+          <figure class="sketch-fig">
+
+            <img src="projects/policyBuilder/sketches/04-sketch-01.jpg" alt="Early canvas concept sketch" loading="lazy">
+
+            <figcaption>Canvas layout — first concept</figcaption>
+
+          </figure>
+
+          <figure class="sketch-fig">
+
+            <img src="projects/policyBuilder/sketches/05-sketch-02.jpg" alt="Rule structure exploration" loading="lazy">
+
+            <figcaption>Rule structure exploration</figcaption>
+
+          </figure>
+
+          <figure class="sketch-fig">
+
+            <img src="projects/policyBuilder/sketches/06-sketch-03.jpg" alt="Multi-view toggle concepts" loading="lazy">
+
+            <figcaption>Multi-view toggle concepts — third direction that led to the final solution</figcaption>
+
+          </figure>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- LOFI -->
+
+    <section id="lofi">
+
+      <div class="section-inner">
+
+        <div class="section-header">
+
+          <div class="section-label">Lo-Fi Design</div>
+
+          <h2 class="section-title">Taking shape — the single pane of glass</h2>
+
+          <p class="section-intro">
+
+            One unified workspace to replace five fragmented screens. The Canvas View emerged as the single pane — rules, conditions, and actions in one place.
+
+          </p>
+
+        </div>
+
+        <div class="img-2col" style="margin-bottom: 16px;">
+
+          <figure class="sketch-fig">
+
+            <img src="projects/policyBuilder/sketches/10-lofi-01.jpg" alt="Lo-fi — canvas view panel" loading="lazy">
+
+            <figcaption>Canvas View — rules panel, lo-fi</figcaption>
+
+          </figure>
+
+          <figure class="sketch-fig">
+
+            <img src="projects/policyBuilder/sketches/11-lofi-02.jpg" alt="Lo-fi — condition builder" loading="lazy">
+
+            <figcaption>Condition builder — lo-fi</figcaption>
+
+          </figure>
+
+        </div>
+
+        <figure class="sketch-fig sketch-fig--full">
+
+          <img src="projects/policyBuilder/sketches/12-lofi-full.jpg" alt="Full canvas view — lo-fi complete layout" loading="lazy">
+
+          <figcaption>Full canvas view — the complete unified workspace at lo-fi</figcaption>
+
+        </figure>
+
+      </div>
+
+    </section>
+
+    <!-- FLOWS -->
+
+    <section id="flows" class="section-tinted">
+
+      <div class="section-inner">
+
+        <div class="section-header">
+
+          <div class="section-label">Design Flows</div>
+
+          <h2 class="section-title">Whiteboard to structure</h2>
+
+          <p class="section-intro">
+
+            From sketch to flow — defining how a user moves through rule creation without ever touching XML unless they choose to.
+
+          </p>
+
+        </div>
+
+        <div class="img-3col">
+
+          <figure class="sketch-fig">
+
+            <img src="projects/policyBuilder/sketches/07-flow-01.jpg" alt="Whiteboard flow — policy canvas" loading="lazy">
+
+            <figcaption>Canvas flow — node-to-node rule structure</figcaption>
+
+          </figure>
+
+          <figure class="sketch-fig">
+
+            <img src="projects/policyBuilder/sketches/08-flow-02.jpg" alt="Whiteboard flow — condition builder" loading="lazy">
+
+            <figcaption>Condition builder flow</figcaption>
+
+          </figure>
+
+          <figure class="sketch-fig">
+
+            <img src="projects/policyBuilder/sketches/09-flow-03.jpg" alt="Whiteboard flow — multi-view" loading="lazy">
+
+            <figcaption>Multi-view toggle — Canvas, XML Tree, and Source</figcaption>
+
+          </figure>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- NORTH STAR -->
+
+    <section id="northstar" class="northstar-section">
+
+      <div class="section-inner">
+
+        <div class="northstar-header">
+
+          <div class="section-label" style="color: rgba(255,255,255,0.5);">North Star Vision · First Draft</div>
+
+          <h2 class="section-title" style="color: #fff;">One canvas. Every function. Nothing lost.</h2>
+
+          <p class="section-intro" style="color: rgba(255,255,255,0.75);">
+
+            The idea was simple and radical: the user never leaves the canvas. Select a node — it highlights. Add conditions, build actions, edit rules — all in place, without a single modal interrupting flow.
+
+            The policy structure stays visible at all times, so administrators always know where they are and what they're changing.
+
+            A single pane of glass to build and edit policies end-to-end.
+
+          </p>
+
+        </div>
+
+        <div class="gif-stage">
+
+          <div class="gif-glow"></div>
+
+          <img src="projects/policyBuilder/sketches/northstar-canvas-view.gif"
+
+               alt="Canvas View — first draft prototype in action"
+
+               class="northstar-gif"
+
+               style="filter: grayscale(100%) contrast(1.05);">
+
+          <div class="gif-badge">✦ First Draft · Canvas View</div>
+
+        </div>
+
+        <figure class="sketch-fig sketch-fig--contained" style="margin-top: 48px;">
+
+          <div class="img-wrap" style="max-width: 900px;">
+
+            <img src="projects/policyBuilder/sketches/14-pseudocode.jpg" alt="Pseudo-code reference — canvas logic structure" loading="lazy" style="filter: grayscale(100%) contrast(1.05);">
+
+          </div>
+
+          <figcaption style="text-align:center; color: rgba(255,255,255,0.65);">
+
+            Reference screen — pseudo-code structure underpinning the canvas logic
+
+          </figcaption>
+
+        </figure>
+
+      </div>
+
+    </section>
+
+    <!-- VALIDATION -->
+
+    <section id="validation" class="section-tinted">
+
+      <div class="section-inner">
+
+        <div class="section-header">
+
+          <div class="section-label">Validation</div>
+
+          <h2 class="section-title">The happy path — confirmed</h2>
+
+          <p class="section-intro">
+
+            Tested with 9 enterprise participants at OTW2025 Innovation Lab in Nashville.
+
+            The redesigned flow mapped cleanly to how administrators actually think about policy management.
+
+          </p>
+
+        </div>
+
+        <figure class="sketch-fig sketch-fig--contained" style="margin-bottom: 48px;">
+
+          <div class="img-wrap" style="max-width:800px;">
+
+            <img src="projects/policyBuilder/sketches/13-happypath.jpg" alt="Validated happy path journey map" loading="lazy" style="filter:grayscale(100%) contrast(1.05);">
+
+          </div>
+
+          <figcaption style="text-align:center;">
+
+            Happy path — validated flow across rule creation, condition building, and action management
+
+          </figcaption>
+
+        </figure>
+
+      </div>
+
+    </section>
+
+    <!-- RESEARCH PROOF -->
+
+    <section id="research-leadership">
+
+      <div class="section-inner">
+
+        <div class="section-header">
+
+          <div class="section-label">OTW2025 Innovation Lab · Nashville</div>
+
+          <h2 class="section-title">Research leadership</h2>
+
+          <p class="section-intro">
+
+            I planned and facilitated enterprise usability validation sessions to measure confidence, workflow clarity, and task success.
+
+            The results confirmed strong adoption potential and eliminated critical usability risks before engineering scale-up.
+
+          </p>
+
+        </div>
+
+        <div class="research-stats-grid">
+
+          <div class="research-stat-card">
+
+            <div class="research-stat-value">83</div>
+
+            <div class="research-stat-label">SUS Score</div>
+
+            <div class="research-stat-sub">“Good” · 95% CI: 76–91</div>
+
+          </div>
+
+          <div class="research-stat-card">
+
+            <div class="research-stat-value">+63</div>
+
+            <div class="research-stat-label">Net Promoter Score</div>
+
+            <div class="research-stat-sub">9.14 / 10 · 0 detractors</div>
+
+          </div>
+
+          <div class="research-stat-card">
+
+            <div class="research-stat-value">100%</div>
+
+            <div class="research-stat-label">Core Task Success</div>
+
+            <div class="research-stat-sub">Tasks 4, 6 &amp; 7 completed</div>
+
+          </div>
+
+          <div class="research-stat-card">
+
+            <div class="research-stat-value">9</div>
+
+            <div class="research-stat-label">Participants</div>
+
+            <div class="research-stat-sub">8 orgs · enterprise admins</div>
+
+          </div>
+
+        </div>
+
+        <div class="research-setup">
+
+          <div class="setup-item">
+
+            <span class="setup-label">Method</span>
+
+            <span class="setup-value">Moderated usability testing</span>
+
+          </div>
+
+          <div class="setup-item">
+
+            <span class="setup-label">Audience</span>
+
+            <span class="setup-value">Application admins · identity teams · partners</span>
+
+          </div>
+
+          <div class="setup-item">
+
+            <span class="setup-label">Location</span>
+
+            <span class="setup-value">Innovation Lab · OpenText World 2025</span>
+
+          </div>
+
+          <div class="setup-item">
+
+            <span class="setup-label">Outcome</span>
+
+            <span class="setup-value">No critical usability blockers found</span>
+
+          </div>
+
+        </div>
+
+        <div class="research-insights-grid">
+
+          <div class="insight-col">
+
+            <h3 class="insight-title">What worked well</h3>
+
+            <ul class="insight-list success">
+
+              <li>Participants quickly understood the Canvas View interaction model.</li>
+
+              <li>Rule building felt predictable and easier than XML workflows.</li>
+
+              <li>Multi-view toggle (Canvas / Tree / Source) improved confidence.</li>
+
+              <li>Users stayed oriented without modal interruptions.</li>
+
+            </ul>
+
+          </div>
+
+          <div class="insight-col">
+
+            <h3 class="insight-title">What we improved next</h3>
+
+            <ul class="insight-list improve">
+
+              <li>Clarified node labeling for complex policies.</li>
+
+              <li>Improved guidance for first-time rule creation.</li>
+
+              <li>Added microcopy to reduce fear of breaking production rules.</li>
+
+              <li>Strengthened error messaging for invalid conditions.</li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+        <div class="quote-hero" style="margin-top: 48px;">
+
+          <blockquote>"I'm really excited for this to go live. This blows the socks off IDM."</blockquote>
+
+          <cite>— Partner, TriVir · OTW2025 Innovation Lab</cite>
+
+        </div>
+
+        <div class="quote-secondary" style="margin-top: 18px;">
+
+          <blockquote>"Oh, snap. Oh, wow. I was not expecting that — that's great... That's pretty slick."</blockquote>
+
+          <cite>— Enterprise participant reacting to Pseudo Code View</cite>
+
+        </div>
+
+        <div class="shane-quote" style="margin-top: 28px;">
+
+          <p>
+
+            "It was a pleasure to work with Sandeep in preparing the Identity Lifecycle Manager Policy Builder usability test for this year's Innovation Lab at OTW2025... As a result of Sandeep's contributions, the test and preparations ran very smoothly. We were able to collect feedback from 9 customers and partners during the Lab. All of these participants left feeling very happy to impact product designs through their feedback."
+
+          </p>
+
+          <cite>— Shane Melton, Product Leadership Team · OTW2025 Innovation Lab Report</cite>
+
+        </div>
+
+        <div class="participants-grid" style="margin-top: 32px;">
+
+          <div class="participant-chip">TriVir</div>
+
+          <div class="participant-chip">CNA Insurance</div>
+
+          <div class="participant-chip">BAE Systems</div>
+
+          <div class="participant-chip">Siemens Energy</div>
+
+          <div class="participant-chip">Arval BNP Paribas</div>
+
+          <div class="participant-chip">Black Sea Trade &amp; Dev. Bank</div>
+
+          <div class="participant-chip">University of Nevada LV</div>
+
+          <div class="participant-chip">+ 1 organisation</div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- DOWNLOAD -->
+
+    <section id="download">
+
+      <div class="section-inner">
+
+        <div style="padding: 48px; background: var(--pale); border-radius: 12px; text-align: center;">
+
+          <p style="font-size: 14px; color: var(--muted); margin-bottom: 8px; letter-spacing: 1px; text-transform: uppercase;">Full Case Study</p>
+
+          <h2 style="font-family:'Playfair Display',serif; font-size: 24px; color: var(--navy); margin-bottom: 12px;">Wireframes, research findings &amp; design process</h2>
+
+          <p style="font-size: 15px; color: var(--muted); margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.7;">
+
+            The complete PDF includes all iterations, usability test methodology, participant data, and the full design rationale.
+
+          </p>
+
+          <button onclick="pgPromptDownload()" class="cta-button primary">↓ Download PDF</button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+<!-- CTA -->
+
+<div class="project-cta" id="cta">
+
   <div class="project-cta-inner">
+
     <h2 class="cta-title">Interested in discussing this work?</h2>
+
     <p class="cta-text">I'm always happy to discuss design process, enterprise research methodology, or how I approach complex UX challenges.</p>
+
     <div class="cta-buttons">
+
       <a href="index.html#contact" class="cta-button">Get in Touch</a>
+
       <a href="index.html#work" class="cta-button">View Other Work</a>
+
     </div>
+
   </div>
+
 </div>
+
+<!-- FOOTER NAV -->
 
 <div class="project-footer-nav">
+
   <a href="index.html#work" class="footer-nav-link" style="text-align: left;">
+
     <span class="footer-nav-label">← Previous Project</span>
+
     <span class="footer-nav-title">(Coming Next)</span>
+
   </a>
+
   <a href="index.html" class="footer-nav-link" style="text-align: center;">
+
     <span class="footer-nav-label">Back to Home</span>
+
   </a>
+
   <a href="ndr-dashboard.html" class="footer-nav-link" style="text-align: right;">
+
     <span class="footer-nav-label">Next Project →</span>
+
     <span class="footer-nav-title">NDR & Rules Dashboard</span>
+
   </a>
+
 </div>
 
-<script>
-function toggleMobileMenu() {
-  const menu = document.getElementById('mobile-menu');
-  const btn = document.getElementById('hamburger');
-  menu.classList.toggle('open');
-  btn.classList.toggle('open');
-}
-function closeMobileMenu() {
-  document.getElementById('mobile-menu').classList.remove('open');
-  document.getElementById('hamburger').classList.remove('open');
-}
-// Close mobile menu on outside click
-document.addEventListener('click', e => {
-  const menu = document.getElementById('mobile-menu');
-  const btn = document.getElementById('hamburger');
-  if (menu.classList.contains('open') && \!menu.contains(e.target) && \!btn.contains(e.target)) {
-    closeMobileMenu();
-  }
-});
-</script>
-
-<!-- ============================================================
-     PDF DOWNLOAD GATE
-     To change the password: edit the one line below
-     ============================================================ -->
-<style>
-#pdf-modal-bg {
-  display: none;
-  position: fixed; inset: 0; z-index: 9999;
-  background: rgba(20,30,45,0.55);
-  backdrop-filter: blur(4px);
-  align-items: center; justify-content: center;
-}
-#pdf-modal-bg.open { display: flex; }
-#pdf-modal {
-  background: #faf8f5;
-  border-radius: 14px;
-  padding: 40px 36px;
-  max-width: 380px;
-  width: 90%;
-  text-align: center;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.18);
-  font-family: 'Source Serif 4', Georgia, serif;
-}
-#pdf-modal h3 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.4rem;
-  color: #1e2d42;
-  margin: 0 0 8px;
-}
-#pdf-modal p {
-  color: #777;
-  font-size: 0.9rem;
-  margin: 0 0 24px;
-  line-height: 1.6;
-}
-#pdf-pw-input {
-  width: 100%;
-  padding: 13px 16px;
-  font-size: 1rem;
-  font-family: inherit;
-  border: 1.5px solid #d0ccc6;
-  border-radius: 8px;
-  background: #fff;
-  color: #1e2d42;
-  outline: none;
-  box-sizing: border-box;
-  text-align: center;
-  letter-spacing: 0.1em;
-  transition: border-color 0.2s;
-}
-#pdf-pw-input:focus { border-color: #1e2d42; }
-#pdf-pw-input.shake {
-  animation: pdf-shake 0.4s ease;
-  border-color: #c0392b;
-}
-#pdf-pw-btn {
-  margin-top: 12px;
-  width: 100%;
-  padding: 13px;
-  background: #1e2d42;
-  color: #fff;
-  font-family: inherit;
-  font-size: 0.92rem;
-  letter-spacing: 0.05em;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-#pdf-pw-btn:hover { background: #2a3f5f; }
-#pdf-cancel {
-  display: block;
-  margin-top: 12px;
-  font-size: 0.85rem;
-  color: #999;
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-family: inherit;
-  text-decoration: underline;
-}
-#pdf-pw-error {
-  margin-top: 10px;
-  font-size: 0.82rem;
-  color: #c0392b;
-  min-height: 18px;
-}
-@keyframes pdf-shake {
-  0%,100% { transform: translateX(0); }
-  20%      { transform: translateX(-8px); }
-  40%      { transform: translateX(8px); }
-  60%      { transform: translateX(-5px); }
-  80%      { transform: translateX(5px); }
-}
-</style>
+<!-- PDF MODAL -->
 
 <div id="pdf-modal-bg">
+
   <div id="pdf-modal">
+
     <div style="font-size:1.8rem;margin-bottom:14px">📄</div>
+
     <h3>Download Case Study</h3>
+
     <p>Enter the password to download the full PDF with wireframes and research findings.</p>
+
     <input id="pdf-pw-input" type="password" placeholder="Password" autocomplete="off" />
+
     <button id="pdf-pw-btn">Download PDF</button>
+
     <div id="pdf-pw-error"></div>
+
     <button id="pdf-cancel">Cancel</button>
+
   </div>
+
 </div>
 
-<script>
-(function () {
-  /* ── CHANGE YOUR PASSWORD HERE ── */
-  const PASSWORD = "sandeep2026";
-  /* ────────────────────────────── */
+<!-- ============================================================
 
-  const PDF_URL   = "casestudies/policy-editor-case-study.pdf";
-  const modalBg   = document.getElementById("pdf-modal-bg");
-  const input     = document.getElementById("pdf-pw-input");
-  const btn       = document.getElementById("pdf-pw-btn");
-  const errorMsg  = document.getElementById("pdf-pw-error");
+     UNIFIED SCRIPT BLOCK (TOC + PROGRESS + PDF GATE)
+
+============================================================ -->
+
+<script>
+
+(function () {
+
+  /* ================================
+
+     TOC ACTIVE HIGHLIGHT (30% trigger)
+
+     ================================ */
+
+  const sections = document.querySelectorAll("main section[id], #cta");
+
+  const tocLinks = document.querySelectorAll(".toc a");
+
+  const mobileLinks = document.querySelectorAll(".mobile-jumpbar a");
+
+  function clearActiveStates() {
+
+    tocLinks.forEach(link => link.classList.remove("active"));
+
+    mobileLinks.forEach(link => link.classList.remove("active"));
+
+  }
+
+  function setActiveLink(id) {
+
+    clearActiveStates();
+
+    tocLinks.forEach(link => {
+
+      if (link.getAttribute("href") === "#" + id) {
+
+        link.classList.add("active");
+
+      }
+
+    });
+
+    mobileLinks.forEach(link => {
+
+      if (link.getAttribute("href") === "#" + id) {
+
+        link.classList.add("active");
+
+      }
+
+    });
+
+  }
+
+  function updateActiveSectionByScroll() {
+
+    if (!sections.length) return;
+
+    const triggerPoint = window.innerHeight * 0.30;
+
+    let currentSectionId = sections[0].id;
+
+    sections.forEach(section => {
+
+      const rect = section.getBoundingClientRect();
+
+      if (rect.top <= triggerPoint) {
+
+        currentSectionId = section.id;
+
+      }
+
+    });
+
+    setActiveLink(currentSectionId);
+
+  }
+
+  window.addEventListener("scroll", updateActiveSectionByScroll);
+
+  window.addEventListener("resize", updateActiveSectionByScroll);
+
+  updateActiveSectionByScroll();
+
+  /* ================================
+
+     SCROLL PROGRESS BAR
+
+     ================================ */
+
+  const progressBar = document.getElementById("scroll-progress-bar");
+
+  function updateScrollProgress() {
+
+    if (!progressBar) return;
+
+    const scrollTop = window.scrollY;
+
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    const scrolled = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+    progressBar.style.width = scrolled + "%";
+
+  }
+
+  window.addEventListener("scroll", updateScrollProgress);
+
+  window.addEventListener("resize", updateScrollProgress);
+
+  updateScrollProgress();
+
+  /* ================================
+
+     PDF DOWNLOAD GATE
+
+     ================================ */
+
+  const PASSWORD = "sandeep2026";
+
+  const PDF_URL = "casestudies/policy-editor-case-study.pdf";
+
+  const modalBg = document.getElementById("pdf-modal-bg");
+
+  const input = document.getElementById("pdf-pw-input");
+
+  const btn = document.getElementById("pdf-pw-btn");
+
+  const errorMsg = document.getElementById("pdf-pw-error");
+
   const cancelBtn = document.getElementById("pdf-cancel");
 
   window.pgPromptDownload = function () {
+
     modalBg.classList.add("open");
+
     input.value = "";
+
     errorMsg.textContent = "";
+
     setTimeout(() => input.focus(), 80);
+
   };
 
-  function attempt() {
+  function attemptDownload() {
+
     if (input.value === PASSWORD) {
+
       modalBg.classList.remove("open");
-      // Trigger download
+
       const a = document.createElement("a");
+
       a.href = PDF_URL;
+
       a.download = "";
+
       document.body.appendChild(a);
+
       a.click();
+
       document.body.removeChild(a);
+
     } else {
+
       errorMsg.textContent = "Incorrect password — try again.";
+
       input.classList.remove("shake");
+
       void input.offsetWidth;
+
       input.classList.add("shake");
+
       input.value = "";
+
       input.focus();
+
     }
+
   }
 
-  btn.addEventListener("click", attempt);
-  input.addEventListener("keydown", e => { if (e.key === "Enter") attempt(); });
+  btn.addEventListener("click", attemptDownload);
+
+  input.addEventListener("keydown", e => { if (e.key === "Enter") attemptDownload(); });
+
   cancelBtn.addEventListener("click", () => modalBg.classList.remove("open"));
+
   modalBg.addEventListener("click", e => { if (e.target === modalBg) modalBg.classList.remove("open"); });
+
 })();
+
 </script>
 
 </body>
+
 </html>
