@@ -260,6 +260,10 @@
     width: 100%;
   }
 
+  main section {
+    scroll-margin-top: 110px;
+  }
+
   /* Inner padding system for ALL sections */
   .section-inner {
     max-width: 1100px;
@@ -624,6 +628,9 @@
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
   }
 
   .gif-glow {
@@ -651,7 +658,7 @@
     background: rgba(255,255,255,0.12);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255,255,255,0.2);
-    color: rgba(255,255,255,0.9);
+    color: rgba(255,255,255,0.75);
     font-size: 11px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -1164,6 +1171,28 @@
     <p class="project-summary">
       Policy administrators were navigating XDS structures and raw XML to manage identity rules — a fragmented, modal-heavy system that blocked self-service and demanded consulting support for everyday tasks. I led research and design to move from that complexity to a single pane of glass policy editor canvas, validated with enterprise customers at OpenText World 2025.
     </p>
+
+    <!-- HERO WOW IMAGE -->
+    <div style="margin-top: 44px; border-radius: 16px; padding: 16px;
+      border: 1px dashed rgba(30,45,66,0.35);
+      background: linear-gradient(135deg, rgba(232,240,248,0.65) 0%, rgba(250,249,247,0.95) 100%);">
+
+      <img src="projects/policyBuilder/hero-policy-builder.png"
+     loading="lazy"
+           alt="ILM Policy Builder Canvas View"
+           style="width:100%; border-radius:14px;
+           border:1px solid rgba(30,45,66,0.18);
+           background:#fff;
+           filter: contrast(1.05);
+           opacity:0.96;
+           box-shadow:0 18px 44px rgba(0,0,0,0.10);">
+    </div>
+
+    <div style="font-size:13px; color:#555; margin-top:10px;
+      line-height:1.6; font-style:italic;">
+      Policy Builder — unified canvas view for editing rules, conditions, and actions end-to-end.
+    </div>
+
     <p style="font-size: 14px; color: #5a7fa8; margin-top: 20px; line-height: 1.7; max-width: 760px;">
       <strong>Role:</strong> Principal Product Designer — research, usability testing, design direction, and cross-functional influence across Engineering, Product, and Go-to-Market.
     </p>
@@ -1345,7 +1374,7 @@
 
           <div class="problem-card">
             <h4>Deep expertise required for every change</h4>
-            <p>Managing existing policies demands technical depth. Errors disrupt synchronisation and cause data inconsistencies — the cost of a wrong edit is high.</p>
+            <p>Managing existing policies demands technical depth. Errors disrupt synchronization and cause data inconsistencies — the cost of a wrong edit is high.</p>
           </div>
 
           <div class="problem-card">
@@ -1469,13 +1498,13 @@
           <img src="projects/policyBuilder/sketches/northstar-canvas-view.gif"
                alt="Canvas View — first draft prototype in action"
                class="northstar-gif"
-               style="filter: grayscale(100%) contrast(1.05);">
+               style="filter: contrast(1.05);">
           <div class="gif-badge">✦ First Draft · Canvas View</div>
         </div>
 
         <figure class="sketch-fig sketch-fig--contained" style="margin-top: 48px;">
           <div class="img-wrap" style="max-width: 900px;">
-            <img src="projects/policyBuilder/sketches/14-pseudocode.jpg" alt="Pseudo-code reference — canvas logic structure" loading="lazy" style="filter: grayscale(100%) contrast(1.05);">
+            <img src="projects/policyBuilder/sketches/14-pseudocode.jpg" alt="Pseudo-code reference — canvas logic structure" loading="lazy" style="filter: contrast(1.05);">
           </div>
           <figcaption style="text-align:center; color: rgba(255,255,255,0.65);">
             Reference screen — pseudo-code structure underpinning the canvas logic
