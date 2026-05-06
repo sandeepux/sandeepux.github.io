@@ -646,6 +646,136 @@
   .footer-nav-label { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
   .footer-nav-title { font-size: 15px; font-weight: 500; }
 
+  /* ── IMPACT STAT STRIP ── */
+  .impact-stat-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+
+  .impact-stat-cell {
+    padding: 28px 24px;
+    border-right: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .impact-stat-cell:last-child { border-right: none; }
+
+  .impact-stat-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+  }
+
+  .impact-stat-lbl {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .impact-stat-sub {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── OUTCOME PILLS ── */
+  .testimony-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .testimony-pill {
+    font-size: 11.5px;
+    color: var(--muted);
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 99px;
+    padding: 3px 11px;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 600px) {
+    .impact-stat-strip { grid-template-columns: 1fr; }
+    .impact-stat-cell { border-right: none; border-bottom: 1px solid var(--rule); }
+    .impact-stat-cell:last-child { border-bottom: none; }
+  }
+
+  /* ── TESTIMONY ROWS ── */
+  .testimony-list {
+    margin-top: 8px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .testimony-row {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .testimony-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--rule);
+    line-height: 1;
+    min-width: 44px;
+    padding-top: 3px;
+    letter-spacing: -1px;
+    flex-shrink: 0;
+    user-select: none;
+  }
+
+  .testimony-body h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy);
+    margin: 0 0 8px;
+    line-height: 1.3;
+  }
+
+  .testimony-body p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin: 0;
+    max-width: 680px;
+  }
+
+  .testimony-tag {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--mid);
+    background: rgba(58,106,154,0.08);
+    padding: 3px 10px;
+    border-radius: 99px;
+    border: 1px solid rgba(58,106,154,0.18);
+  }
+
+  @media (max-width: 600px) {
+    .testimony-row { gap: 16px; }
+    .testimony-num { font-size: 26px; min-width: 32px; }
+    .testimony-body h4 { font-size: 15px; }
+  }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     nav { padding: 0 24px; }
@@ -676,6 +806,60 @@
     .persona-card { grid-template-columns: 1fr; }
     .persona-card-left { flex-direction: row; text-align: left; padding: 20px; }
   }
+
+  /* ─── SCROLL PROGRESS BAR ─── */
+  #scroll-progress-wrap {
+    position: fixed; top: 64px; left: 0; width: 100%; height: 3px;
+    background: rgba(224,224,224,0.5); z-index: 1100;
+  }
+  #scroll-progress-bar { height: 100%; width: 0%; background: var(--navy); transition: width 0.1s linear; }
+
+  /* ─── MOBILE JUMPBAR ─── */
+  .mobile-jumpbar {
+    display: none; position: sticky; top: 67px; z-index: 900;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule); padding: 10px 16px;
+    overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch;
+  }
+  .mobile-jumpbar a {
+    display: inline-block; padding: 7px 14px; margin-right: 6px;
+    border-radius: 999px; background: var(--pale); color: var(--navy);
+    font-size: 12px; text-decoration: none; border: 1px solid rgba(30,45,66,0.12);
+    transition: background 0.2s; font-family: 'Source Serif 4', serif;
+  }
+  .mobile-jumpbar a:hover { background: rgba(232,240,248,0.8); }
+  .mobile-jumpbar a.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+  @media (max-width: 980px) { .mobile-jumpbar { display: block; } }
+
+  /* ─── PAGE WRAP (TOC + MAIN) ─── */
+  .page-wrap {
+    max-width: 1300px; margin: 0 auto; padding: 80px 48px 80px;
+    display: grid; grid-template-columns: 200px 1fr; gap: 56px; align-items: start;
+  }
+  @media (max-width: 980px) {
+    .page-wrap { grid-template-columns: 1fr; padding: 40px 0 80px; gap: 0; }
+  }
+
+  /* ─── LEFT TOC ─── */
+  .toc {
+    position: sticky; top: 96px;
+    border-left: 2px solid var(--rule); padding-left: 16px; z-index: 5;
+  }
+  .toc-title {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--mid); margin-bottom: 16px; font-family: 'Source Serif 4', serif;
+  }
+  .toc ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .toc a {
+    font-size: 12.5px; color: var(--muted); text-decoration: none;
+    transition: color 0.2s; line-height: 1.4; display: block;
+    font-family: 'Source Serif 4', serif;
+  }
+  .toc a:hover { color: var(--navy); }
+  .toc a.active { color: var(--navy); font-weight: 600; }
+  .toc a.active::before { content: "•"; color: var(--mid); margin-right: 8px; }
+  @media (max-width: 980px) { .toc { display: none; } }
+
 </style>
 </head>
 <body>
@@ -685,6 +869,9 @@
   <a href="index.html" class="nav-name">Sandeep Virmani</a>
   <a href="index.html#work" class="back-link">← Back to Work</a>
 </nav>
+
+<!-- SCROLL PROGRESS BAR -->
+<div id="scroll-progress-wrap"><div id="scroll-progress-bar"></div></div>
 
 <!-- HEADER -->
 <div class="project-header">
@@ -729,8 +916,37 @@
   </div>
 </section>
 
+<!-- MOBILE JUMPBAR -->
+<div class="mobile-jumpbar">
+  <a href="#context">Context</a>
+  <a href="#research">Research</a>
+  <a href="#define">Define</a>
+  <a href="#ideation">Ideation</a>
+  <a href="#design">Design</a>
+  <a href="#northstar">North Star</a>
+  <a href="#impact">Impact</a>
+</div>
+
+<div class="page-wrap">
+  <!-- LEFT TOC -->
+  <aside class="toc">
+    <div class="toc-title">Jump to</div>
+    <ul>
+      <li><a href="#context">Project Context</a></li>
+      <li><a href="#research">Discovery &amp; Research</a></li>
+      <li><a href="#define">Define</a></li>
+      <li><a href="#ideation">Ideation</a></li>
+      <li><a href="#design">Design &amp; Iteration</a></li>
+      <li><a href="#northstar">North Star</a></li>
+      <li><a href="#impact">Decisions &amp; Impact</a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
 <!-- ── 1. PROJECT BRIEF & CONTEXT ── -->
-<section>
+<section id="context">
   <div class="section-header">
     <div class="section-label">Project Brief &amp; Context</div>
     <h2 class="section-title">The network sees threats before the endpoint ever does</h2>
@@ -744,7 +960,7 @@
 </section>
 
 <!-- ── 2. DISCOVERY & RESEARCH (tinted) ── -->
-<section class="section-tinted">
+<section id="research" class="section-tinted">
   <div>
     <div class="section-header">
       <div class="section-label">Discovery &amp; Research</div>
@@ -752,22 +968,38 @@
       <p class="section-intro">20 interviews with SOC analysts and threat hunters. Competitive analysis across ExtraHop, Vertica AI, Microsoft Azure, CrowdStrike, and Wiz. The findings converged around four problems that no competitor had solved.</p>
     </div>
 
-    <div class="problem-grid" style="margin-top: 0;">
-      <div class="problem-card">
-        <h4>Hidden threats invisible to IDS</h4>
-        <p>Traditional IDS and dashboards require prior domain knowledge and struggle with evolving threats. Anomalies at the network layer — especially behavioral ones — were going completely undetected.</p>
+    <div class="testimony-list">
+      <div class="testimony-row">
+        <div class="testimony-num">01</div>
+        <div class="testimony-body">
+          <h4>Hidden threats invisible to IDS</h4>
+          <p>Traditional IDS and dashboards require prior domain knowledge and struggle with evolving threats. Behavioural anomalies at the network layer — especially multi-variable ones — were going completely undetected.</p>
+          <span class="testimony-tag">Detection gap</span>
+        </div>
       </div>
-      <div class="problem-card">
-        <h4>Alert analysis too complex to act on</h4>
-        <p>Analysts needed simpler, faster mechanisms to work through traffic alerts. The existing UI required domain expertise just to read the data — let alone act on it within 15 minutes.</p>
+      <div class="testimony-row">
+        <div class="testimony-num">02</div>
+        <div class="testimony-body">
+          <h4>Alert analysis too complex to act on</h4>
+          <p>Analysts needed simpler, faster mechanisms to work through traffic alerts. The existing UI required domain expertise just to read the data — let alone act on it within the 15-minute triage window.</p>
+          <span class="testimony-tag">Usability</span>
+        </div>
       </div>
-      <div class="problem-card">
-        <h4>Severity buried — critical alerts lost in noise</h4>
-        <p>There was no prioritized view. Analysts had to manually sort through all anomalies. The most severe threats didn't surface first, and context was missing for quick decisions.</p>
+      <div class="testimony-row">
+        <div class="testimony-num">03</div>
+        <div class="testimony-body">
+          <h4>Severity buried — critical alerts lost in noise</h4>
+          <p>There was no prioritised view. Analysts manually sorted through every anomaly. The most severe threats didn't surface first, and context was missing for quick decisions.</p>
+          <span class="testimony-tag">Signal-to-noise</span>
+        </div>
       </div>
-      <div class="problem-card">
-        <h4>No way to tune for your environment</h4>
-        <p>Every network is different. Analysts needed to set exceptions and adjust thresholds based on their specific environment — but no tool gave them that control without ML expertise.</p>
+      <div class="testimony-row">
+        <div class="testimony-num">04</div>
+        <div class="testimony-body">
+          <h4>No way to tune for your environment</h4>
+          <p>Every network is different. Analysts needed to set exceptions and adjust thresholds for their specific environment — but no tool gave them that control without ML expertise.</p>
+          <span class="testimony-tag">Customisation</span>
+        </div>
       </div>
     </div>
 
@@ -808,7 +1040,7 @@
 </section>
 
 <!-- ── 3. DEFINE ── -->
-<section>
+<section id="define">
   <div class="section-header">
     <div class="section-label">Define</div>
     <h2 class="section-title">The analyst who has 15 minutes to make the right call</h2>
@@ -847,7 +1079,7 @@
 </section>
 
 <!-- ── 4. IDEATION (tinted) ── -->
-<section class="section-tinted">
+<section id="ideation" class="section-tinted">
   <div>
     <div class="section-header">
       <div class="section-label">Ideation</div>
@@ -889,7 +1121,7 @@
 </section>
 
 <!-- ── 5. DESIGN & ITERATION ── -->
-<section>
+<section id="design">
   <div class="section-header">
     <div class="section-label">Design &amp; Iteration</div>
     <h2 class="section-title">Analyst dashboard — severity first, context always</h2>
@@ -975,7 +1207,7 @@
 </section>
 
 <!-- ── 6. NORTH STAR (navy) ── -->
-<section class="northstar-section">
+<section id="northstar" class="northstar-section">
   <div class="northstar-inner">
     <div class="northstar-header">
       <div class="section-label">North Star Vision</div>
@@ -991,54 +1223,79 @@
 </section>
 
 <!-- ── 7. DECISIONS & IMPACT ── -->
-<section>
+<section id="impact">
   <div class="section-header">
     <div class="section-label">Decisions &amp; Impact</div>
     <h2 class="section-title">Three decisions. Measured outcomes.</h2>
   </div>
 
-  <div class="nps-row">
-    <div class="nps-cell">
-      <div class="nps-val">2</div>
-      <div class="nps-lbl">Interfaces</div>
-      <div class="nps-sub">Analyst dashboard + hunter workbench — one data model, two modes</div>
+  <!-- Stat strip -->
+  <div class="impact-stat-strip">
+    <div class="impact-stat-cell">
+      <div class="impact-stat-val">2</div>
+      <div class="impact-stat-lbl">Interfaces</div>
+      <div class="impact-stat-sub">Analyst dashboard + hunter workbench — one data model, two modes</div>
     </div>
-    <div class="nps-cell">
-      <div class="nps-val">Day 0</div>
-      <div class="nps-lbl">Network Advantage</div>
-      <div class="nps-sub">Threat detection before the endpoint — the core positioning argument</div>
+    <div class="impact-stat-cell">
+      <div class="impact-stat-val">Day 0</div>
+      <div class="impact-stat-lbl">Network Advantage</div>
+      <div class="impact-stat-sub">Threat detection before the endpoint — the core positioning argument</div>
     </div>
-    <div class="nps-cell">
-      <div class="nps-val">15 min</div>
-      <div class="nps-lbl">Triage Standard</div>
-      <div class="nps-sub">Now written into all OpenText security UX briefs across the portfolio</div>
+    <div class="impact-stat-cell">
+      <div class="impact-stat-val">15 min</div>
+      <div class="impact-stat-lbl">Triage Standard</div>
+      <div class="impact-stat-sub">Now written into all OpenText security UX briefs across the portfolio</div>
     </div>
   </div>
 
-  <div class="quote-hero" style="max-width: 100%;">
+  <div class="quote-hero" style="max-width: 100%; margin-top: 48px;">
     <blockquote>"Don't compete on visual sophistication. Compete on analyst efficiency. Speed and clarity beat aesthetics every time."</blockquote>
     <cite>— Core positioning recommendation, presented to Product Leadership, Q3 2024</cite>
   </div>
 
-  <div class="outcomes-grid" style="margin-top: 32px;">
-    <div class="outcome-card">
-      <h4>Decision 1 — Classify in the row, not the detail panel</h4>
-      <ul class="outcome-list">
-        <li><strong>MITRE ATT&amp;CK classification surfaced in the alert row.</strong> Required an ML pipeline contract change — a design requirement that reshaped the engineering data contract.</li>
-        <li><strong>Risk scores as the primary sort axis.</strong> Most severe anomalies surface first. Analysts start at the top and work down — no manual triage of a flat list.</li>
-        <li><strong>One-click escalation to SIEM, TDR, or SOAR</strong> with full context attached. Context doesn't get lost in the handoff.</li>
-      </ul>
+  <!-- Three decisions as testimony rows -->
+  <div class="testimony-list" style="margin-top: 48px;">
+    <div class="testimony-row">
+      <div class="testimony-num">01</div>
+      <div class="testimony-body">
+        <h4>Classify in the row, not the detail panel</h4>
+        <p>MITRE ATT&amp;CK classification surfaced in the alert row itself — requiring an ML pipeline contract change. Risk scores became the primary sort axis so the most severe anomalies surface first. One-click escalation to SIEM, TDR, or SOAR with full context attached — nothing lost in the handoff.</p>
+        <div class="testimony-pills">
+          <span class="testimony-pill">ML data contract</span>
+          <span class="testimony-pill">Risk-sorted list</span>
+          <span class="testimony-pill">One-click escalation</span>
+        </div>
+      </div>
     </div>
-    <div class="outcome-card">
-      <h4>Decision 2 &amp; 3 — Dual interface + visual rules</h4>
-      <ul class="outcome-list">
-        <li><strong>Decision 2: Two interfaces, one data model.</strong> Analyst dashboard for speed; hunter workbench for depth. Built on a shared data layer so context flows between them without duplication.</li>
-        <li><strong>Decision 3: Visual rules builder.</strong> Filter and tune by user, IP, or asset without ML expertise — making threshold configuration self-service for the first time.</li>
-        <li><strong>Portfolio standard:</strong> triage-first UX principles carried forward across ZENworks, ILM, and future OpenText security products.</li>
-      </ul>
+    <div class="testimony-row">
+      <div class="testimony-num">02</div>
+      <div class="testimony-body">
+        <h4>Two interfaces, one data model</h4>
+        <p>Analyst dashboard for speed — built around the 15-minute triage window. Hunter workbench for depth — supporting 24-hour investigation cycles. Both built on a shared data layer so context flows between them without duplication or copy-paste overhead.</p>
+        <div class="testimony-pills">
+          <span class="testimony-pill">Shared data layer</span>
+          <span class="testimony-pill">Dual interaction model</span>
+          <span class="testimony-pill">No context lost in handoff</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimony-row">
+      <div class="testimony-num">03</div>
+      <div class="testimony-body">
+        <h4>Visual rules builder — no ML expertise required</h4>
+        <p>Filter and tune by user, IP, or asset without ML expertise — making threshold configuration self-service for the first time. Triage-first UX principles carried forward as a portfolio standard across ZENworks, ILM, and future OpenText security products.</p>
+        <div class="testimony-pills">
+          <span class="testimony-pill">Self-service tuning</span>
+          <span class="testimony-pill">Portfolio standard</span>
+          <span class="testimony-pill">ZENworks · ILM</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+  </main>
+</div><!-- /page-wrap -->
 
 <!-- ── CTA ── -->
 <div class="project-cta">
@@ -1060,11 +1317,46 @@
   <a href="index.html" class="footer-nav-link" style="text-align: center;">
     <span class="footer-nav-label">Back to Home</span>
   </a>
-  <a href="ndr-dashboard.html" class="footer-nav-link" style="text-align: right;">
+  <a href="xdr-platform.html" class="footer-nav-link" style="text-align: right;">
     <span class="footer-nav-label">Next Project →</span>
-    <span class="footer-nav-title">NDR UEBA Dashboard</span>
+    <span class="footer-nav-title">XDR Platform Research</span>
   </a>
 </div>
+
+
+<!-- ─── TOC HIGHLIGHT + SCROLL PROGRESS ─── -->
+<script>
+(function () {
+  const sections = document.querySelectorAll("main section[id]");
+  const tocLinks = document.querySelectorAll(".toc a");
+  const mobileLinks = document.querySelectorAll(".mobile-jumpbar a");
+  const progressBar = document.getElementById("scroll-progress-bar");
+
+  function setActive(id) {
+    [...tocLinks, ...mobileLinks].forEach(a => {
+      a.classList.toggle("active", a.getAttribute("href") === "#" + id);
+    });
+  }
+
+  function onScroll() {
+    // TOC active
+    const trigger = window.innerHeight * 0.3;
+    let current = sections[0]?.id;
+    sections.forEach(s => { if (s.getBoundingClientRect().top <= trigger) current = s.id; });
+    if (current) setActive(current);
+
+    // Progress bar
+    if (progressBar) {
+      const scrolled = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+      progressBar.style.width = Math.min(scrolled, 100) + "%";
+    }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  onScroll();
+})();
+</script>
 
 </body>
 </html>
