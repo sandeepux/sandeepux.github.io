@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Oracle Live Experience — Sandeep Virmani</title>
-<link rel="icon" type="image/png" href="images/Favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/Favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet" />
 <style>
   :root {
     --navy: #1e2d42;
@@ -32,6 +32,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* ── NAV ── */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -45,7 +46,6 @@
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--rule);
   }
-
   .nav-name {
     font-family: 'Playfair Display', serif;
     font-size: 17px;
@@ -54,63 +54,6 @@
     letter-spacing: -0.2px;
     text-decoration: none;
   }
-
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a {
-    font-family: 'Source Serif 4', serif;
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: 0.3px;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--navy); }
-
-/* ── HAMBURGER + MOBILE MENU ── */
-  .nav-hamburger {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 6px;
-    flex-direction: column;
-    gap: 5px;
-  }
-  .nav-hamburger span {
-    display: block;
-    width: 22px;
-    height: 1.5px;
-    background: var(--navy);
-    transition: transform 0.25s, opacity 0.25s;
-  }
-  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-  .mobile-menu {
-    display: none;
-    position: fixed;
-    top: 64px; left: 0; right: 0;
-    background: #fff;
-    border-bottom: 2px solid var(--navy);
-    z-index: 99;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-  }
-  .mobile-menu.open { display: block; }
-  .mobile-menu a {
-    display: block;
-    padding: 16px 24px;
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    color: var(--navy);
-    text-decoration: none;
-    border-bottom: 1px solid var(--rule);
-    transition: background 0.15s, padding-left 0.15s;
-  }
-  .mobile-menu a:last-child { border-bottom: none; }
-  .mobile-menu a:hover { background: var(--pale); padding-left: 32px; }
-  @media (max-width: 768px) { .nav-hamburger { display: flex; } }
-
   .back-link {
     font-size: 13px;
     color: var(--muted);
@@ -122,6 +65,22 @@
   }
   .back-link:hover { color: var(--navy); }
 
+  /* ── SCROLL PROGRESS ── */
+  #scroll-progress-wrap {
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    height: 3px;
+    background: transparent;
+    z-index: 99;
+  }
+  #scroll-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--mid);
+    transition: width 0.1s linear;
+  }
+
+  /* ── HEADER ── */
   .project-header {
     min-height: 60vh;
     display: flex;
@@ -131,13 +90,11 @@
     background: linear-gradient(135deg, var(--pale) 0%, rgba(232,240,248,0.5) 100%);
     max-width: 100%;
   }
-
   .project-header-inner {
     max-width: 1100px;
     margin: 0 auto;
     width: 100%;
   }
-
   .project-co {
     font-size: 10px;
     letter-spacing: 2px;
@@ -145,7 +102,6 @@
     color: var(--mid);
     margin-bottom: 16px;
   }
-
   .project-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(36px, 6vw, 56px);
@@ -155,7 +111,6 @@
     margin-bottom: 24px;
     letter-spacing: -0.5px;
   }
-
   .project-summary {
     font-size: 18px;
     color: #222;
@@ -164,16 +119,127 @@
     margin-bottom: 0;
   }
 
+  /* ── IMPACT STRIP ── */
+  section.impact-strip {
+    padding: 0;
+    max-width: 100%;
+    border-bottom: 1px solid var(--rule);
+  }
+  .impact-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .impact-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+  }
+  .impact-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .impact-lbl {
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-top: 6px;
+  }
+  .impact-sub {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .impact-divider {
+    width: 1px;
+    height: 60px;
+    background: var(--rule);
+    flex-shrink: 0;
+    margin: 0 8px;
+  }
+
+  /* ── MOBILE JUMPBAR ── */
+  .mobile-jumpbar {
+    display: none;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 12px 24px;
+    gap: 8px;
+    border-bottom: 1px solid var(--rule);
+    background: #fff;
+  }
+  .mobile-jumpbar a {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-family: 'Source Serif 4', serif;
+    color: var(--muted);
+    text-decoration: none;
+    border: 1px solid var(--rule);
+    border-radius: 99px;
+    transition: all 0.2s;
+  }
+  .mobile-jumpbar a.active,
+  .mobile-jumpbar a:hover {
+    background: var(--navy);
+    color: #fff;
+    border-color: var(--navy);
+  }
+
+  /* ── PAGE WRAP + TOC ── */
+  .page-wrap {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 80px 48px 80px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .toc {
+    position: sticky;
+    top: 96px;
+    border-left: 2px solid var(--rule);
+    padding-left: 16px;
+  }
+  .toc-title {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .toc ul { list-style: none; }
+  .toc li { margin-bottom: 12px; }
+  .toc a {
+    font-size: 12.5px;
+    color: var(--muted);
+    text-decoration: none;
+    line-height: 1.4;
+    transition: color 0.2s;
+    display: block;
+  }
+  .toc a:hover { color: var(--navy); }
+  .toc a.active { color: var(--navy); font-weight: 600; }
+  .toc a.active::before { content: "•"; color: var(--mid); margin-right: 8px; }
+
+  /* ── SECTIONS ── */
   section {
     max-width: 1100px;
     margin: 0 auto;
     padding: 80px 48px;
   }
-
-  .section-header {
-    margin-bottom: 48px;
-  }
-
+  main section { max-width: none; padding: 80px 0; }
+  .section-header { margin-bottom: 48px; }
   .section-label {
     font-size: 10px;
     letter-spacing: 2px;
@@ -181,7 +247,6 @@
     color: var(--mid);
     margin-bottom: 12px;
   }
-
   .section-title {
     font-family: 'Playfair Display', serif;
     font-size: 32px;
@@ -190,70 +255,275 @@
     line-height: 1.2;
     letter-spacing: -0.3px;
   }
-
-  .project-metrics {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 32px;
-    margin-bottom: 48px;
-    padding: 48px;
-    background: var(--pale);
-    border-radius: 8px;
+  .section-intro {
+    font-size: 17px;
+    color: #333;
+    line-height: 1.8;
+    max-width: 760px;
+    margin-top: 12px;
   }
 
-  .metric-card {
-    text-align: left;
+  /* ── TINTED SECTION ── */
+  .section-tinted {
+    background: var(--cream);
+    max-width: 100% !important;
+    padding: 80px 0 !important;
+  }
+  .section-tinted > * {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+  .section-tinted > figure {
+    padding-left: 48px;
+    padding-right: 48px;
   }
 
-  .metric-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px;
-    font-weight: 700;
-    color: var(--navy);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .metric-label {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.5;
-  }
-
-  .project-content {
+  /* ── IMAGE GRIDS ── */
+  .img-2col {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    margin-bottom: 48px;
+    gap: 24px;
+    margin-bottom: 24px;
   }
-
-  .content-left, .content-right {
+  .sketch-fig {
+    margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 10px;
+  }
+  .sketch-fig img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--rule);
+    display: block;
+  }
+  .sketch-fig figcaption {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+    padding-left: 2px;
+  }
+  figure.sketch-fig--contained { display: block; }
+  .sketch-fig--contained .img-wrap {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .sketch-fig--contained .img-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .sketch-fig--contained figcaption { margin-top: 10px; }
+
+  /* ── INSIGHT CALLOUT ── */
+  .insight-callout {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 28px 32px;
+    background: #fff;
+    border-radius: 8px;
+    border-left: 3px solid var(--navy);
+    margin-top: 32px;
+  }
+  .insight-icon {
+    font-size: 20px;
+    color: var(--navy);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .insight-callout p {
+    font-size: 16px;
+    color: #222;
+    line-height: 1.7;
+    margin: 0;
   }
 
-  .content-block h3 {
+  /* ── QUOTES ── */
+  .quote-hero {
+    padding: 40px 48px;
+    background: var(--navy);
+    border-radius: 10px;
+    margin-bottom: 16px;
+  }
+  .quote-hero blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .quote-hero cite {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    font-style: normal;
+  }
+  .quote-block {
+    padding: 28px 36px;
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    border-left: 3px solid var(--light);
+    margin-top: 32px;
+  }
+  .quote-block blockquote {
+    font-size: 16px;
+    font-style: italic;
+    color: #333;
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  .quote-block cite {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: normal;
+  }
+
+  /* ── TESTIMONY ROWS ── */
+  .testimony-list { margin-top: 8px; }
+  .testimony-row {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .testimony-row:first-child { border-top: 1px solid var(--rule); }
+  .testimony-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--rule);
+    line-height: 1;
+    min-width: 44px;
+  }
+  .testimony-body { flex: 1; }
+  .testimony-body h4 {
     font-family: 'Playfair Display', serif;
     font-size: 20px;
     font-weight: 600;
     color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .testimony-body p {
+    font-size: 15.5px;
+    color: #333;
+    line-height: 1.75;
+  }
+  .testimony-tag {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--mid);
+    background: rgba(58,106,154,0.08);
+    padding: 3px 10px;
+    border-radius: 99px;
+    border: 1px solid rgba(58,106,154,0.18);
+  }
+  .testimony-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .testimony-pill {
+    font-size: 11.5px;
+    color: var(--muted);
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 99px;
+    padding: 3px 11px;
+  }
+
+  /* ── IMPACT STAT STRIP ── */
+  .impact-stat-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .impact-stat-cell {
+    padding: 32px 28px;
+    border-right: 1px solid var(--rule);
+  }
+  .impact-stat-cell:last-child { border-right: none; }
+  .impact-stat-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .impact-stat-lbl {
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-top: 8px;
+  }
+  .impact-stat-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 6px;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  /* ── PROBLEM CARDS (Define) ── */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .problem-card {
+    background: var(--pale);
+    border-radius: 10px;
+    padding: 32px 28px;
+    border: 1px solid rgba(58,106,154,0.12);
+  }
+  .problem-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--navy);
     margin-bottom: 12px;
   }
-
-  .content-block p {
-    font-size: 16px;
-    color: #222;
-    line-height: 1.8;
+  .problem-card p {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.7;
+  }
+  .problem-card .quote {
+    font-style: italic;
+    color: var(--muted);
+    font-size: 14px;
+    border-left: 2px solid var(--light);
+    padding-left: 12px;
+    margin-top: 16px;
   }
 
+  /* ── CONTENT LIST ── */
   .content-list {
     list-style: none;
     display: flex;
     flex-direction: column;
     gap: 12px;
+    margin-top: 16px;
   }
-
   .content-list li {
     font-size: 15px;
     color: #222;
@@ -261,7 +531,6 @@
     padding-left: 20px;
     position: relative;
   }
-
   .content-list li::before {
     content: '→';
     position: absolute;
@@ -269,17 +538,13 @@
     color: var(--mid);
   }
 
+  /* ── CTA ── */
   .project-cta {
     background: var(--navy);
     padding: 64px 48px;
     text-align: center;
   }
-
-  .project-cta-inner {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
+  .project-cta-inner { max-width: 800px; margin: 0 auto; }
   .cta-title {
     font-family: 'Playfair Display', serif;
     font-size: 32px;
@@ -287,21 +552,13 @@
     color: #fff;
     margin-bottom: 20px;
   }
-
   .cta-text {
     font-size: 16px;
     color: rgba(255,255,255,0.8);
     margin-bottom: 32px;
     line-height: 1.7;
   }
-
-  .cta-buttons {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
+  .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
   .cta-button {
     display: inline-flex;
     align-items: center;
@@ -317,22 +574,11 @@
     font-weight: 500;
     letter-spacing: 0.5px;
   }
+  .cta-button:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+  .cta-button.primary { background: #fff; color: var(--navy); border-color: #fff; }
+  .cta-button.primary:hover { background: rgba(255,255,255,0.9); }
 
-  .cta-button:hover {
-    border-color: #fff;
-    background: rgba(255,255,255,0.1);
-  }
-
-  .cta-button.primary {
-    background: #fff;
-    color: var(--navy);
-    border-color: #fff;
-  }
-
-  .cta-button.primary:hover {
-    background: rgba(255,255,255,0.9);
-  }
-
+  /* ── FOOTER NAV ── */
   .project-footer-nav {
     display: flex;
     justify-content: space-between;
@@ -342,7 +588,6 @@
     padding: 48px;
     border-top: 1px solid var(--rule);
   }
-
   .footer-nav-link {
     display: flex;
     flex-direction: column;
@@ -351,40 +596,35 @@
     color: var(--navy);
     transition: color 0.2s;
   }
-
   .footer-nav-link:hover { color: var(--mid); }
-
   .footer-nav-label {
     font-size: 10px;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--muted);
   }
+  .footer-nav-title { font-size: 15px; font-weight: 500; }
 
-  .footer-nav-title {
-    font-size: 15px;
-    font-weight: 500;
+  /* ── RESPONSIVE ── */
+  @media (max-width: 980px) {
+    .page-wrap { grid-template-columns: 1fr; padding: 48px 32px; }
+    .toc { display: none; }
+    .mobile-jumpbar { display: flex; }
+    .impact-grid { flex-wrap: wrap; padding: 32px 24px; }
+    .impact-item { min-width: 44%; }
+    .impact-stat-strip { grid-template-columns: 1fr; }
+    .impact-stat-cell { border-right: none; border-bottom: 1px solid var(--rule); }
+    .impact-stat-cell:last-child { border-bottom: none; }
   }
-
-  @media (max-width: 900px) {
-    nav { padding: 0 24px; }
-    .project-header { padding: 100px 24px 60px; }
-    section { padding: 60px 24px; }
-    .project-content { grid-template-columns: 1fr; gap: 40px; }
-    .project-cta { padding: 48px 24px; }
-    .project-footer-nav { flex-direction: column; gap: 24px; text-align: center; padding: 32px 24px; }
-    .project-metrics { grid-template-columns: 1fr 1fr; }
-  }
-
   @media (max-width: 768px) {
     nav { padding: 0 16px; }
-    nav .nav-links { display: none; }
-    .project-title { font-size: clamp(28px, 5vw, 36px); }
     .project-header { padding: 80px 16px 48px; }
-    section { padding: 48px 16px; }
-    .section-title { font-size: 24px; }
-    .project-metrics { grid-template-columns: 1fr; padding: 32px 16px; }
-    .project-cta { padding: 32px 16px; }
+    .project-title { font-size: clamp(28px, 5vw, 36px); }
+    main section { padding: 56px 0; }
+    .section-tinted > * { padding-left: 24px; padding-right: 24px; }
+    .problem-grid { grid-template-columns: 1fr; }
+    .project-cta { padding: 40px 16px; }
+    .project-footer-nav { flex-direction: column; gap: 24px; text-align: center; padding: 32px 16px; }
     .cta-buttons { flex-direction: column; }
     .cta-button { width: 100%; justify-content: center; }
   }
@@ -392,253 +632,324 @@
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-name">Sandeep Virmani</a>
   <a href="index.html#work" class="back-link">← Back to Work</a>
 </nav>
 
-<\!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobile-menu">
-  <a href="index.html#work" onclick="closeMobileMenu()">Work</a>
-  <a href="index.html#about" onclick="closeMobileMenu()">About</a>
-  <a href="index.html#career" onclick="closeMobileMenu()">Career</a>
-  <a href="index.html#contact" onclick="closeMobileMenu()">Contact</a>
-</div>
+<!-- SCROLL PROGRESS BAR -->
+<div id="scroll-progress-wrap"><div id="scroll-progress-bar"></div></div>
 
+<!-- HEADER -->
 <div class="project-header">
   <div class="project-header-inner">
     <div class="project-co">Oracle · 2019–2021</div>
-    <h1 class="project-title">Oracle Live Experience</h1>
+    <h1 class="project-title">Oracle Live<br>Experience</h1>
     <p class="project-summary">
-      Transforming customer support from disconnected, context-blind interactions into seamless, contextual engagement sessions. By designing a context-first platform that combines progressive escalation, real-time annotations, and intelligent routing, we reduced support costs while dramatically improving customer satisfaction and associate efficiency.
+      Customer support was context-blind — associates picked up calls knowing nothing about who they were talking to, what the customer had tried, or what they were seeing on screen. I designed a context-first engagement platform that surfaced the right information at the right moment: reducing handling time, eliminating follow-up tickets, and transforming support from reactive phone calls into guided, visual collaboration sessions.
+    </p>
+    <p style="font-size: 14px; color: #5a7fa8; margin-top: 20px; line-height: 1.7; max-width: 760px;">
+      <strong>Role:</strong> Principal Product Designer — end-to-end design of the customer widget, associate desktop, engagement scenario engine, and live annotation system.
     </p>
   </div>
 </div>
 
-<section>
-  <div class="section-header">
-    <div class="section-label">Key Outcomes</div>
-    <h2 class="section-title">Metrics & Impact</h2>
-  </div>
-  <div class="project-metrics">
-    <div class="metric-card">
-      <div class="metric-value">60–90 sec</div>
-      <div class="metric-label">AHT Reduction per call through Context Attributes</div>
+<!-- IMPACT STRIP -->
+<section class="impact-strip">
+  <div class="impact-grid">
+    <div class="impact-item">
+      <span class="impact-val">60–90s</span>
+      <span class="impact-lbl">AHT Reduction</span>
+      <span class="impact-sub">Per call via context attributes</span>
     </div>
-    <div class="metric-card">
-      <div class="metric-value">15–20%</div>
-      <div class="metric-label">Reduction in follow-up tickets via Live Annotations & Screen Share</div>
+    <div class="impact-divider"></div>
+    <div class="impact-item">
+      <span class="impact-val">15–20%</span>
+      <span class="impact-lbl">Fewer Follow-up Tickets</span>
+      <span class="impact-sub">Via live annotations &amp; screen share</span>
     </div>
-    <div class="metric-card">
-      <div class="metric-value">90%+ CSAT</div>
-      <div class="metric-label">Customer satisfaction for SMS-to-Screenshare workflows</div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="section-header">
-    <div class="section-label">Design Process</div>
-    <h2 class="section-title">Research & Strategy</h2>
-  </div>
-  <div class="project-content">
-    <div class="content-left">
-      <div class="content-block">
-        <h3>The Core Challenge</h3>
-        <p>Customer support was fragmented across disconnected channels. Organizations struggled with high technician dispatch costs and inefficient troubleshooting. Customers, in turn, faced frustrating context switches between their application and a phone call, forcing them to repeat issues and feel "unheard" by support associates who lacked real-time visibility into their experience.</p>
-        <p style="margin-top: 16px; font-size: 14px; color: var(--muted); font-style: italic;">The core problem: <strong>Context Loss</strong>—every handoff, every channel switch, every misalignment between what the customer was experiencing and what the associate could see created friction and extended resolution time.</p>
-      </div>
-      <div class="content-block">
-        <h3>Problem from Multiple Angles</h3>
-        <ul class="content-list">
-          <li><strong>For Organizations:</strong> Reduced dispatch costs through video diagnosis; faster resolution via screen sharing for complex issues</li>
-          <li><strong>For Customers:</strong> Seamless in-app engagement without context switching; flexible channel upgrades (audio → video → screen share) based on issue complexity</li>
-          <li><strong>For Associates:</strong> Visual clarity through annotations; multimodal support matching customer preferences in real time</li>
-        </ul>
-      </div>
-    </div>
-    <div class="content-right">
-      <div class="content-block">
-        <h3>The Design Solution: Context-First Platform</h3>
-        <p><strong>Engagement Scenarios</strong> – Rule-based configurations that automatically adapt the support interface based on where the customer is on the site. A technical troubleshooting page triggers video/screen share options, while a general FAQ page offers lightweight SMS support.</p>
-        <p style="margin-top: 12px;"><strong>Progressive Escalation Path</strong> – Engagements start lightweight (audio/SMS) and upgrade to video or screen sharing only when complexity requires it, respecting user privacy while maintaining technical efficiency.</p>
-        <p style="margin-top: 12px;"><strong>Context Attribute Sidebar</strong> – Associates see only data relevant to the triggered routing rule (customer name, cart value, page location), eliminating cognitive overload and keeping the UI actionable.</p>
-        <p style="margin-top: 12px;"><strong>Live Annotations</strong> – The ability to freeze frames and draw directly on customer screens transforms support from verbal directions ("Click the red button... no, the other one") into precise visual guidance.</p>
-      </div>
-      <div class="content-block">
-        <h3>Measurable Impact</h3>
-        <ul class="content-list">
-          <li>60–90 seconds saved per call through context awareness</li>
-          <li>15–20% reduction in follow-up tickets via visual troubleshooting</li>
-          <li>90%+ CSAT for SMS-to-screenshare workflows</li>
-          <li>Elimination of on-site technician visits in pilot regions through video diagnostics</li>
-        </ul>
-      </div>
+    <div class="impact-divider"></div>
+    <div class="impact-item">
+      <span class="impact-val">90%+</span>
+      <span class="impact-lbl">CSAT</span>
+      <span class="impact-sub">SMS-to-screenshare workflows</span>
     </div>
   </div>
 </section>
 
-<section>
+<!-- MOBILE JUMPBAR -->
+<div class="mobile-jumpbar">
+  <a href="#context">Context</a>
+  <a href="#research">Research</a>
+  <a href="#define">Define</a>
+  <a href="#ideation">Ideation</a>
+  <a href="#design">Design</a>
+  <a href="#impact">Impact</a>
+</div>
+
+<div class="page-wrap">
+  <!-- LEFT TOC -->
+  <aside class="toc">
+    <div class="toc-title">Jump to</div>
+    <ul>
+      <li><a href="#context">Project Context</a></li>
+      <li><a href="#research">Discovery &amp; Research</a></li>
+      <li><a href="#define">Define</a></li>
+      <li><a href="#ideation">Ideation</a></li>
+      <li><a href="#design">Design</a></li>
+      <li><a href="#impact">Decisions &amp; Impact</a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+
+<!-- ── 1. CONTEXT ── -->
+<section id="context">
   <div class="section-header">
-    <div class="section-label">Design Methodology</div>
-    <h2 class="section-title">Context-First User-Centered Design</h2>
+    <div class="section-label">Project Brief &amp; Context</div>
+    <h2 class="section-title">Every support call started cold. Associates picked up knowing nothing.</h2>
+    <p class="section-intro">Oracle Live Experience was a multi-channel customer engagement platform embedded directly into enterprise applications. The technology was capable — SMS, audio, video, screen share, and co-browsing all in one SDK. But the experience was broken from the first second: associates answered calls with zero visibility into what the customer was doing, what page they were on, or what they had already tried. Context had to be reconstructed verbally, every time.</p>
   </div>
-  <div class="project-content">
-    <div class="content-left">
-      <div class="content-block">
-        <h3>Core Methodology</h3>
-        <p>Our approach followed a rigorous user-centered design (UCD) cycle, starting with the insight that customer support's core friction is <strong>"repetition fatigue"</strong>—users having to repeat their issue multiple times across channels and associates.</p>
-        <p style="margin-top: 12px;">We identified that support associates were operating "flying blind," lacking visibility into the customer's journey. This insight drove us away from a "phone call" mental model toward an <strong>"engagement session"</strong> model where context flows seamlessly through every interaction.</p>
-      </div>
-      <div class="content-block">
-        <h3>Key Design Decisions & Trade-offs</h3>
-        <ul class="content-list">
-          <li><strong>Progressive Escalation vs. Immediate Video:</strong> We debated starting all calls with video for trust-building, but research showed this felt intrusive. Solution: design a path where calls begin lightweight and upgrade only when needed.</li>
-          <li><strong>Unified Associate Desktop:</strong> Integrating CRM, video, and chat risked cognitive overload. Solution: Context Attribute Sidebar displaying only routing-rule-relevant data, keeping the UI clean and actionable.</li>
-        </ul>
-      </div>
-    </div>
-    <div class="content-right">
-      <div class="content-block">
-        <h3>Evolution: 3 Phases</h3>
-        <p><strong>Phase 1: The Reactive Widget</strong><br>
-        A simple "Click-to-Call" button with no intelligence. Treated every user the same, creating friction for complex issues.</p>
-        <p style="margin-top: 12px;"><strong>Phase 2: The Contextual Scenario</strong><br>
-        Introduced the Engagement Scenario engine. The interface now adapts dynamically—showing "Video Call" on technical pages but only "SMS" on general FAQ pages.</p>
-        <p style="margin-top: 12px;"><strong>Phase 3: The Collaborative Canvas</strong><br>
-        Added Live Annotations, transforming support from "seeing" to "interacting." Both parties could now draw on screens in real-time, providing instant visual clarity.</p>
-      </div>
-      <div class="content-block">
-        <h3>Feature Innovation: Annotations</h3>
-        <p>During user testing, we observed associates struggling with verbal directions ("Click the red button... no, the other one"). This drove up Average Handle Time (AHT) significantly.</p>
-        <p style="margin-top: 12px;">The annotation tool was designed as a "visual pointer," allowing associates to freeze frames and draw directly on customer screens. This single feature reduced misalignment and dramatically improved clarity.</p>
-      </div>
-    </div>
+
+  <div class="insight-callout">
+    <span class="insight-icon">→</span>
+    <p>The competitive insight: rivals like Salesforce Service Cloud and Genesys had richer routing engines, but none offered true <strong>in-application engagement</strong> — the ability to see exactly what a customer was doing inside a web app without asking them to describe it. That was Oracle Live Experience's differentiator. The design challenge was making that capability the default experience, not a premium feature admins had to configure manually.</p>
   </div>
 </section>
 
-<section>
+<!-- ── 2. RESEARCH ── -->
+<section id="research" class="section-tinted">
   <div class="section-header">
-    <div class="section-label">User Research & Psychology</div>
-    <h2 class="section-title">Understanding the Support Journey</h2>
+    <div class="section-label">Discovery &amp; Research</div>
+    <h2 class="section-title">Three problems. Every customer and associate said the same things.</h2>
+    <p class="section-intro">Interviews across customer support teams, usability sessions with live associates, call recording analysis, and a competitive audit of Genesys, Salesforce Service Cloud, and Zendesk Talk. The findings converged around three structural problems the existing platform made actively worse.</p>
   </div>
-  <div class="project-content">
-    <div class="content-left">
-      <div class="content-block">
-        <h3>User Personas</h3>
-        <p><strong>The Frustrated Resolver (End-Customer)</strong><br>
-        Tech-savvy but time-poor. Their psychological state is "high-friction." They don't want a relationship—they want a path of least resistance to solve their problem (failed checkout, technical bug). When forced to repeat their issue, cortisol levels spike.</p>
-        <p style="margin-top: 12px;"><strong>The Multitasking Associate (Support Agent)</strong><br>
-        Operating in a high-stress, efficiency-driven environment. Must rapidly switch mental contexts between customers and varied technical issues without losing conversational thread. Information overload is their enemy.</p>
-      </div>
-      <div class="content-block">
-        <h3>Key Behavioral Insights</h3>
-        <ul class="content-list">
-          <li><strong>The Transparency Effect:</strong> Users are significantly more patient when they feel the associate "sees" what they see. Co-browsing and screen sharing reduced the "explanation gap," lowering stress and increasing satisfaction.</li>
-          <li><strong>The Privacy Paradox:</strong> Users want immediate help but hesitate to share their entire screen. Insight: In-App-Only Sharing (where associates see only the app, not personal desktop) became a psychological requirement for trust.</li>
-          <li><strong>The Escalation Threshold:</strong> Users hit a "silent limit" after 3+ text exchanges. Cognitive load spikes. This validated our Progressive Escalation design.</li>
-        </ul>
+
+  <div class="testimony-list">
+    <div class="testimony-row">
+      <div class="testimony-num">01</div>
+      <div class="testimony-body">
+        <h4>Context blindness — every call starts as if it's the first</h4>
+        <p>Associates had no visibility into where the customer was in the application, what actions they had taken, or what error state they were in. Every engagement began with a verbal reconstruction — "So, what exactly are you seeing right now?" — adding 60–90 seconds before useful troubleshooting could begin. Customers felt they were talking to someone who could not help them until they had finished explaining.</p>
+        <span class="testimony-tag">Context loss</span>
       </div>
     </div>
-    <div class="content-right">
-      <div class="content-block">
-        <h3>Pain Points & Moments of Delight</h3>
-        <p><strong>Pain Point: "Start-Over" Syndrome</strong><br>
-        The biggest frustration was transfer-induced repetition. Users had to explain their issue again to a new associate. Solution: Context Attributes ensured associates knew the user's name, cart value, and exact page location before saying "Hello."</p>
-        <p style="margin-top: 12px;"><strong>Moment of Delight: The "Magic Pointer"</strong><br>
-        When associates used the Annotation Tool to circle a button on a customer's screen, users consistently reported: "I felt like the agent was standing right next to me." This became our highest-impact feature.</p>
-      </div>
-      <div class="content-block">
-        <h3>Direct User Observations</h3>
-        <ul class="content-list">
-          <li><em>"I didn't have to explain where I was stuck. They just knew. It felt like they were in my head."</em> — Customer Participant</li>
-          <li><em>"The ability to 'freeze' a video frame to draw on it changed how I teach customers. I'm no longer just a support agent; I'm a guide."</em> — Support Associate</li>
-        </ul>
+    <div class="testimony-row">
+      <div class="testimony-num">02</div>
+      <div class="testimony-body">
+        <h4>Channel fragmentation — switching support channels meant starting over</h4>
+        <p>When a text conversation needed to escalate to a call, or a call needed to become a screen share, the customer was transferred or called back — a new session with no memory of what had been established. The platform had the technical capability to stay in-session across channels. The product design had not connected those capabilities into a single escalation path.</p>
+        <span class="testimony-tag">Channel switching</span>
       </div>
     </div>
+    <div class="testimony-row">
+      <div class="testimony-num">03</div>
+      <div class="testimony-body">
+        <h4>Verbal troubleshooting fails — "click the red button... no, the other one"</h4>
+        <p>Complex issues — failed checkouts, form validation errors, configuration screens — required associates to guide customers through multi-step UI flows using only verbal description. This created compounding misalignment: the associate was describing something they could not see, and the customer was executing something they did not fully understand. Average Handle Time (AHT) for these cases was 3–4× the baseline.</p>
+        <span class="testimony-tag">Visual guidance</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    <blockquote>"I could hear the frustration in their voice, but I had no idea what they were actually looking at. I'm describing buttons I can't see, on a page I've never opened. It's guesswork."</blockquote>
+    <cite>— Support Associate · Research interview, Oracle Live Experience</cite>
   </div>
 </section>
 
-<section>
+<!-- ── 3. DEFINE ── -->
+<section id="define">
   <div class="section-header">
-    <div class="section-label">Key Outcomes & Impact</div>
-    <h2 class="section-title">Quantified Business Results</h2>
+    <div class="section-label">Define</div>
+    <h2 class="section-title">Two people. One wants resolution. One wants clarity.</h2>
+    <p class="section-intro">Research surfaced two distinct users with contradictory stress responses — both made worse by the same design failure: the absence of shared context. Designing for both meant building a platform where information flowed without either user having to request it.</p>
   </div>
-  <div class="project-content">
-    <div class="content-left">
-      <div class="content-block">
-        <h3>Efficiency Improvements</h3>
-        <p><strong>Average Handle Time (AHT):</strong> Context Attributes eliminated the need for manual identity verification and location confirmation, saving 60–90 seconds per call on average.</p>
-        <p style="margin-top: 12px;"><strong>First Contact Resolution (FCR):</strong> Live Annotations and Screen Sharing enabled immediate visual troubleshooting, reducing follow-up tickets by 15–20%.</p>
-        <p style="margin-top: 12px;"><strong>Channel Fluidity:</strong> By designing seamless upgrades from SMS to audio to video within a single session, we kept customers engaged without forcing app switches.</p>
-      </div>
-      <div class="content-block">
-        <h3>Business Impact</h3>
-        <ul class="content-list">
-          <li>Reduction in on-site technician dispatches (video diagnostics replaced physical visits in pilot regions)</li>
-          <li>Scalable support model: Engagement Scenario framework allowed regional/language rollouts without re-coding</li>
-          <li>Measurable CSAT lift: 90%+ satisfaction for SMS-to-screenshare workflows vs. traditional support</li>
-        </ul>
-      </div>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <h4>The Frustrated Resolver</h4>
+      <p>End-customer. Tech-savvy, time-poor, high stakes. They are already in a failure state — a checkout that won't complete, a configuration they can't find, an error they don't understand. Their psychological threshold is low. They do not want to explain their problem. They want someone who already knows it.</p>
+      <p class="quote">"I didn't have to say anything. They just knew where I was. That was the first time support didn't feel like starting from zero."</p>
     </div>
-    <div class="content-right">
-      <div class="content-block">
-        <h3>Customer Success Story</h3>
-        <p><strong>Retail Client Pilot:</strong> A major retail organization integrated the SMS-to-Screenshare workflow. Customers initiating conversations via text could be instantly upgraded to screen-share sessions. Result: 90%+ CSAT for those interactions—a significant uplift over standard support channels.</p>
-        <p style="margin-top: 12px;"><strong>Customer Quote:</strong><br>
-        <em>"The transition from a basic chat to a visual co-browse session felt like magic. I didn't have to explain the problem; the agent simply saw it and drew the solution on my screen."</em> — Retail Pilot Participant</p>
-      </div>
-      <div class="content-block">
-        <h3>Launch Transformation</h3>
-        <table style="width: 100%; border-collapse: collapse; margin-top: 16px;">
-          <tr style="border-bottom: 1px solid var(--rule);">
-            <td style="padding: 12px 0; font-weight: 600; color: var(--navy);">Metric</td>
-            <td style="padding: 12px 0; font-weight: 600; color: var(--navy);">Pre-Launch</td>
-            <td style="padding: 12px 0; font-weight: 600; color: var(--navy);">Post-Launch</td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--rule);">
-            <td style="padding: 12px 0;">Context Awareness</td>
-            <td style="padding: 12px 0;">Manual (Ask/Confirm)</td>
-            <td style="padding: 12px 0;">Automatic (Context Attributes)</td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--rule);">
-            <td style="padding: 12px 0;">Channel Switching</td>
-            <td style="padding: 12px 0;">Disconnected (Hang up/Call back)</td>
-            <td style="padding: 12px 0;">Fluid (In-session Upgrades)</td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--rule);">
-            <td style="padding: 12px 0;">Visual Clarity</td>
-            <td style="padding: 12px 0;">Verbal Descriptions Only</td>
-            <td style="padding: 12px 0;">Real-time Annotations</td>
-          </tr>
-          <tr>
-            <td style="padding: 12px 0;">User Drop-off</td>
-            <td style="padding: 12px 0;">High (During "Wait for Agent")</td>
-            <td style="padding: 12px 0;">Lower (Contextual Greetings)</td>
-          </tr>
-        </table>
-      </div>
+    <div class="problem-card">
+      <h4>The Multitasking Associate</h4>
+      <p>Support agent. Operating across 3–5 simultaneous sessions, switching context between customers and issue types with no visual continuity between them. Information overload is their primary failure mode. They need fewer inputs — not more. A sidebar that shows only what is relevant to this customer, right now.</p>
+      <p class="quote">"If I have to ask you your name and what page you're on, I've already lost two minutes and your trust."</p>
     </div>
+  </div>
+
+  <div class="insight-callout" style="margin-top: 32px;">
+    <span class="insight-icon">→</span>
+    <p>The design principle that followed: <strong>context should arrive before the associate says hello.</strong> Every design decision was evaluated against this standard — does this surface the right information automatically, or does it require the associate to ask for it?</p>
   </div>
 </section>
 
-<section>
+<!-- ── 4. IDEATION ── -->
+<section id="ideation" class="section-tinted">
   <div class="section-header">
-    <div class="section-label">Further Details</div>
-    <h2 class="section-title">Full Case Study</h2>
+    <div class="section-label">Ideation</div>
+    <h2 class="section-title">Three phases. Each one extended what "support" could mean.</h2>
+    <p class="section-intro">The platform evolved in three distinct design phases — each one solving a different category of the core problem. Phase 1 established presence. Phase 2 established intelligence. Phase 3 established collaboration.</p>
   </div>
-  <div style="padding: 48px; background: var(--pale); border-radius: 8px; text-align: center;">
-    <p style="font-size: 15px; color: var(--muted); margin-bottom: 20px;">Download the full case study PDF for detailed design process, wireframes, and research findings.</p>
-    <button onclick="pgPromptDownload()" class="cta-button primary">↓ Download PDF</button>
+
+  <div class="testimony-list">
+    <div class="testimony-row">
+      <div class="testimony-num">01</div>
+      <div class="testimony-body">
+        <h4>Phase 1 — The Reactive Widget</h4>
+        <p>A "Click to Call" button embedded in the host application. Simple, functional, universally available. The problem: it treated every customer as identical. A user in a technical error state received the same interface as a user browsing an FAQ. No routing intelligence, no context passed to the associate. Presence without intelligence.</p>
+      </div>
+    </div>
+    <div class="testimony-row">
+      <div class="testimony-num">02</div>
+      <div class="testimony-body">
+        <h4>Phase 2 — The Contextual Scenario Engine</h4>
+        <p>Introduced Engagement Scenarios — rule-based configurations that adapted the widget interface based on which page or state the customer was in. A technical troubleshooting page triggered a "Video + Screen Share" widget. A general FAQ page offered only "SMS." Associates received a Context Attribute Sidebar pre-populated with customer name, cart value, page URL, and routing rule — before the first word was spoken. Intelligence without visual depth.</p>
+      </div>
+    </div>
+    <div class="testimony-row">
+      <div class="testimony-num">03</div>
+      <div class="testimony-body">
+        <h4>Phase 3 — The Collaborative Canvas</h4>
+        <p>Added Live Annotations — the ability to freeze a video frame and draw directly on the customer's screen. Associates could circle a button, draw a path, highlight an error. The annotation appeared on the customer's screen in real time. "Click the red button" became "click this" with a circle around it. The associate became a guide, not a voice. Collaboration in place of description.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight-callout">
+    <span class="insight-icon">→</span>
+    <p>The key escalation design decision: <strong>Progressive Escalation</strong>. Sessions begin lightweight (SMS or audio) and upgrade to video or screen share only when the complexity demands it. This respected customer privacy — In-App-Only sharing meant associates saw only the application, never the desktop — while preserving the full capability for cases that needed it.</p>
   </div>
 </section>
 
+<!-- ── 5. DESIGN ── -->
+<section id="design">
+  <div class="section-header">
+    <div class="section-label">Design &amp; Iteration</div>
+    <h2 class="section-title">Four features. One principle — context arrives before the first word.</h2>
+    <p class="section-intro">The final platform shipped four interconnected features, each one eliminating a specific category of context failure from the support workflow.</p>
+  </div>
+
+  <ul class="content-list" style="margin-bottom: 40px;">
+    <li><strong>Engagement Scenarios</strong> — Rule-based configurations. The widget surface adapts automatically based on which page the customer is on. No admin coding required.</li>
+    <li><strong>Context Attribute Sidebar</strong> — Associates see only data relevant to the triggered routing rule: customer name, cart value, current page, last action. Cognitive load eliminated at the point of answer.</li>
+    <li><strong>Progressive Escalation Path</strong> — In-session channel upgrades from SMS → audio → video → screen share without disconnecting or restarting. One session, any complexity.</li>
+    <li><strong>Live Annotations</strong> — Freeze frame + draw on screen. The associate becomes a visual guide. Highest single-feature impact on AHT and customer satisfaction.</li>
+  </ul>
+
+  <!-- Image placeholder: Associate Desktop -->
+  <figure class="sketch-fig sketch-fig--contained" style="margin-bottom: 40px;">
+    <div class="img-wrap" style="max-width: 980px; background: var(--pale); border: 1px dashed rgba(30,45,66,0.2); border-radius: 12px; min-height: 320px; display: flex; align-items: center; justify-content: center;">
+      <p style="font-size: 13px; color: var(--light); font-style: italic;">Associate Desktop — Context Attribute Sidebar + live video session · Image coming soon</p>
+    </div>
+    <figcaption style="text-align: center; margin-top: 12px;">Associate Desktop — pre-populated context sidebar showing customer name, page location, and cart value before the first word is spoken.</figcaption>
+  </figure>
+
+  <!-- Image placeholder: Widget escalation flow -->
+  <div class="section-header" style="margin-top: 64px;">
+    <div class="section-label">Feature Focus</div>
+    <h2 class="section-title">Live Annotations — the associate becomes a visual guide.</h2>
+    <p class="section-intro">During usability testing, we observed associates spending 40% of complex call time on verbal direction-giving. Live Annotations collapsed that to seconds. Associates freeze the shared frame, draw on it, and the annotation appears on the customer's screen immediately. Tested phrases: "I felt like they were standing next to me."</p>
+  </div>
+
+  <figure class="sketch-fig sketch-fig--contained" style="margin-bottom: 40px;">
+    <div class="img-wrap" style="max-width: 980px; background: var(--pale); border: 1px dashed rgba(30,45,66,0.2); border-radius: 12px; min-height: 280px; display: flex; align-items: center; justify-content: center;">
+      <p style="font-size: 13px; color: var(--light); font-style: italic;">Live Annotation tool — freeze frame + draw on customer screen · Image coming soon</p>
+    </div>
+    <figcaption style="text-align: center; margin-top: 12px;">Live Annotations — frame freeze with real-time drawing. Associates draw directly on the customer's visible application state.</figcaption>
+  </figure>
+</section>
+
+<!-- ── 6. IMPACT ── -->
+<section id="impact">
+  <div class="section-header">
+    <div class="section-label">Decisions &amp; Impact</div>
+    <h2 class="section-title">Three outcomes. Measured against context-blind support.</h2>
+  </div>
+
+  <!-- Stat strip -->
+  <div class="impact-stat-strip">
+    <div class="impact-stat-cell">
+      <div class="impact-stat-val">60–90s</div>
+      <div class="impact-stat-lbl">AHT saved</div>
+      <div class="impact-stat-sub">Per call — context arrived before hello</div>
+    </div>
+    <div class="impact-stat-cell">
+      <div class="impact-stat-val">15–20%</div>
+      <div class="impact-stat-lbl">Fewer follow-ups</div>
+      <div class="impact-stat-sub">Visual resolution on first contact</div>
+    </div>
+    <div class="impact-stat-cell">
+      <div class="impact-stat-val">90%+</div>
+      <div class="impact-stat-lbl">CSAT</div>
+      <div class="impact-stat-sub">SMS-to-screenshare pilot cohort</div>
+    </div>
+  </div>
+
+  <div class="quote-hero" style="max-width: 100%; margin-top: 48px;">
+    <blockquote>"The transition from a basic chat to a visual co-browse felt like magic. I didn't have to explain the problem — the agent simply saw it and drew the solution on my screen."</blockquote>
+    <cite>— Customer · Retail pilot cohort, Oracle Live Experience</cite>
+  </div>
+
+  <div class="testimony-list" style="margin-top: 48px;">
+    <div class="testimony-row">
+      <div class="testimony-num">01</div>
+      <div class="testimony-body">
+        <h4>Context attributes eliminated the opening ritual — 60–90 seconds saved per call</h4>
+        <p>Before: associates spent the first 60–90 seconds asking customers who they were, what page they were on, and what they had already tried. After: Context Attribute Sidebar pre-populated with name, cart value, page URL, and triggered routing rule — automatically, before the call connected. That time was recovered on every single interaction.</p>
+        <div class="testimony-pills">
+          <span class="testimony-pill">Auto-populated sidebar</span>
+          <span class="testimony-pill">Zero verbal reconstruction</span>
+          <span class="testimony-pill">60–90s per call</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimony-row">
+      <div class="testimony-num">02</div>
+      <div class="testimony-body">
+        <h4>Visual resolution on first contact — 15–20% reduction in follow-up tickets</h4>
+        <p>Live Annotations and Screen Share eliminated the class of issues that verbal troubleshooting could not close. Associates could freeze a frame and draw the solution directly on the customer's screen. Issues that previously required a follow-up call — "I'll email you the steps" — were resolved visually in session. Follow-up tickets dropped 15–20% in the pilot cohort.</p>
+        <div class="testimony-pills">
+          <span class="testimony-pill">Live annotations</span>
+          <span class="testimony-pill">In-app screen share</span>
+          <span class="testimony-pill">First contact resolution</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimony-row">
+      <div class="testimony-num">03</div>
+      <div class="testimony-body">
+        <h4>Channel fluidity produced the highest CSAT in the product's history — 90%+</h4>
+        <p>The SMS-to-screenshare upgrade path — where a customer could begin with a text and escalate to a shared visual session without disconnecting — produced the highest satisfaction scores in Oracle Live Experience's pilot history. Customers in this cohort consistently described the experience as effortless. The technology was not new; the design of the path between channels was.</p>
+        <div class="testimony-pills">
+          <span class="testimony-pill">Progressive escalation</span>
+          <span class="testimony-pill">No session restart</span>
+          <span class="testimony-pill">90%+ CSAT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PDF download -->
+  <div style="margin-top: 64px; padding: 40px 48px; background: var(--pale); border-radius: 10px; text-align: center;">
+    <p style="font-size: 15px; color: var(--muted); margin-bottom: 20px;">Download the full case study PDF — engagement scenario architecture, annotation UX research, and pilot results.</p>
+    <button onclick="pgPromptDownload()" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--navy); color: #fff; border: none; border-radius: 4px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; letter-spacing: 0.5px;">↓ Download PDF</button>
+  </div>
+</section>
+
+  </main>
+</div><!-- /page-wrap -->
+
+<!-- CTA -->
 <div class="project-cta">
   <div class="project-cta-inner">
     <h2 class="cta-title">Interested in discussing this work?</h2>
-    <p class="cta-text">I'm always happy to discuss design process, platform design, or how I approach enterprise experience optimization.</p>
+    <p class="cta-text">Happy to walk through the engagement scenario architecture, the annotation interaction design, or how progressive escalation was validated against privacy concerns.</p>
     <div class="cta-buttons">
-      <a href="index.html#contact" class="cta-button">Get in Touch</a>
+      <a href="index.html#contact" class="cta-button primary">Get in Touch</a>
       <a href="index.html#work" class="cta-button">View Other Work</a>
     </div>
   </div>
@@ -654,39 +965,42 @@
   </a>
   <a href="oracle-unity-platform.html" class="footer-nav-link" style="text-align: right;">
     <span class="footer-nav-label">Next Project →</span>
-    <span class="footer-nav-title">Unity Data Platform</span>
+    <span class="footer-nav-title">Oracle Unity Data Platform</span>
   </a>
 </div>
 
+<!-- TOC + PROGRESS JS -->
 <script>
-function toggleMobileMenu() {
-  const menu = document.getElementById('mobile-menu');
-  const btn = document.getElementById('hamburger');
-  menu.classList.toggle('open');
-  btn.classList.toggle('open');
-}
-function closeMobileMenu() {
-  document.getElementById('mobile-menu').classList.remove('open');
-  document.getElementById('hamburger').classList.remove('open');
-}
-// Close mobile menu on outside click
-document.addEventListener('click', e => {
-  const menu = document.getElementById('mobile-menu');
-  const btn = document.getElementById('hamburger');
-  if (menu.classList.contains('open') && \!menu.contains(e.target) && \!btn.contains(e.target)) {
-    closeMobileMenu();
+(function () {
+  const sections = document.querySelectorAll("main section[id]");
+  const tocLinks = document.querySelectorAll(".toc a");
+  const mobileLinks = document.querySelectorAll(".mobile-jumpbar a");
+  const progressBar = document.getElementById("scroll-progress-bar");
+  function setActive(id) {
+    [...tocLinks, ...mobileLinks].forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
   }
-});</script>
+  function onScroll() {
+    const trigger = window.innerHeight * 0.3;
+    let current = sections[0]?.id;
+    sections.forEach(s => { if (s.getBoundingClientRect().top <= trigger) current = s.id; });
+    if (current) setActive(current);
+    if (progressBar) {
+      const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+      progressBar.style.width = Math.min(pct, 100) + "%";
+    }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  onScroll();
+})();
+</script>
 
-
-<!-- ============================================================
-     PDF DOWNLOAD GATE — change password on the one line below
-     ============================================================ -->
+<!-- PDF DOWNLOAD GATE -->
 <style>
 #pdf-modal-bg{display:none;position:fixed;inset:0;z-index:9999;background:rgba(20,30,45,0.55);backdrop-filter:blur(4px);align-items:center;justify-content:center}
 #pdf-modal-bg.open{display:flex}
-#pdf-modal{background:#faf8f5;border-radius:14px;padding:40px 36px;max-width:380px;width:90%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,0.18);font-family:'Source Serif 4',Georgia,serif}
-#pdf-modal h3{font-family:'Playfair Display',Georgia,serif;font-size:1.4rem;color:#1e2d42;margin:0 0 8px}
+#pdf-modal{background:#faf8f5;border-radius:14px;padding:40px 36px;max-width:380px;width:90%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,0.18);font-family:"Source Serif 4",Georgia,serif}
+#pdf-modal h3{font-family:"Playfair Display",Georgia,serif;font-size:1.4rem;color:#1e2d42;margin:0 0 8px}
 #pdf-modal p{color:#777;font-size:.9rem;margin:0 0 24px;line-height:1.6}
 #pdf-pw-input{width:100%;padding:13px 16px;font-size:1rem;font-family:inherit;border:1.5px solid #d0ccc6;border-radius:8px;background:#fff;color:#1e2d42;outline:none;box-sizing:border-box;text-align:center;letter-spacing:.1em;transition:border-color .2s}
 #pdf-pw-input:focus{border-color:#1e2d42}
@@ -699,9 +1013,8 @@ document.addEventListener('click', e => {
 </style>
 <div id="pdf-modal-bg">
   <div id="pdf-modal">
-    <div style="font-size:1.8rem;margin-bottom:14px">📄</div>
     <h3>Download Case Study</h3>
-    <p>Enter the password to download the full PDF with wireframes and research findings.</p>
+    <p>Enter the password to download the full PDF with design process and pilot results.</p>
     <input id="pdf-pw-input" type="password" placeholder="Password" autocomplete="off"/>
     <button id="pdf-pw-btn">Download PDF</button>
     <div id="pdf-pw-error"></div>
@@ -709,37 +1022,16 @@ document.addEventListener('click', e => {
   </div>
 </div>
 <script>
-(function () {
-  /* ── CHANGE YOUR PASSWORD HERE ── */
-  const PASSWORD = "sandeep2026";
-  /* ────────────────────────────── */
-  const PDF_URL   = "casestudies/oracle-live-experience.pdf";
-  const modalBg   = document.getElementById("pdf-modal-bg");
-  const input     = document.getElementById("pdf-pw-input");
-  const btn       = document.getElementById("pdf-pw-btn");
-  const errorMsg  = document.getElementById("pdf-pw-error");
-  const cancelBtn = document.getElementById("pdf-cancel");
-  window.pgPromptDownload = function () {
-    modalBg.classList.add("open");
-    input.value = ""; errorMsg.textContent = "";
-    setTimeout(() => input.focus(), 80);
-  };
-  function attempt() {
-    if (input.value === PASSWORD) {
-      modalBg.classList.remove("open");
-      const a = document.createElement("a");
-      a.href = PDF_URL; a.download = "";
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    } else {
-      errorMsg.textContent = "Incorrect password — try again.";
-      input.classList.remove("shake"); void input.offsetWidth;
-      input.classList.add("shake"); input.value = ""; input.focus();
-    }
-  }
-  btn.addEventListener("click", attempt);
-  input.addEventListener("keydown", e => { if (e.key === "Enter") attempt(); });
-  cancelBtn.addEventListener("click", () => modalBg.classList.remove("open"));
-  modalBg.addEventListener("click", e => { if (e.target === modalBg) modalBg.classList.remove("open"); });
+(function(){
+  const PASSWORD="sandeep2026";
+  const PDF_URL="casestudies/oracle-live-experience.pdf";
+  const bg=document.getElementById("pdf-modal-bg"),inp=document.getElementById("pdf-pw-input"),btn=document.getElementById("pdf-pw-btn"),err=document.getElementById("pdf-pw-error"),cancel=document.getElementById("pdf-cancel");
+  window.pgPromptDownload=function(){bg.classList.add("open");inp.value="";err.textContent="";setTimeout(()=>inp.focus(),80);};
+  function attempt(){if(inp.value===PASSWORD){bg.classList.remove("open");const a=document.createElement("a");a.href=PDF_URL;a.download="";document.body.appendChild(a);a.click();document.body.removeChild(a);}else{err.textContent="Incorrect password — try again.";inp.classList.remove("shake");void inp.offsetWidth;inp.classList.add("shake");inp.value="";inp.focus();}}
+  btn.addEventListener("click",attempt);
+  inp.addEventListener("keydown",e=>{if(e.key==="Enter")attempt();});
+  cancel.addEventListener("click",()=>bg.classList.remove("open"));
+  bg.addEventListener("click",e=>{if(e.target===bg)bg.classList.remove("open");});
 })();
 </script>
 

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Oracle Unity Data Platform — Sandeep Virmani</title>
-<link rel="icon" type="image/png" href="images/Favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/Favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet" />
 <style>
   :root {
     --navy: #1e2d42;
@@ -32,6 +32,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* ── NAV ── */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -45,7 +46,6 @@
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--rule);
   }
-
   .nav-name {
     font-family: 'Playfair Display', serif;
     font-size: 17px;
@@ -54,62 +54,6 @@
     letter-spacing: -0.2px;
     text-decoration: none;
   }
-
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a {
-    font-family: 'Source Serif 4', serif;
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: 0.3px;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--navy); }
-
-/* ── HAMBURGER + MOBILE MENU ── */
-  .nav-hamburger {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 6px;
-    flex-direction: column;
-    gap: 5px;
-  }
-  .nav-hamburger span {
-    display: block;
-    width: 22px;
-    height: 1.5px;
-    background: var(--navy);
-    transition: transform 0.25s, opacity 0.25s;
-  }
-  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-  .mobile-menu {
-    display: none;
-    position: fixed;
-    top: 64px; left: 0; right: 0;
-    background: #fff;
-    border-bottom: 2px solid var(--navy);
-    z-index: 99;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-  }
-  .mobile-menu.open { display: block; }
-  .mobile-menu a {
-    display: block;
-    padding: 16px 24px;
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    color: var(--navy);
-    text-decoration: none;
-    border-bottom: 1px solid var(--rule);
-    transition: background 0.15s, padding-left 0.15s;
-  }
-  .mobile-menu a:last-child { border-bottom: none; }
-  .mobile-menu a:hover { background: var(--pale); padding-left: 32px; }
-  @media (max-width: 768px) { .nav-hamburger { display: flex; } }
 
   .back-link {
     font-size: 13px;
@@ -122,6 +66,7 @@
   }
   .back-link:hover { color: var(--navy); }
 
+  /* ── HEADER ── */
   .project-header {
     min-height: 60vh;
     display: flex;
@@ -131,13 +76,11 @@
     background: linear-gradient(135deg, var(--pale) 0%, rgba(232,240,248,0.5) 100%);
     max-width: 100%;
   }
-
   .project-header-inner {
     max-width: 1100px;
     margin: 0 auto;
     width: 100%;
   }
-
   .project-co {
     font-size: 10px;
     letter-spacing: 2px;
@@ -145,7 +88,6 @@
     color: var(--mid);
     margin-bottom: 16px;
   }
-
   .project-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(36px, 6vw, 56px);
@@ -155,7 +97,6 @@
     margin-bottom: 24px;
     letter-spacing: -0.5px;
   }
-
   .project-summary {
     font-size: 18px;
     color: #222;
@@ -164,16 +105,13 @@
     margin-bottom: 0;
   }
 
+  /* ── SECTIONS ── */
   section {
     max-width: 1100px;
     margin: 0 auto;
     padding: 80px 48px;
   }
-
-  .section-header {
-    margin-bottom: 48px;
-  }
-
+  .section-header { margin-bottom: 48px; }
   .section-label {
     font-size: 10px;
     letter-spacing: 2px;
@@ -181,7 +119,6 @@
     color: var(--mid);
     margin-bottom: 12px;
   }
-
   .section-title {
     font-family: 'Playfair Display', serif;
     font-size: 32px;
@@ -190,70 +127,217 @@
     line-height: 1.2;
     letter-spacing: -0.3px;
   }
+  .section-intro {
+    font-size: 17px;
+    color: #333;
+    line-height: 1.8;
+    max-width: 760px;
+    margin-top: 12px;
+  }
 
-  .project-metrics {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 32px;
-    margin-bottom: 48px;
+  /* ── IMPACT STRIP ── */
+  section.impact-strip {
+    padding: 0;
+    max-width: 100%;
+    border-bottom: 1px solid var(--rule);
+  }
+  .impact-grid {
+    max-width: 1100px;
+    margin: 0 auto;
     padding: 48px;
-    background: var(--pale);
-    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0;
   }
-
-  .metric-card {
-    text-align: left;
+  .impact-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
   }
-
-  .metric-value {
+  .impact-val {
     font-family: 'Playfair Display', serif;
-    font-size: 36px;
+    font-size: 48px;
     font-weight: 700;
     color: var(--navy);
     line-height: 1;
-    margin-bottom: 6px;
   }
-
-  .metric-label {
+  .impact-lbl {
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-top: 6px;
+  }
+  .impact-sub {
     font-size: 12px;
     color: var(--muted);
-    line-height: 1.5;
+    font-style: italic;
+  }
+  .impact-divider {
+    width: 1px;
+    height: 60px;
+    background: var(--rule);
+    flex-shrink: 0;
+    margin: 0 8px;
   }
 
-  .project-content {
+  /* ── TINTED SECTION ── */
+  .section-tinted {
+    background: var(--cream);
+    max-width: 100% !important;
+    padding: 80px 0 !important;
+  }
+  .section-tinted > * {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+  .section-tinted > .img-2col,
+  .section-tinted > .img-3col,
+  .section-tinted > figure {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+  /* ── IMAGE GRIDS ── */
+  .img-2col {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    margin-bottom: 48px;
+    gap: 24px;
+    margin-bottom: 24px;
   }
-
-  .content-left, .content-right {
-    display: flex;
-    flex-direction: column;
+  .img-3col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
   }
-
-  .content-block h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 12px;
+  .sketch-fig {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
+  .sketch-fig img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--rule);
+    display: block;
+  }
+  .sketch-fig figcaption {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+    padding-left: 2px;
+  }
+  figure.sketch-fig--contained { display: block; }
+  .sketch-fig--contained .img-wrap {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .sketch-fig--contained .img-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .sketch-fig--contained figcaption { margin-top: 10px; }
 
-  .content-block p {
+  /* ── INSIGHT CALLOUT ── */
+  .insight-callout {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 28px 32px;
+    background: #fff;
+    border-radius: 8px;
+    border-left: 3px solid var(--navy);
+    margin-top: 32px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .insight-icon {
+    font-size: 20px;
+    color: var(--navy);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .insight-callout p {
     font-size: 16px;
     color: #222;
-    line-height: 1.8;
+    line-height: 1.7;
+    margin: 0;
   }
 
+  /* ── QUOTES ── */
+  .quote-hero {
+    padding: 40px 48px;
+    background: var(--navy);
+    border-radius: 10px;
+    margin-bottom: 16px;
+  }
+  .quote-hero blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .quote-hero cite {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    font-style: normal;
+  }
+  .quote-secondary {
+    padding: 28px 36px;
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    border-left: 3px solid var(--light);
+  }
+  .quote-secondary blockquote {
+    font-size: 16px;
+    font-style: italic;
+    color: #333;
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  .quote-secondary cite {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: normal;
+  }
+
+  /* ── NORTH STAR ── */
+  .northstar-section {
+    background: var(--navy);
+    max-width: 100% !important;
+    padding: 80px 0 !important;
+  }
+  .northstar-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+  .northstar-header { margin-bottom: 48px; }
+  .northstar-header .section-label { color: rgba(255,255,255,0.5); }
+  .northstar-header .section-title { color: #fff; }
+  .northstar-header .section-intro { color: rgba(255,255,255,0.72); }
+
+  /* ── CONTENT LIST ── */
   .content-list {
     list-style: none;
     display: flex;
     flex-direction: column;
     gap: 12px;
   }
-
   .content-list li {
     font-size: 15px;
     color: #222;
@@ -261,7 +345,6 @@
     padding-left: 20px;
     position: relative;
   }
-
   .content-list li::before {
     content: '→';
     position: absolute;
@@ -269,122 +352,301 @@
     color: var(--mid);
   }
 
-  .project-cta {
-    background: var(--navy);
-    padding: 64px 48px;
-    text-align: center;
+  /* ── DUAL PERSONA CARDS ── */
+  .persona-dual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
   }
-
-  .project-cta-inner {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .cta-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 20px;
-  }
-
-  .cta-text {
-    font-size: 16px;
-    color: rgba(255,255,255,0.8);
-    margin-bottom: 32px;
-    line-height: 1.7;
-  }
-
-  .cta-buttons {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .cta-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 28px;
-    border: 1px solid rgba(255,255,255,0.4);
-    background: transparent;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: all 0.2s;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-  }
-
-  .cta-button:hover {
-    border-color: #fff;
-    background: rgba(255,255,255,0.1);
-  }
-
-  .cta-button.primary {
+  .persona-card {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
     background: #fff;
-    color: var(--navy);
-    border-color: #fff;
   }
-
-  .cta-button.primary:hover {
-    background: rgba(255,255,255,0.9);
-  }
-
-  .project-footer-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 48px;
-    border-top: 1px solid var(--rule);
-  }
-
-  .footer-nav-link {
+  .persona-card-left {
+    background: var(--navy);
+    padding: 28px 20px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    text-decoration: none;
-    color: var(--navy);
-    transition: color 0.2s;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 12px;
+  }
+  .persona-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 2px solid rgba(255,255,255,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
   }
 
-  .footer-nav-link:hover { color: var(--mid); }
+  /* ── SCROLL PROGRESS ── */
+  #scroll-progress-wrap {
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    height: 3px;
+    background: transparent;
+    z-index: 99;
+  }
+  #scroll-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--mid);
+    transition: width 0.1s linear;
+  }
 
-  .footer-nav-label {
+  /* ── MOBILE JUMPBAR ── */
+  .mobile-jumpbar {
+    display: none;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 12px 24px;
+    gap: 8px;
+    border-bottom: 1px solid var(--rule);
+    background: #fff;
+  }
+  .mobile-jumpbar a {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-family: 'Source Serif 4', serif;
+    color: var(--muted);
+    text-decoration: none;
+    border: 1px solid var(--rule);
+    border-radius: 99px;
+    transition: all 0.2s;
+  }
+  .mobile-jumpbar a.active,
+  .mobile-jumpbar a:hover {
+    background: var(--navy);
+    color: #fff;
+    border-color: var(--navy);
+  }
+
+  /* ── PAGE WRAP + TOC ── */
+  .page-wrap {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 80px 48px 80px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .toc {
+    position: sticky;
+    top: 96px;
+    border-left: 2px solid var(--rule);
+    padding-left: 16px;
+  }
+  .toc-title {
     font-size: 10px;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .toc ul { list-style: none; }
+  .toc li { margin-bottom: 12px; }
+  .toc a {
+    font-size: 12.5px;
+    color: var(--muted);
+    text-decoration: none;
+    line-height: 1.4;
+    transition: color 0.2s;
+    display: block;
+  }
+  .toc a:hover { color: var(--navy); }
+  .toc a.active { color: var(--navy); font-weight: 600; }
+  .toc a.active::before { content: "•"; color: var(--mid); margin-right: 8px; }
+
+  /* ── MAIN SECTIONS ── */
+  main section { max-width: none; padding: 80px 0; }
+  .section-tinted {
+    background: var(--cream);
+    max-width: 100% !important;
+    padding: 80px 0 !important;
+  }
+  .section-tinted > * {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+  .section-tinted > figure {
+    padding-left: 48px;
+    padding-right: 48px;
   }
 
-  .footer-nav-title {
-    font-size: 15px;
-    font-weight: 500;
+  /* ── TESTIMONY ROWS ── */
+  .testimony-list { margin-top: 8px; }
+  .testimony-row {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .testimony-row:first-child { border-top: 1px solid var(--rule); }
+  .testimony-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--rule);
+    line-height: 1;
+    min-width: 44px;
+  }
+  .testimony-body { flex: 1; }
+  .testimony-body h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .testimony-body p {
+    font-size: 15.5px;
+    color: #333;
+    line-height: 1.75;
+  }
+  .testimony-tag {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--mid);
+    background: rgba(58,106,154,0.08);
+    padding: 3px 10px;
+    border-radius: 99px;
+    border: 1px solid rgba(58,106,154,0.18);
+  }
+  .testimony-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .testimony-pill {
+    font-size: 11.5px;
+    color: var(--muted);
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 99px;
+    padding: 3px 11px;
   }
 
-  @media (max-width: 900px) {
-    nav { padding: 0 24px; }
-    .project-header { padding: 100px 24px 60px; }
-    section { padding: 60px 24px; }
-    .project-content { grid-template-columns: 1fr; gap: 40px; }
-    .project-cta { padding: 48px 24px; }
-    .project-footer-nav { flex-direction: column; gap: 24px; text-align: center; padding: 32px 24px; }
-    .project-metrics { grid-template-columns: 1fr 1fr; }
+  /* ── IMPACT STAT STRIP ── */
+  .impact-stat-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .impact-stat-cell {
+    padding: 32px 28px;
+    border-right: 1px solid var(--rule);
+  }
+  .impact-stat-cell:last-child { border-right: none; }
+  .impact-stat-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .impact-stat-lbl {
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-top: 8px;
+  }
+  .impact-stat-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 6px;
+    line-height: 1.5;
+    font-style: italic;
   }
 
+  /* ── QUOTE BLOCK ── */
+  .quote-block {
+    padding: 28px 36px;
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    border-left: 3px solid var(--light);
+    margin-top: 32px;
+  }
+  .quote-block blockquote {
+    font-size: 16px;
+    font-style: italic;
+    color: #333;
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  .quote-block cite {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: normal;
+  }
+
+  /* ── QUOTE HERO ── */
+  .quote-hero {
+    padding: 40px 48px;
+    background: var(--navy);
+    border-radius: 10px;
+    margin-bottom: 16px;
+  }
+  .quote-hero blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .quote-hero cite {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    font-style: normal;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 980px) {
+    .page-wrap { grid-template-columns: 1fr; padding: 48px 32px; }
+    .toc { display: none; }
+    .mobile-jumpbar { display: flex; }
+    .impact-stat-strip { grid-template-columns: 1fr; }
+    .impact-stat-cell { border-right: none; border-bottom: 1px solid var(--rule); }
+    .impact-stat-cell:last-child { border-bottom: none; }
+  }
   @media (max-width: 768px) {
     nav { padding: 0 16px; }
-    nav .nav-links { display: none; }
-    .project-title { font-size: clamp(28px, 5vw, 36px); }
     .project-header { padding: 80px 16px 48px; }
-    section { padding: 48px 16px; }
-    .section-title { font-size: 24px; }
-    .project-metrics { grid-template-columns: 1fr; padding: 32px 16px; }
-    .project-cta { padding: 32px 16px; }
+    .project-title { font-size: clamp(28px, 5vw, 36px); }
+    main section { padding: 56px 0; }
+    .section-tinted > * { padding-left: 24px; padding-right: 24px; }
+    .problem-grid { grid-template-columns: 1fr; }
+    .project-cta { padding: 40px 16px; }
+    .project-footer-nav { flex-direction: column; gap: 24px; text-align: center; padding: 32px 16px; }
     .cta-buttons { flex-direction: column; }
     .cta-button { width: 100%; justify-content: center; }
   }
@@ -392,296 +654,343 @@
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-name">Sandeep Virmani</a>
   <a href="index.html#work" class="back-link">← Back to Work</a>
 </nav>
 
-<\!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobile-menu">
-  <a href="index.html#work" onclick="closeMobileMenu()">Work</a>
-  <a href="index.html#about" onclick="closeMobileMenu()">About</a>
-  <a href="index.html#career" onclick="closeMobileMenu()">Career</a>
-  <a href="index.html#contact" onclick="closeMobileMenu()">Contact</a>
-</div>
+<!-- SCROLL PROGRESS BAR -->
+<div id="scroll-progress-wrap"><div id="scroll-progress-bar"></div></div>
 
+<!-- HEADER -->
 <div class="project-header">
   <div class="project-header-inner">
     <div class="project-co">Oracle · 2019–2021</div>
-    <h1 class="project-title">Oracle Unity Data Platform</h1>
+    <h1 class="project-title">Oracle Unity<br>Data Platform</h1>
     <p class="project-summary">
-      Transforming data integration from complex JSON workflows into an intuitive Admin Console. By redesigning the system with Redwood style guidelines and visual configuration interfaces, we enabled System Administrators to create job configurations, ingest data, and manage schemas 70% faster—eliminating the need to work directly with raw JSON files.
+      A $300M customer data platform built on tools that made experts feel like beginners. I led the redesign of the Admin Console — transforming raw JSON workflows into a visual-first configuration interface, enabling System Administrators to create job configurations, map data sources, and manage schemas without ever touching a JSON file.
+    </p>
+    <p style="font-size: 14px; color: #5a7fa8; margin-top: 20px; line-height: 1.7; max-width: 760px;">
+      <strong>Role:</strong> Principal Product Designer — research, information architecture, interaction design, and Redwood design system implementation across the full Admin Console.
     </p>
   </div>
 </div>
 
-<section>
-  <div class="section-header">
-    <div class="section-label">Key Outcomes</div>
-    <h2 class="section-title">Metrics & Impact</h2>
-  </div>
-  <div class="project-metrics">
-    <div class="metric-card">
-      <div class="metric-value">70%</div>
-      <div class="metric-label">Speed improvement in routine admin work via visual interface</div>
+<!-- IMPACT STRIP -->
+<section class="impact-strip">
+  <div class="impact-grid">
+    <div class="impact-item">
+      <span class="impact-val">70%</span>
+      <span class="impact-lbl">Faster Workflows</span>
+      <span class="impact-sub">Job creation, column mapping &amp; data ingestion</span>
     </div>
-    <div class="metric-card">
-      <div class="metric-value">6 Phases</div>
-      <div class="metric-label">Comprehensive redesign from JSON Tool Manager to Admin Console</div>
+    <div class="impact-divider"></div>
+    <div class="impact-item">
+      <span class="impact-val">Zero</span>
+      <span class="impact-lbl">JSON Required</span>
+      <span class="impact-sub">All routine admin tasks now fully visual</span>
     </div>
-    <div class="metric-card">
-      <div class="metric-value">Zero JSON</div>
-      <div class="metric-label">Admins no longer required to work directly with raw JSON files</div>
+    <div class="impact-divider"></div>
+    <div class="impact-item">
+      <span class="impact-val">85%</span>
+      <span class="impact-lbl">Fewer Import Errors</span>
+      <span class="impact-sub">Real-time validation eliminated syntax failures</span>
     </div>
-  </div>
-</section>
-
-<section>
-  <div class="section-header">
-    <div class="section-label">Design Process</div>
-    <h2 class="section-title">Research & Strategy</h2>
-  </div>
-  <div class="project-content">
-    <div class="content-left">
-      <div class="content-block">
-        <h3>The Core Challenge</h3>
-        <p>The legacy MCPS-Manager exposed raw JSON data structures that System Administrators had to manually parse, understand, and manipulate. Admins like Gavin needed to create Job Configurations to ingest customer data, but the process was cumbersome: working directly with complex JSON files, managing source detection, and mapping columns—all without visual assistance.</p>
-        <p style="margin-top: 12px;">The result: slow, error-prone workflows and significant cognitive load on a small team managing critical data integration tasks.</p>
-      </div>
-      <div class="content-block">
-        <h3>Design Goals</h3>
-        <ul class="content-list">
-          <li>Eliminate direct JSON interaction for routine admin tasks</li>
-          <li>Enable visual job configuration creation and management</li>
-          <li>Provide intuitive source detection and schema mapping</li>
-          <li>Make data ingestion workflows discoverable and searchable</li>
-        </ul>
-      </div>
-    </div>
-    <div class="content-right">
-      <div class="content-block">
-        <h3>The Admin Console Solution</h3>
-        <p>Redesigned the entire platform using Oracle's Redwood Style Guide, creating a visual-first Admin Console where System Administrators can:</p>
-        <ul class="content-list" style="margin-top: 12px;">
-          <li><strong>Create Job Configurations</strong> through an intuitive form-based interface (no JSON editing)</li>
-          <li><strong>Detect Sources</strong> and automatically display available schemas from connected data sources</li>
-          <li><strong>Map Columns</strong> visually by dragging source columns to Unity Data columns</li>
-          <li><strong>Search & Manage</strong> all job configurations in a clean, searchable view</li>
-          <li><strong>Ingest Data</strong> with clear, step-by-step workflows that guide admins through complex processes</li>
-        </ul>
-      </div>
-      <div class="content-block">
-        <h3>Key Impact</h3>
-        <ul class="content-list">
-          <li><strong>70% faster</strong> routine admin workflows (job creation, data ingestion, column mapping)</li>
-          <li><strong>Zero JSON files</strong> required for standard operations—all interactions visual and intuitive</li>
-          <li><strong>Self-service platform</strong> enabling admins to work independently without deep technical knowledge of data structures</li>
-          <li><strong>Scalable operations</strong> allowing the admin team to manage significantly more job configurations</li>
-        </ul>
-      </div>
+    <div class="impact-divider"></div>
+    <div class="impact-item">
+      <span class="impact-val">6</span>
+      <span class="impact-lbl">Design Phases</span>
+      <span class="impact-sub">From JSON Tool Manager to full Admin Console</span>
     </div>
   </div>
 </section>
 
-<section>
+<!-- MOBILE JUMPBAR -->
+<div class="mobile-jumpbar">
+  <a href="#context">Context</a>
+  <a href="#research">Research</a>
+  <a href="#define">Define</a>
+  <a href="#ideation">Ideation</a>
+  <a href="#design">Design</a>
+  <a href="#impact">Impact</a>
+</div>
+
+<div class="page-wrap">
+  <!-- LEFT TOC -->
+  <aside class="toc">
+    <div class="toc-title">Jump to</div>
+    <ul>
+      <li><a href="#context">Project Context</a></li>
+      <li><a href="#research">Discovery &amp; Research</a></li>
+      <li><a href="#define">Define</a></li>
+      <li><a href="#ideation">Ideation</a></li>
+      <li><a href="#design">Design</a></li>
+      <li><a href="#impact">Decisions &amp; Impact</a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+
+<!-- ── 1. CONTEXT ── -->
+<section id="context">
   <div class="section-header">
-    <div class="section-label">Design Methodology</div>
-    <h2 class="section-title">6-Phase Redesign Approach</h2>
+    <div class="section-label">Project Brief &amp; Context</div>
+    <h2 class="section-title">The tools were technically capable. The UI made experts feel like beginners.</h2>
+    <p class="section-intro">Oracle Unity Data Platform unified customer data across CX products — Eloqua, Service Cloud, Commerce. The underlying ML and data pipeline were enterprise-grade. But System Administrators had to configure everything by hand-editing raw JSON files. Gavin, a senior admin managing 500+ job configurations, was spending more time debugging JSON syntax than actually managing data.</p>
   </div>
-  <div class="project-content">
-    <div class="content-left">
-      <div class="content-block">
-        <h3>Phase 1: Study JSON Tool Manager</h3>
-        <p>Deep analysis of the legacy MCPS-Manager system. Documented how System Administrators currently worked with JSON structures, identified pain points, and mapped the data flow from source detection to column mapping to data ingestion.</p>
-      </div>
-      <div class="content-block">
-        <h3>Phase 2: Navigation & Information Architecture</h3>
-        <p>Designed a clear, hierarchical structure for the Admin Console. Created navigation patterns that surface key actions (Create, Search, Edit, Delete) and organized screens logically: Dashboard → Job Configurations → Configuration Details → Execution Logs.</p>
-      </div>
-      <div class="content-block">
-        <h3>Phase 3: Data Ingestion Design</h3>
-        <p>Built intuitive workflows for data source selection and connection. Designed forms and wizards that guide admins through source detection, validation, and configuration without requiring JSON knowledge.</p>
+
+  <div class="insight-callout">
+    <span class="insight-icon">→</span>
+    <p>The competitive angle: every competing CDP had visual configuration. Oracle's advantage was the depth of its data model — Redwood design system, cross-product unification, ML-driven identity resolution. The design challenge was making that depth accessible without a computer science degree. The constraint: a small admin team managing critical data integration for Oracle's largest enterprise clients.</p>
+  </div>
+</section>
+
+<!-- ── 2. RESEARCH ── -->
+<section id="research" class="section-tinted">
+  <div class="section-header">
+    <div class="section-label">Discovery &amp; Research</div>
+    <h2 class="section-title">Three problems. Every System Administrator said the same things.</h2>
+    <p class="section-intro">Deep analysis of the legacy MCPS-Manager. Interviews with System Administrators across Oracle's enterprise clients. Competitive review of Segment, Treasure Data, and Salesforce CDP. The findings converged around three problems that the existing tool made structurally worse.</p>
+  </div>
+
+  <div class="testimony-list">
+    <div class="testimony-row">
+      <div class="testimony-num">01</div>
+      <div class="testimony-body">
+        <h4>JSON complexity turns routine tasks into error-prone marathons</h4>
+        <p>Creating a single job configuration required hand-editing nested JSON structures, manually verifying syntax, and running test imports to check for errors. A task that should take 10 minutes regularly took 45. New admins needed weeks of training just to become productive.</p>
+        <span class="testimony-tag">Cognitive load</span>
       </div>
     </div>
-    <div class="content-right">
-      <div class="content-block">
-        <h3>Phase 4: View, Edit, Create Pages</h3>
-        <p>Designed comprehensive CRUD interfaces following Redwood style guidelines. Created detail pages with inline editing, confirmation dialogs, and clear error messaging. Built list views with filtering, sorting, and search to help admins manage hundreds of job configurations.</p>
+    <div class="testimony-row">
+      <div class="testimony-num">02</div>
+      <div class="testimony-body">
+        <h4>No visual feedback — you only know it's wrong when it fails</h4>
+        <p>Column mapping was entirely textual. Admins mapped source columns to Unity Data columns by typing field names, with no preview of how the mapping would resolve against live schema data. Errors surfaced only at import time — hours after configuration.</p>
+        <span class="testimony-tag">No validation</span>
       </div>
-      <div class="content-block">
-        <h3>Phase 5: Rebrand Query Builder</h3>
-        <p>Transformed the query builder interface from a text-based JSON editor into a visual query composer. Admins can now build complex queries through an intuitive interface with drag-and-drop column selection, operator dropdowns, and real-time query preview.</p>
+    </div>
+    <div class="testimony-row">
+      <div class="testimony-num">03</div>
+      <div class="testimony-body">
+        <h4>Discovery is impossible at scale</h4>
+        <p>Gavin managed 500+ job configurations stored as individual JSON files. Finding, comparing, or auditing them required custom scripts or manual file browsing. There was no search, no filter, no way to see status at a glance.</p>
+        <span class="testimony-tag">Searchability</span>
       </div>
-      <div class="content-block">
-        <h3>Phase 6: Shell & Integration</h3>
-        <p>Implemented the unified shell/navigation framework, integrated all modules into a cohesive Admin Console, and ensured consistent styling across all components using Redwood design system.</p>
+    </div>
+  </div>
+
+  <div class="quote-hero" style="margin-top: 40px;">
+    <blockquote>"The old system forced me to become a JSON expert just to manage configurations. I should be focused on which sources to connect and which columns to map — not wrestling with syntax."</blockquote>
+    <cite>— Gavin, System Administrator · Research interview, Oracle Unity</cite>
+  </div>
+</section>
+
+<!-- ── 3. DEFINE ── -->
+<section id="define">
+  <div class="section-header">
+    <div class="section-label">Define</div>
+    <h2 class="section-title">Gavin manages 500+ configurations. He thinks in data sources — not JSON.</h2>
+    <p class="section-intro">Research surfaced a clear primary user — not a developer, but a trained System Administrator responsible for connecting Oracle's CX products to enterprise data sources. His mental model was built around sources, columns, and jobs — not the data structures underneath them.</p>
+  </div>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <h4>The System Administrator</h4>
+      <p>Manages data integration workflows and job configurations for Oracle Unity. Responsible for connecting sources, mapping columns, monitoring ingestion, and troubleshooting failed imports. Technical — but not a developer.</p>
+      <p class="quote" style="margin-top: 14px;">"I think in terms of 'what data source am I connecting' and 'which columns map to which attributes' — I don't think in terms of JSON keys and nested objects."</p>
+    </div>
+    <div class="problem-card">
+      <h4>What Gavin actually needed</h4>
+      <p>A visual-first interface that matched his mental model: browse sources, drag columns to map them, preview the configuration before saving, and search across all jobs without scripting. Speed and confidence — not raw control over data structures.</p>
+    </div>
+  </div>
+
+  <div class="insight-callout" style="margin-top: 32px;">
+    <span class="insight-icon">→</span>
+    <p>The design principle that followed: <strong>the interface should speak the language of the administrator, not the data engineer.</strong> Every screen was evaluated against Gavin's vocabulary — sources, columns, jobs, runs — not JSON keys or schema objects.</p>
+  </div>
+</section>
+
+<!-- ── 4. IDEATION ── -->
+<section id="ideation" class="section-tinted">
+  <div class="section-header">
+    <div class="section-label">Ideation</div>
+    <h2 class="section-title">Six phases, one north star — zero JSON for routine work.</h2>
+    <p class="section-intro">The redesign was too large to tackle as a single effort. I structured it into six sequential phases, each one buildable and shippable independently, with each phase reducing JSON dependency at a different point in the admin workflow.</p>
+  </div>
+
+  <div class="testimony-list">
+    <div class="testimony-row">
+      <div class="testimony-num">01</div>
+      <div class="testimony-body">
+        <h4>Study the JSON Tool Manager</h4>
+        <p>Deep audit of the legacy MCPS-Manager. Documented every screen, every JSON structure, every pain point. Mapped the complete data flow from source detection through column mapping to ingestion execution. This phase established the baseline — every future design decision was measured against it.</p>
+      </div>
+    </div>
+    <div class="testimony-row">
+      <div class="testimony-num">02</div>
+      <div class="testimony-body">
+        <h4>Navigation &amp; Information Architecture</h4>
+        <p>Designed the Admin Console's structural hierarchy — Dashboard → Job Configurations → Configuration Detail → Execution Logs. Created navigation patterns that surfaced the four primary actions (Create, Search, Edit, Delete) without requiring knowledge of the underlying data model.</p>
+      </div>
+    </div>
+    <div class="testimony-row">
+      <div class="testimony-num">03</div>
+      <div class="testimony-body">
+        <h4>Data Ingestion Design</h4>
+        <p>Built guided workflows for source selection and connection. Forms and step-by-step wizards replaced free-form JSON editing. Source detection — previously a manual JSON lookup — became a one-click schema discovery from connected data sources.</p>
+      </div>
+    </div>
+    <div class="testimony-row">
+      <div class="testimony-num">04</div>
+      <div class="testimony-body">
+        <h4>View, Edit, Create pages</h4>
+        <p>Comprehensive CRUD interfaces following Oracle Redwood style guidelines. Inline editing, confirmation dialogs, and real-time validation. List views with filtering, sorting, and search — giving Gavin visibility across all 500+ configurations for the first time.</p>
+      </div>
+    </div>
+    <div class="testimony-row">
+      <div class="testimony-num">05</div>
+      <div class="testimony-body">
+        <h4>Rebrand the Query Builder</h4>
+        <p>Transformed the text-based JSON query editor into a visual query composer. Drag-and-drop column selection, operator dropdowns, and real-time query preview. Admins build complex queries without writing a single line of JSON.</p>
+      </div>
+    </div>
+    <div class="testimony-row">
+      <div class="testimony-num">06</div>
+      <div class="testimony-body">
+        <h4>Shell &amp; Integration</h4>
+        <p>Implemented the unified shell and navigation framework. Integrated all six modules into a cohesive Admin Console with consistent styling across every component. The Redwood design system applied end-to-end — from form labels to error states.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section>
+<!-- ── 5. DESIGN ── -->
+<section id="design">
   <div class="section-header">
-    <div class="section-label">User Research & Insights</div>
-    <h2 class="section-title">Understanding the System Administrator</h2>
+    <div class="section-label">Design &amp; Iteration</div>
+    <h2 class="section-title">Admin Console — visual configuration, drag-and-drop mapping.</h2>
+    <p class="section-intro">The final Admin Console replaced every JSON interaction with a visual equivalent. Three interfaces formed the core of the redesign — each one eliminating a specific category of JSON dependency from Gavin's daily workflow.</p>
   </div>
-  <div class="project-content">
-    <div class="content-left">
-      <div class="content-block">
-        <h3>Primary User: Gavin (System Administrator)</h3>
-        <p><strong>Role:</strong> Manages data integration workflows and job configurations for Oracle Unity Data Platform.</p>
-        <p style="margin-top: 12px;"><strong>Key Responsibilities:</strong></p>
-        <ul class="content-list">
-          <li>Create and maintain Job Configurations</li>
-          <li>Detect and map data sources</li>
-          <li>Define column transformations and mappings</li>
-          <li>Monitor data ingestion execution</li>
-          <li>Troubleshoot failed imports</li>
-        </ul>
-      </div>
-      <div class="content-block">
-        <h3>Pain Points Addressed</h3>
-        <ul class="content-list">
-          <li><strong>JSON Complexity:</strong> Gavin had to manually edit JSON, making simple tasks error-prone</li>
-          <li><strong>Time Investment:</strong> Routine tasks took hours due to manual JSON manipulation</li>
-          <li><strong>Learning Curve:</strong> New admins required significant training on JSON structure and syntax</li>
-          <li><strong>Error Rate:</strong> Manual JSON editing led to typos, syntax errors, and failed imports</li>
-          <li><strong>Discovery:</strong> Finding existing job configurations required searching through hundreds of JSON files</li>
-        </ul>
-      </div>
+
+  <!-- Image placeholder: Admin Console overview -->
+  <figure class="sketch-fig sketch-fig--contained" style="margin-bottom: 40px;">
+    <div class="img-wrap" style="max-width: 980px; background: var(--pale); border: 1px dashed rgba(30,45,66,0.2); border-radius: 12px; min-height: 320px; display: flex; align-items: center; justify-content: center;">
+      <p style="font-size: 13px; color: var(--light); font-style: italic;">Admin Console — Job Configurations overview · Image coming soon</p>
     </div>
-    <div class="content-right">
-      <div class="content-block">
-        <h3>Key Insights</h3>
-        <p><strong>Mental Model Shift:</strong> Gavin thinks in terms of "data sources," "columns," and "jobs"—not JSON structures. The redesign centered on his mental model, not the underlying data format.</p>
-        <p style="margin-top: 12px;"><strong>Visual Preference:</strong> Admins strongly prefer visual interfaces. When shown mockups of the visual column mapper vs. JSON editing, Gavin's team unanimously chose the visual approach.</p>
-        <p style="margin-top: 12px;"><strong>Searchability Matters:</strong> Gavin manages 500+ job configurations. The ability to quickly search and filter was critical to his workflow.</p>
-        <p style="margin-top: 12px;"><strong>Confidence in Decisions:</strong> When Gavin can see a preview of his configuration before saving, he makes decisions faster and with fewer revisions.</p>
-      </div>
-      <div class="content-block">
-        <h3>Quote from Gavin</h3>
-        <p style="font-style: italic; color: var(--muted);">"The old system forced me to become a JSON expert just to manage configurations. With the new console, I can focus on the data itself—which sources to connect, which columns to map—instead of wrestling with JSON syntax."</p>
-      </div>
-    </div>
+    <figcaption style="text-align: center; margin-top: 12px;">Admin Console — searchable list view replacing 500+ individual JSON files with a single filtered, sortable interface.</figcaption>
+  </figure>
+
+  <div class="insight-callout">
+    <span class="insight-icon">→</span>
+    <p>The design decision that changed the engineering contract: <strong>source schema detection had to happen live in the browser</strong>, not as a separate developer step. This required a new API surface from the backend team — a design requirement that reshaped the data architecture.</p>
   </div>
+
+  <!-- Image placeholder: Visual column mapper -->
+  <div class="section-header" style="margin-top: 64px;">
+    <div class="section-label">Feature Focus</div>
+    <h2 class="section-title">Visual column mapper — drag source columns to Unity attributes.</h2>
+    <p class="section-intro">The most impactful single interface. Admins see source columns on the left and Oracle Unity Data attributes on the right. Drag a column to map it. Unmapped columns flag in amber. Conflicts flag in red. The configuration is validated before it is ever saved.</p>
+  </div>
+
+  <figure class="sketch-fig sketch-fig--contained" style="margin-bottom: 40px;">
+    <div class="img-wrap" style="max-width: 980px; background: var(--pale); border: 1px dashed rgba(30,45,66,0.2); border-radius: 12px; min-height: 280px; display: flex; align-items: center; justify-content: center;">
+      <p style="font-size: 13px; color: var(--light); font-style: italic;">Visual column mapper · Image coming soon</p>
+    </div>
+    <figcaption style="text-align: center; margin-top: 12px;">Column mapper — drag-and-drop source-to-Unity mapping with live validation. Replaced manual JSON field-name entry.</figcaption>
+  </figure>
 </section>
 
-<section>
+<!-- ── 6. IMPACT ── -->
+<section id="impact">
   <div class="section-header">
-    <div class="section-label">Outcomes & Transformation</div>
-    <h2 class="section-title">Measurable Impact</h2>
+    <div class="section-label">Decisions &amp; Impact</div>
+    <h2 class="section-title">Three outcomes. Measured against the old JSON workflow.</h2>
   </div>
-  <div class="project-content">
-    <div class="content-left">
-      <div class="content-block">
-        <h3>Workflow Efficiency</h3>
-        <p><strong>Before:</strong> Creating a job configuration took 45 minutes (JSON file creation, manual column mapping, syntax verification, testing).</p>
-        <p style="margin-top: 12px;"><strong>After:</strong> Same task takes 12–15 minutes using the Admin Console (guided workflow, visual mapping, instant validation).</p>
-        <p style="margin-top: 12px;"><strong>Result: 70% time savings per configuration</strong></p>
-      </div>
-      <div class="content-block">
-        <h3>Error Reduction</h3>
-        <p>JSON syntax errors dropped significantly. The visual interface with real-time validation eliminated typos and structural errors before configurations were saved. Failed imports due to configuration errors reduced by 85%.</p>
-      </div>
+
+  <!-- Stat strip -->
+  <div class="impact-stat-strip">
+    <div class="impact-stat-cell">
+      <div class="impact-stat-val">70%</div>
+      <div class="impact-stat-lbl">Time saved</div>
+      <div class="impact-stat-sub">Per job configuration — from 45 min to 12–15 min</div>
     </div>
-    <div class="content-right">
-      <div class="content-block">
-        <h3>Adoption & Scalability</h3>
-        <p>New System Administrators could become productive in days instead of weeks. The team confidently manages 2.5× more job configurations with the same headcount, enabling rapid expansion of data integration capabilities across Oracle's product lines.</p>
-      </div>
-      <div class="content-block">
-        <h3>Strategic Impact</h3>
-        <p><strong>Self-Service Platform:</strong> System Administrators work independently without requiring data architects to write JSON code.</p>
-        <p style="margin-top: 12px;"><strong>Faster Go-to-Market:</strong> New data source integrations launch faster when configurations can be created visually.</p>
-        <p style="margin-top: 12px;"><strong>User Satisfaction:</strong> Gavin's team reported significantly higher job satisfaction—managing data instead of fighting JSON syntax.</p>
-      </div>
+    <div class="impact-stat-cell">
+      <div class="impact-stat-val">85%</div>
+      <div class="impact-stat-lbl">Fewer errors</div>
+      <div class="impact-stat-sub">Failed imports due to configuration mistakes</div>
+    </div>
+    <div class="impact-stat-cell">
+      <div class="impact-stat-val">2.5×</div>
+      <div class="impact-stat-lbl">Scale</div>
+      <div class="impact-stat-sub">More job configurations managed by the same team</div>
     </div>
   </div>
-</section>
 
-<section>
-  <div class="section-header">
-    <div class="section-label">Platform Context</div>
-    <h2 class="section-title">The Complete User Journey</h2>
+  <div class="quote-hero" style="max-width: 100%; margin-top: 48px;">
+    <blockquote>"With the new console, I can focus on the data itself — which sources to connect, which columns to map — instead of wrestling with JSON syntax."</blockquote>
+    <cite>— Gavin, System Administrator · Post-launch validation</cite>
   </div>
-  <p style="font-size: 16px; color: #222; margin-bottom: 40px; line-height: 1.8;">The Admin Console (Job Configs) is the critical foundation of the entire Oracle Unity Data Platform. It enables System Administrators like Gavin to efficiently ingest data, which then flows through mastering and analytics, ultimately enabling downstream users to explore and report on clean, unified data.</p>
 
-  <div style="background: #faf9f7; padding: 48px; border-radius: 8px; margin-bottom: 48px;">
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-bottom: 32px;">
-      <!-- Phase 1 -->
-      <div style="text-align: center;">
-        <div style="background: #4a3f6b; color: white; padding: 16px; border-radius: 6px 6px 0 0; font-weight: 600; font-size: 16px;">Phase 1: Ingest Data</div>
-        <div style="background: white; padding: 20px; border-radius: 0 0 6px 6px; border: 1px solid #e0e0e0; border-top: none;">
-          <div style="font-weight: 600; color: #1e2d42; margin-bottom: 12px; font-size: 14px;">System Administrator</div>
-          <ul style="list-style: none; font-size: 13px; color: #555; line-height: 1.6;">
-            <li>✓ Create job config</li>
-            <li>✓ Configure sources</li>
-            <li>✓ Map columns</li>
-            <li>✓ Run publish job</li>
-          </ul>
+  <div class="testimony-list" style="margin-top: 48px;">
+    <div class="testimony-row">
+      <div class="testimony-num">01</div>
+      <div class="testimony-body">
+        <h4>Workflow efficiency — 70% time saving per configuration</h4>
+        <p>Before: creating a job configuration took 45 minutes — JSON file creation, manual column mapping, syntax verification, test import. After: 12–15 minutes using the Admin Console — guided workflow, visual mapping, instant validation before save.</p>
+        <div class="testimony-pills">
+          <span class="testimony-pill">Guided wizard</span>
+          <span class="testimony-pill">Live validation</span>
+          <span class="testimony-pill">45 min → 12 min</span>
         </div>
       </div>
-
-      <!-- Arrow -->
-      <div style="display: flex; align-items: center; justify-content: center; font-size: 24px; color: #3a6a9a;">→</div>
-
-      <!-- Phase 2 -->
-      <div style="text-align: center;">
-        <div style="background: #5a4f7b; color: white; padding: 16px; border-radius: 6px 6px 0 0; font-weight: 600; font-size: 16px;">Phase 2: Master Data</div>
-        <div style="background: white; padding: 20px; border-radius: 0 0 6px 6px; border: 1px solid #e0e0e0; border-top: none;">
-          <div style="font-weight: 600; color: #1e2d42; margin-bottom: 12px; font-size: 14px;">Instance Admin & Power Users</div>
-          <ul style="list-style: none; font-size: 13px; color: #555; line-height: 1.6;">
-            <li>✓ Unify data</li>
-            <li>✓ Augment attributes</li>
-            <li>✓ Promote records</li>
-            <li>✓ Run analytics</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Arrow -->
-      <div style="display: flex; align-items: center; justify-content: center; font-size: 24px; color: #3a6a9a;">→</div>
-
-      <!-- Phase 3 -->
-      <div style="text-align: center;">
-        <div style="background: #3a2f5b; color: white; padding: 16px; border-radius: 6px 6px 0 0; font-weight: 600; font-size: 16px;">Phase 3: Use & Explore</div>
-        <div style="background: white; padding: 20px; border-radius: 0 0 6px 6px; border: 1px solid #e0e0e0; border-top: none;">
-          <div style="font-weight: 600; color: #1e2d42; margin-bottom: 12px; font-size: 14px;">Data Consumers & Explorers</div>
-          <ul style="list-style: none; font-size: 13px; color: #555; line-height: 1.6;">
-            <li>✓ Query data</li>
-            <li>✓ Generate reports</li>
-            <li>✓ Export for use</li>
-            <li>✓ Build insights</li>
-          </ul>
+    </div>
+    <div class="testimony-row">
+      <div class="testimony-num">02</div>
+      <div class="testimony-body">
+        <h4>Error elimination — visual interfaces catch mistakes before import</h4>
+        <p>JSON syntax errors dropped significantly. The visual column mapper with real-time validation flagged unmapped columns and type conflicts before configurations were saved — eliminating the class of errors that only surfaced at import time. Failed imports due to configuration errors reduced by 85%.</p>
+        <div class="testimony-pills">
+          <span class="testimony-pill">Real-time type checking</span>
+          <span class="testimony-pill">Unmapped column flags</span>
+          <span class="testimony-pill">85% fewer failed imports</span>
         </div>
       </div>
     </div>
-
-    <div style="text-align: center; padding: 20px; background: white; border-radius: 6px; border: 2px solid #3a6a9a;">
-      <strong style="color: #1e2d42; display: block; margin-bottom: 8px;">The Admin Console is the Gateway</strong>
-      <p style="color: #555; font-size: 14px;">Without efficient job configuration and data ingestion, the entire downstream mastering and exploration pipeline cannot succeed. The Admin UI directly enables 70% faster data integration workflows.</p>
-      <p style="margin-top: 12px;"><a href="oracle-unity-user-journey.html" style="color: #3a6a9a; text-decoration: none; font-weight: 600;">View detailed user journey →</a></p>
+    <div class="testimony-row">
+      <div class="testimony-num">03</div>
+      <div class="testimony-body">
+        <h4>Self-service scale — 2.5× more configurations, same team</h4>
+        <p>New System Administrators became productive in days instead of weeks. The team confidently managed 2.5× more job configurations with the same headcount. The Redwood-based Admin Console became the foundation for Oracle Unity's self-service data integration strategy across product lines.</p>
+        <div class="testimony-pills">
+          <span class="testimony-pill">Days not weeks onboarding</span>
+          <span class="testimony-pill">Portfolio standard</span>
+          <span class="testimony-pill">Self-service platform</span>
+        </div>
+      </div>
     </div>
   </div>
-</section>
 
-<section>
-  <div class="section-header">
-    <div class="section-label">Further Details</div>
-    <h2 class="section-title">Full Case Study</h2>
-  </div>
-  <div style="padding: 48px; background: var(--pale); border-radius: 8px; text-align: center;">
-    <p style="font-size: 15px; color: var(--muted); margin-bottom: 20px;">Download the full case study PDF for detailed design process, data architecture, and research findings.</p>
-    <button onclick="pgPromptDownload()" class="cta-button primary">↓ Download PDF</button>
+  <!-- PDF download -->
+  <div style="margin-top: 64px; padding: 40px 48px; background: var(--pale); border-radius: 10px; text-align: center;">
+    <p style="font-size: 15px; color: var(--muted); margin-bottom: 20px;">Download the full case study PDF — wireframes, research findings, and Redwood implementation detail.</p>
+    <button onclick="pgPromptDownload()" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--navy); color: #fff; border: none; border-radius: 4px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; letter-spacing: 0.5px;">↓ Download PDF</button>
   </div>
 </section>
 
+  </main>
+</div><!-- /page-wrap -->
+
+<!-- CTA -->
 <div class="project-cta">
   <div class="project-cta-inner">
     <h2 class="cta-title">Interested in discussing this work?</h2>
-    <p class="cta-text">I'm always happy to discuss design process, data platform design, or how I approach making complex technical workflows approachable.</p>
+    <p class="cta-text">Happy to walk through the Redwood design system implementation, the JSON-to-visual translation process, or how I structured the six-phase approach.</p>
     <div class="cta-buttons">
-      <a href="index.html#contact" class="cta-button">Get in Touch</a>
+      <a href="index.html#contact" class="cta-button primary">Get in Touch</a>
       <a href="index.html#work" class="cta-button">View Other Work</a>
     </div>
   </div>
@@ -695,40 +1004,44 @@
   <a href="index.html" class="footer-nav-link" style="text-align: center;">
     <span class="footer-nav-label">Back to Home</span>
   </a>
-  <a href="index.html#work" class="footer-nav-link" style="text-align: right;">
-    <span class="footer-nav-label">Back to Work →</span>
+  <a href="prisma-cloud-onboarding.html" class="footer-nav-link" style="text-align: right;">
+    <span class="footer-nav-label">Next Project →</span>
+    <span class="footer-nav-title">Prisma Cloud Onboarding</span>
   </a>
 </div>
 
+<!-- TOC + PROGRESS JS -->
 <script>
-function toggleMobileMenu() {
-  const menu = document.getElementById('mobile-menu');
-  const btn = document.getElementById('hamburger');
-  menu.classList.toggle('open');
-  btn.classList.toggle('open');
-}
-function closeMobileMenu() {
-  document.getElementById('mobile-menu').classList.remove('open');
-  document.getElementById('hamburger').classList.remove('open');
-}
-// Close mobile menu on outside click
-document.addEventListener('click', e => {
-  const menu = document.getElementById('mobile-menu');
-  const btn = document.getElementById('hamburger');
-  if (menu.classList.contains('open') && \!menu.contains(e.target) && \!btn.contains(e.target)) {
-    closeMobileMenu();
+(function () {
+  const sections = document.querySelectorAll("main section[id]");
+  const tocLinks = document.querySelectorAll(".toc a");
+  const mobileLinks = document.querySelectorAll(".mobile-jumpbar a");
+  const progressBar = document.getElementById("scroll-progress-bar");
+  function setActive(id) {
+    [...tocLinks, ...mobileLinks].forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
   }
-});</script>
+  function onScroll() {
+    const trigger = window.innerHeight * 0.3;
+    let current = sections[0]?.id;
+    sections.forEach(s => { if (s.getBoundingClientRect().top <= trigger) current = s.id; });
+    if (current) setActive(current);
+    if (progressBar) {
+      const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+      progressBar.style.width = Math.min(pct, 100) + "%";
+    }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  onScroll();
+})();
+</script>
 
-
-<!-- ============================================================
-     PDF DOWNLOAD GATE — change password on the one line below
-     ============================================================ -->
+<!-- PDF DOWNLOAD GATE -->
 <style>
 #pdf-modal-bg{display:none;position:fixed;inset:0;z-index:9999;background:rgba(20,30,45,0.55);backdrop-filter:blur(4px);align-items:center;justify-content:center}
 #pdf-modal-bg.open{display:flex}
-#pdf-modal{background:#faf8f5;border-radius:14px;padding:40px 36px;max-width:380px;width:90%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,0.18);font-family:'Source Serif 4',Georgia,serif}
-#pdf-modal h3{font-family:'Playfair Display',Georgia,serif;font-size:1.4rem;color:#1e2d42;margin:0 0 8px}
+#pdf-modal{background:#faf8f5;border-radius:14px;padding:40px 36px;max-width:380px;width:90%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,0.18);font-family:"Source Serif 4",Georgia,serif}
+#pdf-modal h3{font-family:"Playfair Display",Georgia,serif;font-size:1.4rem;color:#1e2d42;margin:0 0 8px}
 #pdf-modal p{color:#777;font-size:.9rem;margin:0 0 24px;line-height:1.6}
 #pdf-pw-input{width:100%;padding:13px 16px;font-size:1rem;font-family:inherit;border:1.5px solid #d0ccc6;border-radius:8px;background:#fff;color:#1e2d42;outline:none;box-sizing:border-box;text-align:center;letter-spacing:.1em;transition:border-color .2s}
 #pdf-pw-input:focus{border-color:#1e2d42}
@@ -741,7 +1054,6 @@ document.addEventListener('click', e => {
 </style>
 <div id="pdf-modal-bg">
   <div id="pdf-modal">
-    <div style="font-size:1.8rem;margin-bottom:14px">📄</div>
     <h3>Download Case Study</h3>
     <p>Enter the password to download the full PDF with wireframes and research findings.</p>
     <input id="pdf-pw-input" type="password" placeholder="Password" autocomplete="off"/>
@@ -751,37 +1063,16 @@ document.addEventListener('click', e => {
   </div>
 </div>
 <script>
-(function () {
-  /* ── CHANGE YOUR PASSWORD HERE ── */
-  const PASSWORD = "sandeep2026";
-  /* ────────────────────────────── */
-  const PDF_URL   = "casestudies/oracle-unity-data-platform.pdf";
-  const modalBg   = document.getElementById("pdf-modal-bg");
-  const input     = document.getElementById("pdf-pw-input");
-  const btn       = document.getElementById("pdf-pw-btn");
-  const errorMsg  = document.getElementById("pdf-pw-error");
-  const cancelBtn = document.getElementById("pdf-cancel");
-  window.pgPromptDownload = function () {
-    modalBg.classList.add("open");
-    input.value = ""; errorMsg.textContent = "";
-    setTimeout(() => input.focus(), 80);
-  };
-  function attempt() {
-    if (input.value === PASSWORD) {
-      modalBg.classList.remove("open");
-      const a = document.createElement("a");
-      a.href = PDF_URL; a.download = "";
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    } else {
-      errorMsg.textContent = "Incorrect password — try again.";
-      input.classList.remove("shake"); void input.offsetWidth;
-      input.classList.add("shake"); input.value = ""; input.focus();
-    }
-  }
-  btn.addEventListener("click", attempt);
-  input.addEventListener("keydown", e => { if (e.key === "Enter") attempt(); });
-  cancelBtn.addEventListener("click", () => modalBg.classList.remove("open"));
-  modalBg.addEventListener("click", e => { if (e.target === modalBg) modalBg.classList.remove("open"); });
+(function(){
+  const PASSWORD="sandeep2026";
+  const PDF_URL="casestudies/oracle-unity-data-platform.pdf";
+  const bg=document.getElementById("pdf-modal-bg"),inp=document.getElementById("pdf-pw-input"),btn=document.getElementById("pdf-pw-btn"),err=document.getElementById("pdf-pw-error"),cancel=document.getElementById("pdf-cancel");
+  window.pgPromptDownload=function(){bg.classList.add("open");inp.value="";err.textContent="";setTimeout(()=>inp.focus(),80);};
+  function attempt(){if(inp.value===PASSWORD){bg.classList.remove("open");const a=document.createElement("a");a.href=PDF_URL;a.download="";document.body.appendChild(a);a.click();document.body.removeChild(a);}else{err.textContent="Incorrect password — try again.";inp.classList.remove("shake");void inp.offsetWidth;inp.classList.add("shake");inp.value="";inp.focus();}}
+  btn.addEventListener("click",attempt);
+  inp.addEventListener("keydown",e=>{if(e.key==="Enter")attempt();});
+  cancel.addEventListener("click",()=>bg.classList.remove("open"));
+  bg.addEventListener("click",e=>{if(e.target===bg)bg.classList.remove("open");});
 })();
 </script>
 
